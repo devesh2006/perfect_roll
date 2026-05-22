@@ -15,10 +15,10 @@ const head = `
 const header = `
   <header id="site-header">
     <div class="header-container">
-      <a href="home.html" class="logo">Prince Perfect</a>
+      <a href="index.html" class="logo">Prince Perfect</a>
       <nav id="main-nav">
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="about.html">Our Story</a></li>
           <li><a href="distributors.html">Distributors</a></li>
@@ -36,7 +36,7 @@ const header = `
     </div>
     <div id="mobile-nav-overlay">
         <ul>
-          <li><a href="home.html" class="mobile-link">Home</a></li>
+          <li><a href="index.html" class="mobile-link">Home</a></li>
           <li><a href="products.html" class="mobile-link">Products</a></li>
           <li><a href="about.html" class="mobile-link">Our Story</a></li>
           <li><a href="distributors.html" class="mobile-link">Distributors</a></li>
@@ -51,7 +51,7 @@ const footer = `
     <div class="container">
       <div class="footer-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
         <div class="footer-brand">
-          <a href="home.html" class="logo" style="font-size: 1.5rem; margin-bottom: 8px; display: block;">Prince Perfect</a>
+          <a href="index.html" class="logo" style="font-size: 1.5rem; margin-bottom: 8px; display: block;">Prince Perfect</a>
           <p style="color: #999; font-size: 0.9rem;">Premium rolling papers by Twoday.</p>
         </div>
         <div class="footer-links" style="display: flex; gap: 24px; flex-wrap: wrap;">
@@ -78,196 +78,69 @@ const footer = `
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
-${head.replace('<title>Prince Perfect Roll</title>', '<title>Enter | Prince Perfect Roll</title>')}
-<style>
-    body {
-        background: radial-gradient(circle at 50% 50%, #2a2218 0%, var(--black) 100%);
-        color: var(--white);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        margin: 0;
-        overflow: hidden;
-        position: relative;
-    }
-    
-    .ambient-glow {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60vw;
-        height: 60vw;
-        background: radial-gradient(circle, rgba(200, 168, 107, 0.15) 0%, transparent 60%);
-        z-index: 0;
-        animation: pulseGlow 8s ease-in-out infinite alternate;
-        pointer-events: none;
-    }
-    
-    @keyframes pulseGlow {
-        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
-        100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
-    }
-
-    .landing-content {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        animation: slideUpFade 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-    }
-
-    .brand-mark {
-        font-family: var(--font-heading);
-        font-size: clamp(3rem, 8vw, 6rem);
-        color: var(--gold);
-        line-height: 1;
-        margin-bottom: 8px;
-        letter-spacing: -0.02em;
-        text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-
-    .brand-tagline {
-        font-family: var(--font-body);
-        font-size: clamp(1rem, 2vw, 1.2rem);
-        color: #a9a9a9;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        margin-bottom: 60px;
-    }
-
-    .gate-card {
-        background: rgba(255, 255, 255, 0.03);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 40px;
-        border-radius: 24px;
-        max-width: 420px;
-        width: 90%;
-        margin: 0 auto;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-    }
-
-    .gate-card:hover {
-        transform: translateY(-5px);
-        border-color: rgba(200, 168, 107, 0.3);
-    }
-
-    .gate-card h2 {
-        font-family: var(--font-heading);
-        font-size: 1.8rem;
-        margin-bottom: 12px;
-        color: var(--white);
-    }
-
-    .gate-card p {
-        color: #999;
-        font-size: 0.95rem;
-        margin-bottom: 32px;
-        line-height: 1.6;
-    }
-
-    .btn-enter-site {
-        background: var(--gold);
-        color: var(--black);
-        border: none;
-        padding: 16px 32px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        width: 100%;
-        margin-bottom: 16px;
-    }
-
-    .btn-enter-site:hover {
-        background: #d6b87b;
-        box-shadow: 0 10px 20px rgba(200, 168, 107, 0.2);
-        transform: translateY(-2px);
-    }
-
-    .btn-decline {
-        background: transparent;
-        color: #666;
-        border: none;
-        font-size: 0.9rem;
-        cursor: pointer;
-        text-decoration: underline;
-        transition: color 0.3s ease;
-    }
-
-    .btn-decline:hover {
-        color: var(--white);
-    }
-
-    @keyframes slideUpFade {
-        0% { opacity: 0; transform: translateY(40px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-</style>
-<body>
-    <div class="ambient-glow"></div>
-    
-    <div class="landing-content">
-        <h1 class="brand-mark">Prince Perfect</h1>
-        <div class="brand-tagline">Premium Rolling Experience</div>
-        
-        <div class="gate-card">
-            <h2>Welcome.</h2>
-            <p>Our products are intended strictly for adults. Please verify that you are 18 years of age or older to enter.</p>
-            <button id="btn-enter" class="btn-enter-site">Yes, I am 18+</button>
-            <button id="btn-exit" class="btn-decline">I am under 18</button>
-        </div>
-    </div>
-
-    <script>
-        if (localStorage.getItem('ageVerified') === 'true') {
-            window.location.href = 'home.html';
-        }
-
-        document.getElementById('btn-enter').addEventListener('click', () => {
-            // Add a beautiful exit animation before redirecting
-            document.body.style.transition = "opacity 0.6s ease";
-            document.body.style.opacity = "0";
-            
-            setTimeout(() => {
-                localStorage.setItem('ageVerified', 'true');
-                window.location.href = 'home.html';
-            }, 600);
-        });
-
-        document.getElementById('btn-exit').addEventListener('click', () => {
-            window.location.href = 'https://www.google.com';
-        });
-    </script>
-</body>
-</html>`;
-
-const homeHtml = `<!DOCTYPE html>
-<html lang="en">
 ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfect Roll</title>')}
 <body>
   ${header}
   <main>
-    <section id="hero" class="hero-section section">
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-accent"></div>
       <div class="hero-content">
-        <div>
-          <div class="badge hero-badge">100% Natural Arabic Gum</div>
-          <h1 class="hero-title">Roll It Perfect.<br>Every Time.</h1>
-          <p class="hero-sub">India's premium rolling paper — precision crafted for a smooth, slow burn.</p>
+        <div class="hero-text-wrapper">
+          <div class="badge hero-badge gold-badge">Premium Collection</div>
+          <h1 class="hero-title">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
+          <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
           <div class="hero-ctas">
-            <a href="products.html" class="btn btn-red">Shop Now</a>
-            <a href="products.html" class="btn btn-gold-outline">See Products</a>
+            <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
+            <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
           </div>
         </div>
-        <div class="hero-images">
-          <div class="img-placeholder" style="min-height: 400px; width: 100%;"></div>
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="img-placeholder hero-main-img"></div>
+            <div class="floating-badge badge-1">
+              <span class="icon">🌿</span>
+              <span>100% Natural</span>
+            </div>
+            <div class="floating-badge badge-2">
+              <span class="icon">✨</span>
+              <span>Ultra Thin</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase" class="products-showcase section reveal" style="background: var(--cream); padding-top: 80px;">
+      <div class="container">
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+          <h2 class="section-title">Signature Collection</h2>
+          <p class="section-subtitle">Discover our meticulously crafted rolling papers.</p>
+        </div>
+        <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
+          
+          <div class="product-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
+            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
+              <div class="img-placeholder" style="min-height: 250px; background: #f9f9f9; border: 1px solid #eee;"></div>
+              <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--white); color: var(--gold); border: 1px solid var(--gold);">Best Seller</div>
+            </div>
+            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">Twoday Classic</h3>
+            <p style="color: #666; margin-bottom: 24px;">Our original white rolling papers. Pure, tasteless, and exceptionally smooth.</p>
+            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+          </div>
+
+          <div class="product-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
+            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
+              <div class="img-placeholder" style="min-height: 250px; background: #f9f9f9; border: 1px solid #eee;"></div>
+              <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--red); color: var(--white);">New</div>
+            </div>
+            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">5 FRIEC Natural</h3>
+            <p style="color: #666; margin-bottom: 24px;">Unbleached brown papers for the most authentic and raw smoking experience.</p>
+            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+          </div>
+
+        </div>
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="products.html" class="btn btn-red btn-large">View All Products</a>
         </div>
       </div>
     </section>
@@ -572,7 +445,6 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Contact | Prince Pe
 </html>`;
 
 fs.writeFileSync('index.html', indexHtml);
-fs.writeFileSync('home.html', homeHtml);
 fs.writeFileSync('products.html', productsHtml);
 fs.writeFileSync('about.html', aboutHtml);
 fs.writeFileSync('distributors.html', distributorsHtml);

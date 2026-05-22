@@ -1,10 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Redirect to age gate if not verified
-  if (window.location.pathname !== '/' && !window.location.pathname.endsWith('index.html')) {
-    if (localStorage.getItem('ageVerified') !== 'true') {
-      window.location.href = 'index.html';
-    }
-  }
 
   // Sticky Header & Mobile Nav
   const header = document.getElementById('site-header');
@@ -12,13 +6,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNav = document.getElementById('mobile-nav-overlay');
   
   if (header) {
+    let isScrolling = false;
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 80) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
+      if (!isScrolling) {
+        window.requestAnimationFrame(() => {
+          if (window.scrollY > 80) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+          isScrolling = false;
+        });
+        isScrolling = true;
       }
-    });
+    }, { passive: true });
   }
 
   if (mobileBtn && mobileNav) {
@@ -44,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       }
     });
-  }, { root: null, threshold: 0.2 });
+  }, { root: null, threshold: 0.05 });
 
   revealElements.forEach(el => revealObserver.observe(el));
 
