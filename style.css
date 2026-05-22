@@ -538,7 +538,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: flex-end;
   opacity: 0;
-  transform: translateX(40px) rotate(-5deg);
+  transform: translateY(20px);
   animation: slideInRotate 1s ease forwards 0.5s;
 }
 
@@ -553,7 +553,7 @@ h1, h2, h3, h4, h5, h6 {
   to { opacity: 1; }
 }
 @keyframes slideInRotate {
-  to { opacity: 1; transform: translateX(0) rotate(0); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .hero-badge {
@@ -562,9 +562,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Trust Bar */
 .trust-bar {
-  background: var(--black);
-  color: var(--white);
-  padding: 24px 0;
+  background: transparent;
+  color: var(--black);
+  padding: 12px 0;
   overflow: hidden;
   width: 100%;
   position: relative;
@@ -737,8 +737,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Stats Section */
 .stats-section {
-  background: var(--black);
-  color: var(--white);
+  background: transparent;
+  color: var(--black);
 }
 
 .stats-grid {
@@ -756,7 +756,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-label {
-  color: var(--cream);
+  color: #666;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.9rem;
