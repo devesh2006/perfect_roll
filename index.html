@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Landing | Prince Perfect Roll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    body {
+        background-color: var(--black);
+        color: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+        background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(200, 168, 107, 0.05) 10px, rgba(200, 168, 107, 0.05) 20px);
+    }
+    .landing-card {
+        background: rgba(17, 17, 17, 0.95);
+        border: 1px solid var(--gold);
+        padding: clamp(2rem, 5vw, 4rem);
+        text-align: center;
+        border-radius: var(--radius-md);
+        max-width: 400px;
+        width: 90%;
+        animation: fadeIn 1s ease;
+    }
+    .landing-card h1 {
+        font-size: 2rem;
+        color: var(--gold);
+        margin-bottom: 12px;
+    }
+    .landing-card p {
+        margin-bottom: 32px;
+        color: #ccc;
+    }
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+    .logo-placeholder {
+        font-family: var(--font-heading);
+        font-size: 24px;
+        color: var(--gold);
+        border: 1px solid var(--gold);
+        padding: 12px;
+        display: inline-block;
+        margin-bottom: 24px;
+        border-radius: var(--radius-sm);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+<body>
+    <div class="landing-card">
+        <div class="logo-placeholder">PRINCE PERFECT</div>
+        <h1>Are you 18 or older?</h1>
+        <p>You must be of legal smoking age to enter this site.</p>
+        <div class="btn-group">
+            <button id="btn-enter" class="btn btn-red">Yes, I'm 18+</button>
+            <button id="btn-exit" class="btn btn-outline">No, exit</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('btn-enter').addEventListener('click', () => {
+            localStorage.setItem('ageVerified', 'true');
+            window.location.href = 'home.html';
+        });
+        document.getElementById('btn-exit').addEventListener('click', () => {
+            window.location.href = 'https://www.google.com';
+        });
+        if (localStorage.getItem('ageVerified') === 'true') {
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>
