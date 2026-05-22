@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Landing | Prince Perfect Roll</title>
+  <title>Enter | Prince Perfect Roll</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,76 +13,170 @@
 
 <style>
     body {
-        background-color: var(--black);
+        background: radial-gradient(circle at 50% 50%, #2a2218 0%, var(--black) 100%);
         color: var(--white);
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        min-height: 100vh;
         margin: 0;
         overflow: hidden;
-        background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(200, 168, 107, 0.05) 10px, rgba(200, 168, 107, 0.05) 20px);
+        position: relative;
     }
-    .landing-card {
-        background: rgba(17, 17, 17, 0.95);
-        border: 1px solid var(--gold);
-        padding: clamp(2rem, 5vw, 4rem);
+    
+    .ambient-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60vw;
+        height: 60vw;
+        background: radial-gradient(circle, rgba(200, 168, 107, 0.15) 0%, transparent 60%);
+        z-index: 0;
+        animation: pulseGlow 8s ease-in-out infinite alternate;
+        pointer-events: none;
+    }
+    
+    @keyframes pulseGlow {
+        0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; }
+        100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+
+    .landing-content {
+        position: relative;
+        z-index: 1;
         text-align: center;
-        border-radius: var(--radius-md);
-        max-width: 400px;
-        width: 90%;
-        animation: fadeIn 1s ease;
+        animation: slideUpFade 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
     }
-    .landing-card h1 {
-        font-size: 2rem;
-        color: var(--gold);
-        margin-bottom: 12px;
-    }
-    .landing-card p {
-        margin-bottom: 32px;
-        color: #ccc;
-    }
-    .btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-    .logo-placeholder {
+
+    .brand-mark {
         font-family: var(--font-heading);
-        font-size: 24px;
+        font-size: clamp(3rem, 8vw, 6rem);
         color: var(--gold);
-        border: 1px solid var(--gold);
-        padding: 12px;
-        display: inline-block;
-        margin-bottom: 24px;
-        border-radius: var(--radius-sm);
+        line-height: 1;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
-    @keyframes fadeIn {
-        from { opacity: 0; transform: scale(0.9); }
-        to { opacity: 1; transform: scale(1); }
+
+    .brand-tagline {
+        font-family: var(--font-body);
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        color: #a9a9a9;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        margin-bottom: 60px;
+    }
+
+    .gate-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 40px;
+        border-radius: 24px;
+        max-width: 420px;
+        width: 90%;
+        margin: 0 auto;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease;
+    }
+
+    .gate-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(200, 168, 107, 0.3);
+    }
+
+    .gate-card h2 {
+        font-family: var(--font-heading);
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+        color: var(--white);
+    }
+
+    .gate-card p {
+        color: #999;
+        font-size: 0.95rem;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+
+    .btn-enter-site {
+        background: var(--gold);
+        color: var(--black);
+        border: none;
+        padding: 16px 32px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .btn-enter-site:hover {
+        background: #d6b87b;
+        box-shadow: 0 10px 20px rgba(200, 168, 107, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .btn-decline {
+        background: transparent;
+        color: #666;
+        border: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+        text-decoration: underline;
+        transition: color 0.3s ease;
+    }
+
+    .btn-decline:hover {
+        color: var(--white);
+    }
+
+    @keyframes slideUpFade {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 </style>
 <body>
-    <div class="landing-card">
-        <div class="logo-placeholder">PRINCE PERFECT</div>
-        <h1>Are you 18 or older?</h1>
-        <p>You must be of legal smoking age to enter this site.</p>
-        <div class="btn-group">
-            <button id="btn-enter" class="btn btn-red">Yes, I'm 18+</button>
-            <button id="btn-exit" class="btn btn-outline">No, exit</button>
+    <div class="ambient-glow"></div>
+    
+    <div class="landing-content">
+        <h1 class="brand-mark">Prince Perfect</h1>
+        <div class="brand-tagline">Premium Rolling Experience</div>
+        
+        <div class="gate-card">
+            <h2>Welcome.</h2>
+            <p>Our products are intended strictly for adults. Please verify that you are 18 years of age or older to enter.</p>
+            <button id="btn-enter" class="btn-enter-site">Yes, I am 18+</button>
+            <button id="btn-exit" class="btn-decline">I am under 18</button>
         </div>
     </div>
+
     <script>
-        document.getElementById('btn-enter').addEventListener('click', () => {
-            localStorage.setItem('ageVerified', 'true');
-            window.location.href = 'home.html';
-        });
-        document.getElementById('btn-exit').addEventListener('click', () => {
-            window.location.href = 'https://www.google.com';
-        });
         if (localStorage.getItem('ageVerified') === 'true') {
             window.location.href = 'home.html';
         }
+
+        document.getElementById('btn-enter').addEventListener('click', () => {
+            // Add a beautiful exit animation before redirecting
+            document.body.style.transition = "opacity 0.6s ease";
+            document.body.style.opacity = "0";
+            
+            setTimeout(() => {
+                localStorage.setItem('ageVerified', 'true');
+                window.location.href = 'home.html';
+            }, 600);
+        });
+
+        document.getElementById('btn-exit').addEventListener('click', () => {
+            window.location.href = 'https://www.google.com';
+        });
     </script>
 </body>
 </html>
