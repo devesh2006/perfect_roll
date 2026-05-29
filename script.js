@@ -121,4 +121,128 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // Product Detail Modal Dynamic Creation & Event Handling
+  const productCards = document.querySelectorAll('.product-card');
+  
+  if (productCards.length > 0) {
+    // Create the modal container if it doesn't exist
+    let modalOverlay = document.getElementById('product-detail-modal');
+    if (!modalOverlay) {
+      modalOverlay = document.createElement('div');
+      modalOverlay.id = 'product-detail-modal';
+      modalOverlay.className = 'product-modal-overlay';
+      modalOverlay.innerHTML = `
+        <div class="product-modal-card animate-reveal">
+          <button class="product-modal-close" aria-label="Close details">&times;</button>
+          <div class="product-modal-img-side">
+            <!-- Dynamic Image or Placeholder -->
+          </div>
+          <div class="product-modal-info-side">
+            <h2 id="modal-product-title">Product Title</h2>
+            <p id="modal-product-tagline" class="tagline">Product Tagline</p>
+            <ul id="modal-product-features" class="modal-features">
+              <!-- Dynamic features -->
+            </ul>
+            <div class="product-modal-footer">
+              <div class="product-modal-price">
+                <span class="price-label">Estimated Price</span>
+                <span id="modal-product-price" class="price-val">₹20 - ₹50</span>
+              </div>
+              <a href="#" id="modal-product-wa-btn" target="_blank" rel="noopener noreferrer" class="product-modal-cta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px; vertical-align: middle;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Order via WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalOverlay);
+    }
+    
+    const modalClose = modalOverlay.querySelector('.product-modal-close');
+    const modalImgSide = modalOverlay.querySelector('.product-modal-img-side');
+    const modalTitle = modalOverlay.querySelector('#modal-product-title');
+    const modalTagline = modalOverlay.querySelector('#modal-product-tagline');
+    const modalFeatures = modalOverlay.querySelector('#modal-product-features');
+    const modalPrice = modalOverlay.querySelector('#modal-product-price');
+    const modalWaBtn = modalOverlay.querySelector('#modal-product-wa-btn');
+    
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        closeModal();
+      }
+    });
+    
+    productCards.forEach(card => {
+      card.addEventListener('click', (e) => {
+        // If they click the navigation button on the home page showcase, let them navigate
+        if (e.target.closest('.btn-gold-outline')) {
+          return;
+        }
+        
+        // Prevent default only if clicking on active trigger parts of the card
+        const isWa = e.target.closest('.floating-wa');
+        if (isWa) return;
+        
+        e.preventDefault();
+        
+        // Extract data
+        const titleEl = card.querySelector('h3') || card.querySelector('.product-title');
+        const titleText = titleEl ? titleEl.innerText : 'Premium Rolling Paper';
+        
+        const imgEl = card.querySelector('img');
+        let imgHtml = '';
+        if (imgEl) {
+          imgHtml = `<img src="${imgEl.src}" alt="${titleText}">`;
+        } else {
+          imgHtml = `<div class="img-placeholder" style="min-height: 250px; width: 100%; display: flex; align-items: center; justify-content: center; background: #e0d5c1; font-family: var(--font-heading); font-size: 1.5rem; color: rgba(17,17,17,0.4); text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0;">${titleText}</div>`;
+        }
+        
+        const taglineEl = card.querySelector('.tagline') || card.querySelector('p');
+        const taglineText = taglineEl ? taglineEl.innerText : '"Premium rolling experience"';
+        
+        const featuresEl = card.querySelector('.features-list');
+        let featuresHtml = '';
+        if (featuresEl) {
+          featuresHtml = featuresEl.innerHTML;
+        } else {
+          featuresHtml = `
+            <li>Natural Arabic Gum</li>
+            <li>Ultra-Thin slow burn paper</li>
+            <li>Premium quality materials</li>
+          `;
+        }
+        
+        const priceEl = card.querySelector('.price-range');
+        const priceText = priceEl ? priceEl.innerText : '₹20 - ₹100';
+        
+        // Populate modal
+        modalImgSide.innerHTML = imgHtml;
+        modalTitle.innerText = titleText;
+        modalTagline.innerText = taglineText;
+        modalFeatures.innerHTML = featuresHtml;
+        modalPrice.innerText = priceText;
+        
+        // Prefilled WhatsApp message
+        const waBaseUrl = 'https://wa.me/91XXXXXXXXXX'; 
+        const messageText = encodeURIComponent(`Hi Prince Perfect! I am interested in ordering the "${titleText}" rolling paper (${priceText}). Please provide details on how to proceed.`);
+        modalWaBtn.href = `${waBaseUrl}?text=${messageText}`;
+        
+        // Open modal
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+  }
 });
