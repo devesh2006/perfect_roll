@@ -787,12 +787,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-img-container .img-placeholder {
-  min-height: 250px;
+  min-height: 220px;
 }
 
-.product-card:hover .card-img-container img,
-.product-card:hover .product-img-wrapper img {
-  transform: scale(1.04);
+.product-card:hover .image-container img {
+  transform: scale(1.03) !important;
 }
 
 .card-content {
@@ -1450,39 +1449,51 @@ h1, h2, h3, h4, h5, h6 {
    Product Gallery - Premium Modern Carousel
    ========================================================================== */
 .product-gallery {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  position: relative;
-  background: transparent;
-  border-radius: 0;
-  padding: 0;
-  box-sizing: border-box;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  position: relative !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .image-container {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border-radius: 0;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 3 / 2 !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.image-container img {
-  width: 95%; /* Occupies 90-95% of available width */
-  height: 95%;
-  object-fit: contain;
-  display: block;
-  transition: opacity 0.35s ease, transform 0.5s ease;
+.product-card .image-container {
+  height: auto !important;
+}
+
+.image-container img,
+.gallery-image,
+.product-image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  transition: opacity 0.35s ease, transform 0.5s ease !important;
+  transform: scale(1) !important;
   opacity: 1;
 }
 
 .image-container img.fade-out {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .prev-btn, .next-btn {
@@ -1513,11 +1524,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .prev-btn {
-  left: 16px;
+  left: 28px;
 }
 
 .next-btn {
-  right: 16px;
+  right: 28px;
 }
 
 .prev-btn:hover, .next-btn:hover {
@@ -1566,8 +1577,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  .image-container {
-    height: 220px;
+  .product-card .image-container {
+    height: auto !important;
   }
   .prev-btn, .next-btn {
     width: 40px;
@@ -1577,10 +1588,10 @@ h1, h2, h3, h4, h5, h6 {
     pointer-events: auto !important;
   }
   .prev-btn {
-    left: 8px;
+    left: 16px;
   }
   .next-btn {
-    right: 8px;
+    right: 16px;
   }
   .product-modal-img-side {
     min-height: 250px;
