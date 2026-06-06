@@ -1,5 +1,175 @@
 const fs = require('fs');
 
+const products = [
+  {
+    id: 1,
+    name: "Perfect Roll White",
+    tagline: "Experience the ultimate smooth, even burn.",
+    imageAlt: "Perfect Roll White premium rolling papers with natural Arabic gum",
+    images: [
+      "images/2.webp",
+      "images/5.webp",
+      "images/7.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 1 Filter Tip per pack",
+      "Premium bleached white paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable and eco-friendly"
+    ],
+    priceRange: "₹20 - ₹50",
+    color: "#e67e22",
+    featured: true,
+    badge: "Signature Collection"
+  },
+  {
+    id: 2,
+    name: "Perfect Roll Brown",
+    tagline: "Experience the organic, raw taste of unbleached paper.",
+    imageAlt: "Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum",
+    images: [
+      "images/13.webp",
+      "images/12.webp",
+      "images/21.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 1 Filter Tip per pack",
+      "Premium unbleached organic brown paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable and eco-friendly"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#5c4033",
+    featured: true,
+    badge: "Organic Premium"
+  },
+  {
+    id: 3,
+    name: "5 FRIEC WHITE",
+    tagline: "Premium bleached white paper for a clean, pure experience.",
+    imageAlt: "5 Friec White premium rolling papers with slow burn technology",
+    images: [
+      "images/22.webp",
+      "images/24.webp"
+    ],
+    features: [
+      "Premium bleached white paper",
+      "100% natural Arabic gum",
+      "Ultra-thin lightweight paper",
+      "Slow, clean, even burn",
+      "Chemical-free manufacturing"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#bdc3c7",
+    featured: false,
+    badge: "Premium Choice"
+  },
+  {
+    id: 4,
+    name: "5 FRIEC BROWN",
+    tagline: "Unbleached organic brown paper for a raw, natural experience.",
+    imageAlt: "5 Friec Brown organic natural unbleached rolling papers with slow burn technology",
+    images: [
+      "images/18.webp",
+      "images/15.webp",
+      "images/19.webp"
+    ],
+    features: [
+      "Unbleached organic natural brown paper",
+      "100% organic natural Arabic gum",
+      "Ultra-thin lightweight paper",
+      "Slow, clean, even burn",
+      "Chemical-free and chlorine-free manufacturing"
+    ],
+    priceRange: "₹30 - ₹60",
+    color: "#8B5A2B",
+    featured: true,
+    badge: "Organic Choice"
+  },
+  {
+    id: 5,
+    name: "TWODAY WHITE",
+    tagline: "Standard bleached white paper, clean and pure.",
+    imageAlt: "Twoday White premium rolling papers with natural Arabic gum and filter tips",
+    images: [
+      "images/16.webp",
+      "images/1.webp",
+      "images/17.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 2 Filter Tips per pack",
+      "Premium quality bleached white paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable packaging"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#d4af37",
+    featured: false,
+    badge: "Connoisseur's Choice"
+  },
+  {
+    id: 6,
+    name: "TWODAY BROWN",
+    tagline: "Premium unbleached brown paper, earthy and smooth.",
+    imageAlt: "Twoday Brown premium unbleached rolling papers with natural Arabic gum and filter tips",
+    images: [
+      "images/10.webp",
+      "images/9.webp",
+      "images/8.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 2 Filter Tips per pack",
+      "Premium quality unbleached brown paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable packaging"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#795548",
+    featured: false,
+    badge: "Earthy Choice"
+  }
+];
+
+const getProductSchemaJson = (productsList) => {
+  const schemas = productsList.map(p => {
+    let lowPrice = 20;
+    let highPrice = 50;
+    const priceMatch = p.priceRange.match(/₹?(\d+)\s*-\s*₹?(\d+)/);
+    if (priceMatch) {
+      lowPrice = parseInt(priceMatch[1], 10);
+      highPrice = parseInt(priceMatch[2], 10);
+    }
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": p.name,
+      "image": p.images.map(img => `https://www.princeperfectroll.com/${img}`),
+      "description": p.tagline + " " + p.features.join(", "),
+      "brand": {
+        "@type": "Brand",
+        "name": "Prince Perfect"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "INR",
+        "lowPrice": lowPrice,
+        "highPrice": highPrice,
+        "offerCount": p.images.length,
+        "availability": "https://schema.org/InStock"
+      }
+    };
+  });
+
+  return `<script type="application/ld+json">\n` + JSON.stringify(schemas, null, 2) + `\n</script>`;
+};
+
+const productSchema = getProductSchemaJson(products);
+
 const head = `
 <head>
   <meta charset="UTF-8">
@@ -9,6 +179,7 @@ const head = `
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  ${productSchema}
 </head>
 `;
 
@@ -76,140 +247,12 @@ const footer = `
   <script src="script.js" defer></script>
 `;
 
-const products = [
-  {
-    id: 1,
-    name: "Perfect Roll White",
-    tagline: "Experience the ultimate smooth, even burn.",
-    images: [
-      "images/2.webp",
-      "images/5.webp",
-      "images/7.webp"
-    ],
-    features: [
-      "2 Rolling Papers + 1 Filter Tip per pack",
-      "Premium bleached white paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable and eco-friendly"
-    ],
-    priceRange: "₹20 - ₹50",
-    color: "#e67e22",
-    featured: true,
-    badge: "Signature Collection"
-  },
-  {
-    id: 2,
-    name: "Perfect Roll Brown",
-    tagline: "Experience the organic, raw taste of unbleached paper.",
-    images: [
-      "images/13.webp",
-      "images/12.webp",
-      "images/21.webp"
-    ],
-    features: [
-      "2 Rolling Papers + 1 Filter Tip per pack",
-      "Premium unbleached organic brown paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable and eco-friendly"
-    ],
-    priceRange: "₹25 - ₹55",
-    color: "#5c4033",
-    featured: true,
-    badge: "Organic Premium"
-  },
-  {
-    id: 3,
-    name: "5 FRIEC WHITE",
-    tagline: "Premium bleached white paper for a clean, pure experience.",
-    images: [
-      "images/22.webp",
-      "images/24.webp"
-    ],
-    features: [
-      "Premium bleached white paper",
-      "100% natural Arabic gum",
-      "Ultra-thin lightweight paper",
-      "Slow, clean, even burn",
-      "Chemical-free manufacturing"
-    ],
-    priceRange: "₹25 - ₹55",
-    color: "#bdc3c7",
-    featured: false,
-    badge: "Premium Choice"
-  },
-  {
-    id: 4,
-    name: "5 FRIEC BROWN",
-    tagline: "Unbleached organic brown paper for a raw, natural experience.",
-    images: [
-      "images/18.webp",
-      "images/15.webp",
-      "images/19.webp"
-    ],
-    features: [
-      "Unbleached organic natural brown paper",
-      "100% organic natural Arabic gum",
-      "Ultra-thin lightweight paper",
-      "Slow, clean, even burn",
-      "Chemical-free and chlorine-free manufacturing"
-    ],
-    priceRange: "₹30 - ₹60",
-    color: "#8B5A2B",
-    featured: true,
-    badge: "Organic Choice"
-  },
-  {
-    id: 5,
-    name: "TWODAY WHITE",
-    tagline: "Standard bleached white paper, clean and pure.",
-    images: [
-      "images/16.webp",
-      "images/1.webp",
-      "images/17.webp"
-    ],
-    features: [
-      "2 Rolling Papers + 2 Filter Tips per pack",
-      "Premium quality bleached white paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable packaging"
-    ],
-    priceRange: "₹25 - ₹55",
-    color: "#d4af37",
-    featured: false,
-    badge: "Connoisseur's Choice"
-  },
-  {
-    id: 6,
-    name: "TWODAY BROWN",
-    tagline: "Premium unbleached brown paper, earthy and smooth.",
-    images: [
-      "images/10.webp",
-      "images/9.webp",
-      "images/8.webp"
-    ],
-    features: [
-      "2 Rolling Papers + 2 Filter Tips per pack",
-      "Premium quality unbleached brown paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable packaging"
-    ],
-    priceRange: "₹25 - ₹55",
-    color: "#795548",
-    featured: false,
-    badge: "Earthy Choice"
-  }
-];
-
 const makeSliderHtml = (p) => {
   return `
     <div class="product-gallery" data-images='${JSON.stringify(p.images)}'>
         <div class="image-container">
             <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-            <img id="mainProductImage" src="${p.images[0]}" alt="${p.name}" />
+            <img id="mainProductImage" src="${p.images[0]}" alt="${p.imageAlt}" />
             <button class="next-btn" aria-label="Next image">&rsaquo;</button>
         </div>
         <div class="gallery-dots">
@@ -230,7 +273,7 @@ const featuredHtmlList = products.length === 0
   : products
       .filter(p => p.featured)
       .map(p => `
-          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color};">
+          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color};">
             <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
               ${makeSliderHtml(p)}
               ${p.badge ? `<div class="badge" style="position: absolute; top: 16px; right: 16px; ${p.badge === 'Best Seller' ? 'background: var(--white); color: var(--gold); border: 1px solid var(--gold);' : 'background: var(--red); color: var(--white);'}">${p.badge}</div>` : ''}
@@ -251,7 +294,7 @@ const productsHtmlList = products.length === 0
   `
   : products
       .map(p => `
-          <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' style="border-top: 4px solid ${p.color};">
+          <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" style="border-top: 4px solid ${p.color};">
             <div class="card-img-container">
               ${makeSliderHtml(p)}
             </div>
@@ -272,7 +315,7 @@ const productsHtmlList = products.length === 0
 const marqueeProductsHtml = [...products, ...products]
   .map(p => `
           <a href="products.html" class="product-item">
-            <img src="${p.images[0]}" alt="${p.name}" />
+            <img src="${p.images[0]}" alt="${p.imageAlt}" />
           </a>
   `).join('\n');
 
@@ -419,7 +462,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
 <body>
   ${header}
   <main style="padding-top: var(--nav-height);">
-    <section id="story" class="story-section section reveal">
+    <section id="story" class="story-section section">
       <div class="container">
         <div style="text-align: center; margin-bottom: 56px;">
           <h2 class="section-title about-heading">Premium Rolling Papers Designed for a Superior Smoking Experience</h2>
@@ -443,7 +486,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
       </div>
     </section>
 
-    <section id="why-us" class="why-us-section section reveal">
+    <section id="why-us" class="why-us-section section">
       <div class="container">
         <h2 class="section-title">Why Choose Prince Perfect Roll?</h2>
         <div class="why-choose-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
@@ -475,7 +518,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
       </div>
     </section>
 
-    <section class="story-quote-section section reveal">
+    <section class="story-quote-section section">
       <div class="container">
         <blockquote class="story-quote-block">
           "Every great roll begins with exceptional paper. At Prince Perfect Roll, quality is not an option—it's our standard."

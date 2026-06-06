@@ -333,6 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
         }
         
+        const altText = card.getAttribute('data-alt') || titleText;
+        
         const priceEl = card.querySelector('.price-range');
         const priceText = priceEl ? priceEl.innerText : '₹20 - ₹100';
         
@@ -386,9 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (images.length > 1) {
           modalImgSide.innerHTML = `
             <div class="product-gallery">
-                <div class="image-container" style="height: 350px;">
+                <div class="image-container">
                     <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-                    <img id="mainProductImage" src="${images[0]}" alt="${titleText}" />
+                    <img id="mainProductImage" src="${images[0]}" alt="${altText}" />
                     <button class="next-btn" aria-label="Next image">&rsaquo;</button>
                 </div>
                 <div class="gallery-dots">
@@ -459,8 +461,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } else {
           modalImgSide.innerHTML = `
-            <div class="image-container" style="height: 350px; width: 100%;">
-              <img id="mainProductImage" src="${images[0] || ''}" alt="${titleText}">
+            <div class="image-container">
+              <img id="mainProductImage" src="${images[0] || ''}" alt="${altText}">
             </div>
           `;
         }

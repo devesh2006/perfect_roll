@@ -1039,6 +1039,16 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.03em;
 }
 
+.story-section.section {
+  padding-bottom: 40px !important;
+  margin-bottom: 0 !important;
+}
+
+.why-us-section.section {
+  padding-top: 40px !important;
+  margin-top: 0 !important;
+}
+
 .story-quote-section {
   padding: 85px 0;
   text-align: center;
@@ -1467,20 +1477,45 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-modal-img-side {
   flex: 1.1;
-  background: #1a1a1a;
+  background: transparent; /* Remove unnecessary black padding background */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  min-height: 450px;
+  min-height: 400px;
 }
 
-.product-modal-img-side > img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 24px;
+.product-modal-img-side .product-gallery {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+.product-modal-img-side .image-container {
+  height: auto !important;
+  max-height: 400px !important;
+  width: 100% !important;
+  aspect-ratio: auto !important; /* override default aspect-ratio */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  padding: 16px !important;
+}
+
+.product-modal-img-side img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 360px !important;
+  object-fit: contain !important;
+  display: block !important;
+  border-radius: var(--radius-md);
 }
 
 .product-modal-info-side {
