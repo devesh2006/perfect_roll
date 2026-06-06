@@ -100,6 +100,47 @@ const products = [
   },
   {
     id: 2,
+    name: "Perfect Roll Brown",
+    tagline: "Experience the organic, raw taste of unbleached paper.",
+    images: [
+      "images/13.webp",
+      "images/12.webp",
+      "images/21.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 1 Filter Tip per pack",
+      "Premium unbleached organic brown paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable and eco-friendly"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#5c4033",
+    featured: true,
+    badge: "Organic Premium"
+  },
+  {
+    id: 3,
+    name: "5 FRIEC WHITE",
+    tagline: "Premium bleached white paper for a clean, pure experience.",
+    images: [
+      "images/22.webp",
+      "images/24.webp"
+    ],
+    features: [
+      "Premium bleached white paper",
+      "100% natural Arabic gum",
+      "Ultra-thin lightweight paper",
+      "Slow, clean, even burn",
+      "Chemical-free manufacturing"
+    ],
+    priceRange: "₹25 - ₹55",
+    color: "#bdc3c7",
+    featured: true,
+    badge: "Premium Choice"
+  },
+  {
+    id: 4,
     name: "5 FRIEC BROWN",
     tagline: "Unbleached organic brown paper for a raw, natural experience.",
     images: [
@@ -120,7 +161,7 @@ const products = [
     badge: "Organic Choice"
   },
   {
-    id: 3,
+    id: 5,
     name: "TWODAY WHITE",
     tagline: "Standard bleached white paper, clean and pure.",
     images: [
@@ -141,7 +182,7 @@ const products = [
     badge: "Connoisseur's Choice"
   },
   {
-    id: 4,
+    id: 6,
     name: "TWODAY BROWN",
     tagline: "Premium unbleached brown paper, earthy and smooth.",
     images: [
@@ -160,27 +201,6 @@ const products = [
     color: "#795548",
     featured: true,
     badge: "Earthy Choice"
-  },
-  {
-    id: 5,
-    name: "Perfect Roll Brown",
-    tagline: "Experience the organic, raw taste of unbleached paper.",
-    images: [
-      "images/13.webp",
-      "images/12.webp",
-      "images/21.webp"
-    ],
-    features: [
-      "2 Rolling Papers + 1 Filter Tip per pack",
-      "Premium unbleached organic brown paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable and eco-friendly"
-    ],
-    priceRange: "₹25 - ₹55",
-    color: "#5c4033",
-    featured: true,
-    badge: "Organic Premium"
   }
 ];
 
@@ -320,7 +340,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
           <div class="stat-label">Happy Rollers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="5" data-suffix="">0</div>
+          <div class="stat-number" data-target="6" data-suffix="">0</div>
           <div class="stat-label">Signature Products</div>
         </div>
         <div class="stat-item">
