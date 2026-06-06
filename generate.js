@@ -420,16 +420,25 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
   ${header}
   <main style="padding-top: var(--nav-height);">
     <section id="story" class="story-section section reveal">
-      <div class="container story-split">
-        <div class="story-text">
-          <h2 class="section-title">Crafted for the Perfect Roll</h2>
-          <p class="story-subtitle" style="font-size: 1.25rem; font-weight: 600; color: var(--gold); margin-bottom: 24px;">Premium Rolling Papers Designed for a Superior Smoking Experience</p>
-          <p>Prince Perfect Roll is dedicated to creating premium rolling papers that deliver consistency, smoothness, and reliability with every roll. Crafted using carefully selected materials and natural Arabic gum, our papers are designed for smokers who appreciate quality, precision, and an even burn.</p>
-          <p>Whether you're looking for classic white rolling papers, natural brown papers, king-size cones, or innovative flavored options, every Prince Perfect Roll product is engineered to provide a cleaner, smoother, and slower-burning experience.</p>
-          <p>Our commitment goes beyond manufacturing. We focus on delivering premium rolling accessories that combine quality craftsmanship, modern design, and dependable performance for rolling enthusiasts across India.</p>
+      <div class="container">
+        <div style="text-align: center; margin-bottom: 56px;">
+          <h2 class="section-title about-heading">Premium Rolling Papers Designed for a Superior Smoking Experience</h2>
+          <p class="about-subtitle">Natural Arabic Gum • Slow Burn Technology • Premium Rolling Papers • King Size Cones</p>
         </div>
-        <div class="story-image">
-          <img src="26.webp" alt="Prince Perfect Crafting" style="width: 100%; height: 500px; object-fit: cover; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+        <div class="story-split">
+          <div class="story-text">
+            <p>Prince Perfect Roll is dedicated to creating premium rolling papers that deliver consistency, smoothness, and reliability with every roll. Crafted using carefully selected materials and natural Arabic gum, our papers are designed for smokers who appreciate quality, precision, and an even burn.</p>
+            <p>Whether you're looking for classic white rolling papers, natural brown papers, king-size cones, or innovative flavored options, every Prince Perfect Roll product is engineered to provide a cleaner, smoother, and slower-burning experience.</p>
+            <p>Our commitment goes beyond manufacturing. We focus on delivering premium rolling accessories that combine quality craftsmanship, modern design, and dependable performance for rolling enthusiasts across India.</p>
+            <div style="margin-top: 28px;">
+              <a href="products.html" style="color: var(--gold); font-weight: 600; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; text-decoration: none;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--gold)'">
+                Explore Our Full Product Collection &rarr;
+              </a>
+            </div>
+          </div>
+          <div class="story-image">
+            <img src="26.webp" alt="Prince Perfect Crafting" style="width: 100%; height: 500px; object-fit: cover; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+          </div>
         </div>
       </div>
     </section>
@@ -472,6 +481,9 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
           "Every great roll begins with exceptional paper. At Prince Perfect Roll, quality is not an option—it's our standard."
         </blockquote>
         <div class="story-quote-divider"></div>
+        <div style="margin-top: 40px; text-align: center;">
+          <a href="products.html" class="btn btn-red" style="display: inline-flex; align-items: center; gap: 8px;">Explore Our Full Product Collection &rarr;</a>
+        </div>
       </div>
     </section>
   </main>

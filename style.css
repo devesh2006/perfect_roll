@@ -1010,6 +1010,35 @@ h1, h2, h3, h4, h5, h6 {
   font-style: italic;
 }
 
+/* About Page Header */
+.about-heading {
+  text-align: center;
+  margin-bottom: 16px;
+  display: inline-block;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .about-heading {
+    white-space: nowrap;
+    font-size: clamp(1.5rem, 2.8vw, 2.3rem) !important;
+  }
+}
+
+.reveal.visible .about-heading::after {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+}
+
+.about-subtitle {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 8px;
+  letter-spacing: 0.03em;
+}
+
 .story-quote-section {
   padding: 85px 0;
   text-align: center;
