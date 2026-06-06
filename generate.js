@@ -76,6 +76,95 @@ const footer = `
   <script src="script.js" defer></script>
 `;
 
+const products = [
+  {
+    id: 1,
+    name: "Perfect Roll White",
+    tagline: "Experience the ultimate smooth, even burn.",
+    images: [
+      "images/2.webp",
+      "images/5.webp",
+      "images/7.webp"
+    ],
+    features: [
+      "2 Rolling Papers + 1 Filter Tip per pack",
+      "Premium bleached white paper",
+      "100% natural Arabic gum",
+      "Ultra-thin slow burn technology",
+      "Fully biodegradable and eco-friendly"
+    ],
+    priceRange: "₹20 - ₹50",
+    color: "#e67e22",
+    featured: true,
+    badge: "Signature Collection"
+  }
+];
+
+const makeSliderHtml = (p) => {
+  return `
+    <div class="product-gallery" data-images='${JSON.stringify(p.images)}'>
+        <div class="image-container">
+            <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
+            <img id="mainProductImage" src="${p.images[0]}" alt="${p.name}" />
+            <button class="next-btn" aria-label="Next image">&rsaquo;</button>
+        </div>
+        <div class="gallery-dots">
+            ${p.images.map((_, i) => `<span class="gallery-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`).join('')}
+        </div>
+    </div>
+  `;
+};
+
+const featuredHtmlList = products.length === 0
+  ? `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 60px 24px; color: #666; background: var(--white); border-radius: var(--radius-lg); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+            <span style="font-size: 3rem; margin-bottom: 20px; display: block;">✨</span>
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.5rem; margin-bottom: 12px;">Premium Catalog Coming Soon</h3>
+            <p style="max-width: 500px; margin: 0 auto; line-height: 1.6;">We are currently updating our signature collection with new premium products. Stay tuned!</p>
+          </div>
+  `
+  : products
+      .filter(p => p.featured)
+      .map(p => `
+          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color};">
+            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
+              ${makeSliderHtml(p)}
+              ${p.badge ? `<div class="badge" style="position: absolute; top: 16px; right: 16px; ${p.badge === 'Best Seller' ? 'background: var(--white); color: var(--gold); border: 1px solid var(--gold);' : 'background: var(--red); color: var(--white);'}">${p.badge}</div>` : ''}
+            </div>
+            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">${p.name}</h3>
+            <p style="color: #666; margin-bottom: 24px;">${p.tagline}</p>
+            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+          </div>
+      `).join('\n');
+
+const productsHtmlList = products.length === 0
+  ? `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 80px 24px; color: #666; background: var(--white); border-radius: var(--radius-lg); box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <span style="font-size: 3.5rem; margin-bottom: 24px; display: block;">⏳</span>
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.8rem; margin-bottom: 12px;">Catalog Under Updates</h3>
+            <p style="max-width: 500px; margin: 0 auto; line-height: 1.6;">Our new collection of premium rolling papers and accessories is launching soon. For distributor inquiries, please visit our <a href="distributors.html" style="color: var(--gold); font-weight: 600;">Partners page</a>.</p>
+          </div>
+  `
+  : products
+      .map(p => `
+          <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' style="border-top: 4px solid ${p.color};">
+            <div class="card-img-container">
+              ${makeSliderHtml(p)}
+            </div>
+            <div class="card-content">
+              <h3>${p.name}</h3>
+              <p class="tagline">"${p.tagline}"</p>
+              <ul class="features-list">
+                ${p.features.map(f => `<li>${f}</li>`).join('\n')}
+              </ul>
+              <div class="card-footer">
+                <span class="price-range">${p.priceRange}</span>
+                <button class="btn btn-red">Order Now</button>
+              </div>
+            </div>
+          </article>
+      `).join('\n');
+
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfect Roll</title>')}
@@ -96,7 +185,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
         </div>
         <div class="hero-visual">
           <div class="visual-card">
-            <div class="img-placeholder hero-main-img"></div>
+            <img src="images/4.webp" alt="Perfect Roll Gold Edition" class="hero-main-img" style="width: 100%; object-fit: cover; display: block;">
             <div class="floating-badge badge-1">
               <span class="icon">🌿</span>
               <span>100% Natural</span>
@@ -117,27 +206,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
           <p class="section-subtitle">Discover our meticulously crafted rolling papers.</p>
         </div>
         <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-          
-          <div class="product-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
-              <div class="img-placeholder" style="min-height: 250px; background: #f9f9f9; border: 1px solid #eee;"></div>
-              <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--white); color: var(--gold); border: 1px solid var(--gold);">Best Seller</div>
-            </div>
-            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">Twoday Classic</h3>
-            <p style="color: #666; margin-bottom: 24px;">Our original white rolling papers. Pure, tasteless, and exceptionally smooth.</p>
-            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
-          </div>
-
-          <div class="product-card" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease;">
-            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
-              <div class="img-placeholder" style="min-height: 250px; background: #f9f9f9; border: 1px solid #eee;"></div>
-              <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--red); color: var(--white);">New</div>
-            </div>
-            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">5 FRIEC Natural</h3>
-            <p style="color: #666; margin-bottom: 24px;">Unbleached brown papers for the most authentic and raw smoking experience.</p>
-            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
-          </div>
-
+          ${featuredHtmlList}
         </div>
         <div style="text-align: center; margin-top: 60px;">
             <a href="products.html" class="btn btn-red btn-large">View All Products</a>
@@ -167,7 +236,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
           <div class="stat-label">Happy Rollers</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number" data-target="2" data-suffix="">0</div>
+          <div class="stat-number" data-target="1" data-suffix="">0</div>
           <div class="stat-label">Signature Products</div>
         </div>
         <div class="stat-item">
@@ -214,96 +283,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Products | Prince P
       <div class="container">
         <h2 class="section-title">Our Products</h2>
         <div class="products-grid">
-          <article class="product-card card-twoday">
-            <div class="card-img-container">
-              <div class="img-placeholder" style="min-height: 250px; width: 100%;"></div>
-            </div>
-            <div class="card-content">
-              <h3>TWODAY</h3>
-              <p class="tagline">"Your daily two."</p>
-              <ul class="features-list">
-                <li>2 rolling papers + 1 filter</li>
-                <li>White Paper</li>
-                <li>Natural Arabic Gum</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹20 - ₹50</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card card-friec">
-            <div class="card-img-container">
-              <div class="img-placeholder" style="min-height: 250px; width: 100%;"></div>
-            </div>
-            <div class="card-content">
-              <h3>5 FRIEC</h3>
-              <p class="tagline">"5 a day, every day."</p>
-              <ul class="features-list">
-                <li>5 rolling papers + filters</li>
-                <li>Natural/Brown Paper</li>
-                <li>Premium positioning</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹30 - ₹80</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card" style="border-top: 4px solid var(--black);">
-            <div class="card-img-container">
-              <div class="img-placeholder" style="min-height: 250px; width: 100%;"></div>
-            </div>
-            <div class="card-content">
-              <h3>5 FRIEC Rolling Paper</h3>
-              <p class="tagline">"The classic choice."</p>
-              <ul class="features-list">
-                <li>Standard rolling papers</li>
-                <li>Slow burn technology</li>
-                <li>Natural Arabic Gum</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹40 - ₹90</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card" style="border-top: 4px solid var(--gold);">
-            <div class="card-img-container">
-              <div class="img-placeholder" style="min-height: 250px; width: 100%;"></div>
-            </div>
-            <div class="card-content">
-              <h3>Perfect Roll</h3>
-              <p class="tagline">"Precision in every roll."</p>
-              <ul class="features-list">
-                <li>Ultra-thin paper</li>
-                <li>Unbleached, natural</li>
-                <li>King Size Slim</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹50 - ₹100</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card" style="border-top: 4px solid var(--gold);">
-            <div class="card-img-container">
-              <div class="img-placeholder" style="min-height: 250px; width: 100%;"></div>
-            </div>
-            <div class="card-content">
-              <h3>Perfect Roll Gold</h3>
-              <p class="tagline">"The premium experience."</p>
-              <ul class="features-list">
-                <li>Exclusive Gold Edition</li>
-                <li>Includes premium tips</li>
-                <li>Luxury packaging</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹100 - ₹250</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
+          ${productsHtmlList}
         </div>
       </div>
     </section>
@@ -326,7 +306,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
           <blockquote>"We believe every tobacco moment deserves the perfect paper."</blockquote>
         </div>
         <div class="story-image">
-          <div class="img-placeholder" style="min-height: 400px; width: 100%;"></div>
+          <img src="images/3.webp" alt="Prince Perfect Crafting" style="width: 100%; height: 400px; object-fit: cover; display: block;">
         </div>
       </div>
     </section>

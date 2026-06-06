@@ -122,6 +122,122 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Initialize Product Galleries
+  const productGalleries = document.querySelectorAll('.product-gallery');
+  productGalleries.forEach(gallery => {
+    const imagesData = gallery.getAttribute('data-images');
+    if (!imagesData) return;
+    
+    let images = [];
+    try {
+      images = JSON.parse(imagesData);
+    } catch(err) {
+      console.error("Failed to parse gallery images:", err);
+      return;
+    }
+    
+    if (images.length === 0) return;
+    
+    const activeImg = gallery.querySelector('#mainProductImage');
+    const prevBtn = gallery.querySelector('.prev-btn');
+    const nextBtn = gallery.querySelector('.next-btn');
+    const dots = gallery.querySelectorAll('.gallery-dot');
+    
+    let currentIndex = 0;
+    let isTransitioning = false;
+    
+    function updateImage() {
+      if (!activeImg || isTransitioning) return;
+      isTransitioning = true;
+      
+      // Add fade-out transition class
+      activeImg.classList.add('fade-out');
+      
+      // Update dots immediately
+      dots.forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === currentIndex);
+      });
+      
+      // Wait 150ms to swap src, then fade back in
+      setTimeout(() => {
+        activeImg.src = images[currentIndex];
+        activeImg.onload = () => {
+          activeImg.classList.remove('fade-out');
+          isTransitioning = false;
+        };
+        // Fallback in case loading takes too long or fails
+        setTimeout(() => {
+          if (isTransitioning) {
+            activeImg.classList.remove('fade-out');
+            isTransitioning = false;
+          }
+        }, 150);
+      }, 150);
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isTransitioning) return;
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImage();
+      });
+    }
+    
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isTransitioning) return;
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImage();
+      });
+    }
+    
+    // Dot clicks
+    dots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (isTransitioning) return;
+        const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
+        if (targetIdx === currentIndex) return;
+        currentIndex = targetIdx;
+        updateImage();
+      });
+    });
+    
+    // Swipe gestures on mobile devices
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    
+    gallery.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    
+    gallery.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].clientX;
+      touchEndY = e.changedTouches[0].clientY;
+      
+      const swipeDistanceX = touchEndX - touchStartX;
+      const swipeDistanceY = touchEndY - touchStartY;
+      const threshold = 50;
+      
+      // Prevent scrolling interference by checking X vs Y displacement
+      if (Math.abs(swipeDistanceX) > threshold && Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
+        if (isTransitioning) return;
+        if (swipeDistanceX > 0) {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          updateImage();
+        } else {
+          currentIndex = (currentIndex + 1) % images.length;
+          updateImage();
+        }
+      }
+    }, { passive: true });
+  });
+
   // Product Detail Modal Dynamic Creation & Event Handling
   const productCards = document.querySelectorAll('.product-card');
   
@@ -186,28 +302,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
     productCards.forEach(card => {
       card.addEventListener('click', (e) => {
-        // If they click the navigation button on the home page showcase, let them navigate
         if (e.target.closest('.btn-gold-outline')) {
           return;
         }
+
+        if (e.target.closest('.prev-btn') || e.target.closest('.next-btn') || e.target.closest('.gallery-dot')) {
+          return;
+        }
         
-        // Prevent default only if clicking on active trigger parts of the card
         const isWa = e.target.closest('.floating-wa');
         if (isWa) return;
         
         e.preventDefault();
         
-        // Extract data
         const titleEl = card.querySelector('h3') || card.querySelector('.product-title');
         const titleText = titleEl ? titleEl.innerText : 'Premium Rolling Paper';
-        
-        const imgEl = card.querySelector('img');
-        let imgHtml = '';
-        if (imgEl) {
-          imgHtml = `<img src="${imgEl.src}" alt="${titleText}">`;
-        } else {
-          imgHtml = `<div class="img-placeholder" style="min-height: 250px; width: 100%; display: flex; align-items: center; justify-content: center; background: #e0d5c1; font-family: var(--font-heading); font-size: 1.5rem; color: rgba(17,17,17,0.4); text-transform: uppercase; letter-spacing: 0.1em; border-radius: 0;">${titleText}</div>`;
-        }
         
         const taglineEl = card.querySelector('.tagline') || card.querySelector('p');
         const taglineText = taglineEl ? taglineEl.innerText : '"Premium rolling experience"';
@@ -227,19 +336,144 @@ document.addEventListener('DOMContentLoaded', () => {
         const priceEl = card.querySelector('.price-range');
         const priceText = priceEl ? priceEl.innerText : '₹20 - ₹100';
         
-        // Populate modal
-        modalImgSide.innerHTML = imgHtml;
+        const imagesAttr = card.getAttribute('data-images') || (card.querySelector('.product-gallery') ? card.querySelector('.product-gallery').getAttribute('data-images') : null);
+        let images = [];
+        if (imagesAttr) {
+          try {
+            images = JSON.parse(imagesAttr);
+          } catch(err) {
+            console.error("Failed to parse images data:", err);
+          }
+        }
+        
+        if (images.length === 0) {
+          const singleImg = card.querySelector('img');
+          if (singleImg) {
+            images = [singleImg.src];
+          }
+        }
+
+        let activeIndex = 0;
+        let modalTransitioning = false;
+
+        function updateModalImage() {
+          const activeImg = modalImgSide.querySelector('#mainProductImage');
+          const modalDots = modalImgSide.querySelectorAll('.gallery-dot');
+          if (!activeImg || modalTransitioning) return;
+          modalTransitioning = true;
+
+          activeImg.classList.add('fade-out');
+
+          modalDots.forEach((dot, idx) => {
+            dot.classList.toggle('active', idx === activeIndex);
+          });
+
+          setTimeout(() => {
+            activeImg.src = images[activeIndex];
+            activeImg.onload = () => {
+              activeImg.classList.remove('fade-out');
+              modalTransitioning = false;
+            };
+            setTimeout(() => {
+              if (modalTransitioning) {
+                activeImg.classList.remove('fade-out');
+                modalTransitioning = false;
+              }
+            }, 150);
+          }, 150);
+        }
+
+        if (images.length > 1) {
+          modalImgSide.innerHTML = `
+            <div class="product-gallery">
+                <div class="image-container" style="height: 350px;">
+                    <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
+                    <img id="mainProductImage" src="${images[0]}" alt="${titleText}" />
+                    <button class="next-btn" aria-label="Next image">&rsaquo;</button>
+                </div>
+                <div class="gallery-dots">
+                    ${images.map((_, i) => `<span class="gallery-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></span>`).join('')}
+                </div>
+            </div>
+          `;
+
+          const prevBtn = modalImgSide.querySelector('.prev-btn');
+          const nextBtn = modalImgSide.querySelector('.next-btn');
+          const modalDots = modalImgSide.querySelectorAll('.gallery-dot');
+
+          prevBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (modalTransitioning) return;
+            activeIndex = (activeIndex - 1 + images.length) % images.length;
+            updateModalImage();
+          };
+
+          nextBtn.onclick = (e) => {
+            e.stopPropagation();
+            if (modalTransitioning) return;
+            activeIndex = (activeIndex + 1) % images.length;
+            updateModalImage();
+          };
+
+          modalDots.forEach(dot => {
+            dot.onclick = (e) => {
+              e.stopPropagation();
+              if (modalTransitioning) return;
+              const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
+              if (targetIdx === activeIndex) return;
+              activeIndex = targetIdx;
+              updateModalImage();
+            };
+          });
+
+          const modalGallery = modalImgSide.querySelector('.product-gallery');
+          let touchStartX = 0;
+          let touchEndX = 0;
+          let touchStartY = 0;
+          let touchEndY = 0;
+
+          modalGallery.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].clientX;
+            touchStartY = e.changedTouches[0].clientY;
+          }, { passive: true });
+
+          modalGallery.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].clientX;
+            touchEndY = e.changedTouches[0].clientY;
+            
+            const distanceX = touchEndX - touchStartX;
+            const distanceY = touchEndY - touchStartY;
+            const threshold = 50;
+
+            if (Math.abs(distanceX) > threshold && Math.abs(distanceX) > Math.abs(distanceY)) {
+              if (modalTransitioning) return;
+              if (distanceX > 0) {
+                activeIndex = (activeIndex - 1 + images.length) % images.length;
+                updateModalImage();
+              } else {
+                activeIndex = (activeIndex + 1) % images.length;
+                updateModalImage();
+              }
+            }
+          }, { passive: true });
+
+        } else {
+          modalImgSide.innerHTML = `
+            <div class="image-container" style="height: 350px; width: 100%;">
+              <img id="mainProductImage" src="${images[0] || ''}" alt="${titleText}">
+            </div>
+          `;
+        }
+        
         modalTitle.innerText = titleText;
         modalTagline.innerText = taglineText;
         modalFeatures.innerHTML = featuresHtml;
         modalPrice.innerText = priceText;
         
-        // Prefilled WhatsApp message
         const waBaseUrl = 'https://wa.me/91XXXXXXXXXX'; 
         const messageText = encodeURIComponent(`Hi Prince Perfect! I am interested in ordering the "${titleText}" rolling paper (${priceText}). Please provide details on how to proceed.`);
         modalWaBtn.href = `${waBaseUrl}?text=${messageText}`;
         
-        // Open modal
         modalOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
