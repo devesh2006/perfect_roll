@@ -136,7 +136,7 @@ const products = [
     ],
     priceRange: "₹25 - ₹55",
     color: "#bdc3c7",
-    featured: true,
+    featured: false,
     badge: "Premium Choice"
   },
   {
@@ -178,7 +178,7 @@ const products = [
     ],
     priceRange: "₹25 - ₹55",
     color: "#d4af37",
-    featured: true,
+    featured: false,
     badge: "Connoisseur's Choice"
   },
   {
@@ -199,7 +199,7 @@ const products = [
     ],
     priceRange: "₹25 - ₹55",
     color: "#795548",
-    featured: true,
+    featured: false,
     badge: "Earthy Choice"
   }
 ];
@@ -269,22 +269,42 @@ const productsHtmlList = products.length === 0
           </article>
       `).join('\n');
 
+const marqueeProductsHtml = [...products, ...products]
+  .map(p => `
+          <a href="products.html" class="product-item">
+            <img src="${p.images[0]}" alt="${p.name}" />
+          </a>
+  `).join('\n');
+
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
 ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfect Roll</title>')}
 <body>
   ${header}
   <main>
-    <section id="hero" class="hero-section" style="justify-content: center; text-align: center;">
-      <div class="hero-bg-accent" style="left: 50%; transform: translateX(-50%); width: 80%; height: 100%; top: 0;"></div>
-      <div class="hero-content" style="justify-content: center;">
-        <div class="hero-text-wrapper" style="max-width: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-accent"></div>
+      <div class="hero-content">
+        <div class="hero-text-wrapper">
           <div class="badge hero-badge gold-badge">Premium Collection</div>
-          <h1 class="hero-title" style="text-align: center;">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
-          <p class="hero-sub" style="margin: 0 auto 40px; text-align: center;">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
-          <div class="hero-ctas" style="justify-content: center;">
+          <h1 class="hero-title">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
+          <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
+          <div class="hero-ctas">
             <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
             <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="hero-main-img"></div>
+            <div class="floating-badge badge-1">
+              <span class="icon">🌿</span>
+              <span>100% Natural</span>
+            </div>
+            <div class="floating-badge badge-2">
+              <span class="icon">✨</span>
+              <span>Ultra Thin</span>
+            </div>
           </div>
         </div>
       </div>
@@ -337,6 +357,17 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
       </div>
     </section>
 
+    <section class="product-marquee section reveal">
+      <div class="container" style="text-align: center; margin-bottom: 40px;">
+        <h2 class="section-title">Our Signature Range</h2>
+      </div>
+      <div class="marquee-track-container" style="overflow: hidden; width: 100%; display: flex; position: relative; mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);">
+        <div class="marquee-track">
+          ${marqueeProductsHtml}
+        </div>
+      </div>
+    </section>
+
     <section class="why-us-section section reveal" style="background: var(--white);">
       <div class="container">
         <h2 class="section-title">Why Choose Us</h2>
@@ -382,7 +413,6 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Products | Prince P
   ${footer}
 </body>
 </html>`;
-
 const aboutHtml = `<!DOCTYPE html>
 <html lang="en">
 ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince Perfect Roll</title>')}
@@ -392,36 +422,56 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Our Story | Prince 
     <section id="story" class="story-section section reveal">
       <div class="container story-split">
         <div class="story-text">
-          <h2 class="section-title">Crafted for the Discerning Roller</h2>
-          <p>Prince Perfect by Twoday was born from a simple desire: to elevate the rolling experience. We noticed that truly premium papers were hard to find or overpriced, so we created our own. With a commitment to natural ingredients and precision engineering, we deliver papers that respect your tobacco.</p>
-          <blockquote>"We believe every tobacco moment deserves the perfect paper."</blockquote>
+          <h2 class="section-title">Crafted for the Perfect Roll</h2>
+          <p class="story-subtitle" style="font-size: 1.25rem; font-weight: 600; color: var(--gold); margin-bottom: 24px;">Premium Rolling Papers Designed for a Superior Smoking Experience</p>
+          <p>Prince Perfect Roll is dedicated to creating premium rolling papers that deliver consistency, smoothness, and reliability with every roll. Crafted using carefully selected materials and natural Arabic gum, our papers are designed for smokers who appreciate quality, precision, and an even burn.</p>
+          <p>Whether you're looking for classic white rolling papers, natural brown papers, king-size cones, or innovative flavored options, every Prince Perfect Roll product is engineered to provide a cleaner, smoother, and slower-burning experience.</p>
+          <p>Our commitment goes beyond manufacturing. We focus on delivering premium rolling accessories that combine quality craftsmanship, modern design, and dependable performance for rolling enthusiasts across India.</p>
         </div>
         <div class="story-image">
-          <img src="images/3.webp" alt="Prince Perfect Crafting" style="width: 100%; height: 400px; object-fit: cover; display: block;">
+          <img src="26.webp" alt="Prince Perfect Crafting" style="width: 100%; height: 500px; object-fit: cover; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
         </div>
       </div>
     </section>
 
     <section id="why-us" class="why-us-section section reveal">
       <div class="container">
-        <h2 class="section-title">Why Choose Us</h2>
-        <div class="features-grid">
-          <div class="feature-item">
-            <div class="feature-icon">🌿</div>
-            <h4>Natural Gum</h4>
-            <p>Sticks first time, every time.</p>
+        <h2 class="section-title">Why Choose Prince Perfect Roll?</h2>
+        <div class="why-choose-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">Premium Quality Rolling Papers</span>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon">⏳</div>
-            <h4>Slow Even Burn</h4>
-            <p>Engineered consistency for perfect moments.</p>
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">Natural Arabic Gum for Secure Rolling</span>
           </div>
-          <div class="feature-item">
-            <div class="feature-icon">✨</div>
-            <h4>Ultra-Thin Paper</h4>
-            <p>No taste interference, purely tobacco.</p>
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">Slow & Even Burn Technology</span>
+          </div>
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">King Size and Specialty Variants</span>
+          </div>
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">Trusted by Thousands of Rolling Enthusiasts</span>
+          </div>
+          <div class="why-item" style="display: flex; align-items: center; gap: 16px; background: var(--white); padding: 20px 24px; border-radius: var(--radius-md); box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--gold);">
+            <span style="color: var(--gold); font-size: 1.5rem; font-weight: bold;">✓</span>
+            <span style="font-weight: 600; font-size: 1.1rem; color: var(--black);">Designed for Consistent Performance</span>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="story-quote-section section reveal">
+      <div class="container">
+        <blockquote class="story-quote-block">
+          "Every great roll begins with exceptional paper. At Prince Perfect Roll, quality is not an option—it's our standard."
+        </blockquote>
+        <div class="story-quote-divider"></div>
       </div>
     </section>
   </main>
