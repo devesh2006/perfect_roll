@@ -275,29 +275,16 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
 <body>
   ${header}
   <main>
-    <section id="hero" class="hero-section">
-      <div class="hero-bg-accent"></div>
-      <div class="hero-content">
-        <div class="hero-text-wrapper">
+    <section id="hero" class="hero-section" style="justify-content: center; text-align: center;">
+      <div class="hero-bg-accent" style="left: 50%; transform: translateX(-50%); width: 80%; height: 100%; top: 0;"></div>
+      <div class="hero-content" style="justify-content: center;">
+        <div class="hero-text-wrapper" style="max-width: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
           <div class="badge hero-badge gold-badge">Premium Collection</div>
-          <h1 class="hero-title">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
-          <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
-          <div class="hero-ctas">
+          <h1 class="hero-title" style="text-align: center;">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
+          <p class="hero-sub" style="margin: 0 auto 40px; text-align: center;">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
+          <div class="hero-ctas" style="justify-content: center;">
             <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
             <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="visual-card">
-            <img src="images/4.webp" alt="Perfect Roll Gold Edition" class="hero-main-img" style="width: 100%; object-fit: cover; display: block;">
-            <div class="floating-badge badge-1">
-              <span class="icon">🌿</span>
-              <span>100% Natural</span>
-            </div>
-            <div class="floating-badge badge-2">
-              <span class="icon">✨</span>
-              <span>Ultra Thin</span>
-            </div>
           </div>
         </div>
       </div>
