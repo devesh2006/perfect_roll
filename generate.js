@@ -337,19 +337,6 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
             <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
           </div>
         </div>
-        <div class="hero-visual">
-          <div class="visual-card">
-            <div class="hero-main-img"></div>
-            <div class="floating-badge badge-1">
-              <span class="icon">🌿</span>
-              <span>100% Natural</span>
-            </div>
-            <div class="floating-badge badge-2">
-              <span class="icon">✨</span>
-              <span>Ultra Thin</span>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

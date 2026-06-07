@@ -513,17 +513,20 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto;
   padding: 0 clamp(1.5rem, 5vw, 4rem);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   position: relative;
   z-index: 1;
   gap: 40px;
 }
 
 .hero-text-wrapper {
-  flex: 1;
-  max-width: 650px;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   animation: slideUp 0.8s ease forwards 0.2s;
   opacity: 0;
   transform: translateY(20px);
@@ -561,8 +564,8 @@ h1, h2, h3, h4, h5, h6 {
 .hero-sub {
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   color: #ccc;
-  margin-bottom: 40px;
-  max-width: 500px;
+  margin: 0 auto 40px;
+  max-width: 650px;
   line-height: 1.6;
 }
 
@@ -570,6 +573,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .btn-large {
@@ -597,70 +601,63 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-visual {
-  flex: 1;
+  flex: 1.2;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
   position: relative;
   opacity: 0;
   transform: translateY(20px);
   animation: slideUp 1s ease forwards 0.4s;
+  width: 100%;
 }
 
-.visual-card {
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 800px;
+  aspect-ratio: 3 / 2;
+  transition: transform 0.4s ease;
+  z-index: 1;
+  background: radial-gradient(
+    circle,
+    rgba(200, 168, 107, 0.35) 0%,
+    rgba(200, 168, 107, 0.10) 30%,
+    transparent 60%
+  );
 }
 
-.hero-main-img {
-  min-height: 600px;
-  border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
-  background: #1a1a1a;
+.hero-image:hover {
+  transform: scale(1.03);
 }
 
-.floating-badge {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 12px 20px;
-  border-radius: 50px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--white);
-  font-weight: 600;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  animation: float 6s ease-in-out infinite;
-  z-index: 2;
-  will-change: transform;
-  transform: translateZ(0);
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0,0,0,0.35)) brightness(1.1) contrast(1.05);
+  animation: floatProducts 6s ease-in-out infinite;
+  display: block;
 }
 
-.badge-1 {
-  top: 10%;
-  left: -15%;
-  animation-delay: 0s;
+@keyframes floatProducts {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.badge-2 {
-  bottom: 20%;
-  right: -10%;
-  animation-delay: 3s;
-}
-
-@keyframes float {
-  0% { transform: translateY(0px) translateZ(0); }
-  50% { transform: translateY(-15px) translateZ(0); }
-  100% { transform: translateY(0px) translateZ(0); }
+@keyframes floatProductsMobile {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
 }
 
 @media (max-width: 992px) {
   .hero-content {
-    flex-direction: column;
+    flex-direction: column !important;
     text-align: center;
     padding-top: 40px;
   }
@@ -668,9 +665,11 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 24px;
+    max-width: 100%;
   }
   .hero-sub {
-    margin: 0 auto 40px;
+    margin: 0 auto 32px;
   }
   .hero-ctas {
     justify-content: center;
@@ -678,11 +677,16 @@ h1, h2, h3, h4, h5, h6 {
   .hero-visual {
     width: 100%;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 24px;
   }
-  .badge-1 { left: -5%; }
-  .badge-2 { right: -5%; }
-  .hero-main-img { min-height: 400px; }
+  .hero-image {
+    width: 90% !important;
+    max-width: 500px !important;
+    margin: 0 auto;
+  }
+  .hero-image img {
+    animation: floatProductsMobile 6s ease-in-out infinite;
+  }
 }
 
 @keyframes slideUp {
