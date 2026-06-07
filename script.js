@@ -36,6 +36,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Interactive Hero mouse-tracking glow
+  const heroSection = document.getElementById('hero');
+  if (heroSection) {
+    heroSection.addEventListener('mousemove', (e) => {
+      const rect = heroSection.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      heroSection.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
+      heroSection.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
+    });
+  }
+
   // Scroll-Triggered Fade-In
   const revealElements = document.querySelectorAll('.reveal');
   const revealObserver = new IntersectionObserver((entries, observer) => {

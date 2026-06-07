@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Products | Prince Perfect Roll</title>
+  <title>Home | Prince Perfect Roll</title>
   <script>
     if (localStorage.getItem('age_verified') !== 'true') {
       window.location.href = 'index.html';
@@ -191,15 +191,34 @@
     </div>
   </header>
 
-  <main style="padding-top: var(--nav-height);">
-    <section id="products" class="products-section section reveal">
+  <main>
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-accent"></div>
+      <div class="hero-content">
+        <div class="hero-text-wrapper">
+          <div class="badge hero-badge gold-badge">Premium Collection</div>
+          <h1 class="hero-title">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
+          <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
+          <div class="hero-ctas">
+            <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
+            <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="showcase" class="products-showcase section reveal" style="background: var(--cream); padding-top: 80px;">
       <div class="container">
-        <h2 class="section-title">Our Products</h2>
-        <div class="products-grid">
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+          <h2 class="section-title">Signature Collection</h2>
+          <p class="section-subtitle">Discover our meticulously crafted rolling papers.</p>
+        </div>
+        <div class="products-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
           
-          <article class="product-card" data-id="1" data-images='["images/2.webp","images/5.webp","images/7.webp"]' data-alt="Perfect Roll White premium rolling papers with natural Arabic gum" style="border-top: 4px solid #e67e22;">
-            <div class="card-img-container">
-              
+          <div class="product-card" data-id="1" data-images='["images/2.webp","images/5.webp","images/7.webp"]' data-alt="Perfect Roll White premium rolling papers with natural Arabic gum" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid #e67e22; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; flex-grow: 1;">
+              <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
+                
     <div class="product-gallery" data-images='["images/2.webp","images/5.webp","images/7.webp"]'>
         <div class="image-container">
             <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
@@ -211,28 +230,23 @@
         </div>
     </div>
   
-            </div>
-            <div class="card-content">
-              <h3>PERFECT ROLL WHITE</h3>
-              <p class="tagline">"Experience the ultimate smooth, even burn."</p>
-              <ul class="features-list">
-                <li>2 Rolling Papers + 1 Filter Tip per pack</li>
-<li>Premium bleached white paper</li>
-<li>100% natural Arabic gum</li>
-<li>Ultra-thin slow burn technology</li>
-<li>Fully biodegradable and eco-friendly</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹20 - ₹50</span>
-                <button class="btn btn-red">Order Now</button>
+                <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--red); color: var(--white);">Signature Collection</div>
+              </div>
+              <div style="padding: 0 24px; flex-grow: 1;">
+                <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--black);">PERFECT ROLL WHITE</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">Experience the ultimate smooth, even burn.</p>
               </div>
             </div>
-          </article>
+            <div style="padding: 0 24px; margin-top: auto;">
+              <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+            </div>
+          </div>
       
 
-          <article class="product-card" data-id="2" data-images='["images/13.webp","images/12.webp","images/21.webp"]' data-alt="Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum" style="border-top: 4px solid #5c4033;">
-            <div class="card-img-container">
-              
+          <div class="product-card" data-id="2" data-images='["images/13.webp","images/12.webp","images/21.webp"]' data-alt="Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid #5c4033; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; flex-grow: 1;">
+              <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
+                
     <div class="product-gallery" data-images='["images/13.webp","images/12.webp","images/21.webp"]'>
         <div class="image-container">
             <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
@@ -244,61 +258,23 @@
         </div>
     </div>
   
-            </div>
-            <div class="card-content">
-              <h3>PERFECT ROLL BROWN</h3>
-              <p class="tagline">"Experience the organic, raw taste of unbleached paper."</p>
-              <ul class="features-list">
-                <li>2 Rolling Papers + 1 Filter Tip per pack</li>
-<li>Premium unbleached organic brown paper</li>
-<li>100% natural Arabic gum</li>
-<li>Ultra-thin slow burn technology</li>
-<li>Fully biodegradable and eco-friendly</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹25 - ₹55</span>
-                <button class="btn btn-red">Order Now</button>
+                <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--red); color: var(--white);">Organic Premium</div>
+              </div>
+              <div style="padding: 0 24px; flex-grow: 1;">
+                <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--black);">PERFECT ROLL BROWN</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">Experience the organic, raw taste of unbleached paper.</p>
               </div>
             </div>
-          </article>
+            <div style="padding: 0 24px; margin-top: auto;">
+              <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+            </div>
+          </div>
       
 
-          <article class="product-card" data-id="3" data-images='["images/22.webp","images/24.webp"]' data-alt="5 Friec White premium rolling papers with slow burn technology" style="border-top: 4px solid #bdc3c7;">
-            <div class="card-img-container">
-              
-    <div class="product-gallery" data-images='["images/22.webp","images/24.webp"]'>
-        <div class="image-container">
-            <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-            <img id="mainProductImage" src="images/22.webp" alt="5 Friec White premium rolling papers with slow burn technology" />
-            <button class="next-btn" aria-label="Next image">&rsaquo;</button>
-        </div>
-        <div class="gallery-dots">
-            <span class="gallery-dot active" data-index="0"></span><span class="gallery-dot " data-index="1"></span>
-        </div>
-    </div>
-  
-            </div>
-            <div class="card-content">
-              <h3>5 FRIEC WHITE</h3>
-              <p class="tagline">"Premium bleached white paper for a clean, pure experience."</p>
-              <ul class="features-list">
-                <li>Premium bleached white paper</li>
-<li>100% natural Arabic gum</li>
-<li>Ultra-thin lightweight paper</li>
-<li>Slow, clean, even burn</li>
-<li>Chemical-free manufacturing</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹25 - ₹55</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-      
-
-          <article class="product-card" data-id="4" data-images='["images/18.webp","images/15.webp","images/19.webp"]' data-alt="5 Friec Brown organic natural unbleached rolling papers with slow burn technology" style="border-top: 4px solid #8B5A2B;">
-            <div class="card-img-container">
-              
+          <div class="product-card" data-id="4" data-images='["images/18.webp","images/15.webp","images/19.webp"]' data-alt="5 Friec Brown organic natural unbleached rolling papers with slow burn technology" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid #8B5A2B; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; flex-grow: 1;">
+              <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
+                
     <div class="product-gallery" data-images='["images/18.webp","images/15.webp","images/19.webp"]'>
         <div class="image-container">
             <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
@@ -310,90 +286,159 @@
         </div>
     </div>
   
-            </div>
-            <div class="card-content">
-              <h3>5 FRIEC BROWN</h3>
-              <p class="tagline">"Unbleached organic brown paper for a raw, natural experience."</p>
-              <ul class="features-list">
-                <li>Unbleached organic natural brown paper</li>
-<li>100% organic natural Arabic gum</li>
-<li>Ultra-thin lightweight paper</li>
-<li>Slow, clean, even burn</li>
-<li>Chemical-free and chlorine-free manufacturing</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹30 - ₹60</span>
-                <button class="btn btn-red">Order Now</button>
+                <div class="badge" style="position: absolute; top: 16px; right: 16px; background: var(--red); color: var(--white);">Organic Choice</div>
+              </div>
+              <div style="padding: 0 24px; flex-grow: 1;">
+                <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--black);">5 FRIEC BROWN</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">Unbleached organic brown paper for a raw, natural experience.</p>
               </div>
             </div>
-          </article>
+            <div style="padding: 0 24px; margin-top: auto;">
+              <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+            </div>
+          </div>
       
+        </div>
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="products.html" class="btn btn-red btn-large">View All Products</a>
+        </div>
+      </div>
+    </section>
 
-          <article class="product-card" data-id="5" data-images='["images/16.webp","images/1.webp","images/17.webp"]' data-alt="Twoday White premium rolling papers with natural Arabic gum and filter tips" style="border-top: 4px solid #d4af37;">
-            <div class="card-img-container">
-              
-    <div class="product-gallery" data-images='["images/16.webp","images/1.webp","images/17.webp"]'>
-        <div class="image-container">
-            <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-            <img id="mainProductImage" src="images/16.webp" alt="Twoday White premium rolling papers with natural Arabic gum and filter tips" />
-            <button class="next-btn" aria-label="Next image">&rsaquo;</button>
+    <section class="trust-bar section">
+      <div class="trust-marquee">
+        <div class="trust-marquee-inner">
+          <div class="trust-item"><span class="icon gold">✦</span> Natural Arabic Gum</div>
+          <div class="trust-item"><span class="icon gold">✦</span> Slow Burn</div>
+          <div class="trust-item"><span class="icon gold">✦</span> Precision Cut</div>
+          <div class="trust-item"><span class="icon gold">✦</span> 18+ Certified</div>
+          <div class="trust-item duplicate-item"><span class="icon gold">✦</span> Natural Arabic Gum</div>
+          <div class="trust-item duplicate-item"><span class="icon gold">✦</span> Slow Burn</div>
+          <div class="trust-item duplicate-item"><span class="icon gold">✦</span> Precision Cut</div>
+          <div class="trust-item duplicate-item"><span class="icon gold">✦</span> 18+ Certified</div>
         </div>
-        <div class="gallery-dots">
-            <span class="gallery-dot active" data-index="0"></span><span class="gallery-dot " data-index="1"></span><span class="gallery-dot " data-index="2"></span>
-        </div>
-    </div>
-  
-            </div>
-            <div class="card-content">
-              <h3>TWODAY WHITE</h3>
-              <p class="tagline">"Standard bleached white paper, clean and pure."</p>
-              <ul class="features-list">
-                <li>2 Rolling Papers + 2 Filter Tips per pack</li>
-<li>Premium quality bleached white paper</li>
-<li>100% natural Arabic gum</li>
-<li>Ultra-thin slow burn technology</li>
-<li>Fully biodegradable packaging</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹25 - ₹55</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-      
+      </div>
+    </section>
 
-          <article class="product-card" data-id="6" data-images='["images/10.webp","images/9.webp","images/8.webp"]' data-alt="Twoday Brown premium unbleached rolling papers with natural Arabic gum and filter tips" style="border-top: 4px solid #795548;">
-            <div class="card-img-container">
-              
-    <div class="product-gallery" data-images='["images/10.webp","images/9.webp","images/8.webp"]'>
-        <div class="image-container">
-            <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-            <img id="mainProductImage" src="images/10.webp" alt="Twoday Brown premium unbleached rolling papers with natural Arabic gum and filter tips" />
-            <button class="next-btn" aria-label="Next image">&rsaquo;</button>
+    <section id="stats" class="stats-section section reveal">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-target="500" data-suffix="K+">0</div>
+          <div class="stat-label">Happy Rollers</div>
         </div>
-        <div class="gallery-dots">
-            <span class="gallery-dot active" data-index="0"></span><span class="gallery-dot " data-index="1"></span><span class="gallery-dot " data-index="2"></span>
+        <div class="stat-item">
+          <div class="stat-number" data-target="6" data-suffix="">0</div>
+          <div class="stat-label">Signature Products</div>
         </div>
-    </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="18" data-suffix="+">0</div>
+          <div class="stat-label">States Served</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-marquee section reveal">
+      <div class="container" style="text-align: center; margin-bottom: 40px;">
+        <h2 class="section-title">Our Signature Range</h2>
+        <p style="color: #666; font-size: 1.1rem; line-height: 1.6; max-width: 700px; margin: 20px auto 0;">Explore our premium rolling papers, king-size cones, ultra-thin rolling papers, and natural Arabic gum products designed for a smooth and consistent smoking experience.</p>
+      </div>
+      <div class="marquee-track-container" style="overflow: hidden; width: 100%; display: flex; position: relative; mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);">
+        <div class="marquee-track">
+          
+          <a href="products.html" class="product-item">
+            <img src="images/2.webp" alt="Perfect Roll White premium rolling papers with natural Arabic gum" />
+            <h4>PERFECT ROLL WHITE</h4>
+          </a>
   
-            </div>
-            <div class="card-content">
-              <h3>TWODAY BROWN</h3>
-              <p class="tagline">"Premium unbleached brown paper, earthy and smooth."</p>
-              <ul class="features-list">
-                <li>2 Rolling Papers + 2 Filter Tips per pack</li>
-<li>Premium quality unbleached brown paper</li>
-<li>100% natural Arabic gum</li>
-<li>Ultra-thin slow burn technology</li>
-<li>Fully biodegradable packaging</li>
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">₹25 - ₹55</span>
-                <button class="btn btn-red">Order Now</button>
-              </div>
-            </div>
-          </article>
-      
+
+          <a href="products.html" class="product-item">
+            <img src="images/13.webp" alt="Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum" />
+            <h4>PERFECT ROLL BROWN</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/22.webp" alt="5 Friec White premium rolling papers with slow burn technology" />
+            <h4>5 FRIEC WHITE</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/18.webp" alt="5 Friec Brown organic natural unbleached rolling papers with slow burn technology" />
+            <h4>5 FRIEC BROWN</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/16.webp" alt="Twoday White premium rolling papers with natural Arabic gum and filter tips" />
+            <h4>TWODAY WHITE</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/10.webp" alt="Twoday Brown premium unbleached rolling papers with natural Arabic gum and filter tips" />
+            <h4>TWODAY BROWN</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/2.webp" alt="Perfect Roll White premium rolling papers with natural Arabic gum" />
+            <h4>PERFECT ROLL WHITE</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/13.webp" alt="Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum" />
+            <h4>PERFECT ROLL BROWN</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/22.webp" alt="5 Friec White premium rolling papers with slow burn technology" />
+            <h4>5 FRIEC WHITE</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/18.webp" alt="5 Friec Brown organic natural unbleached rolling papers with slow burn technology" />
+            <h4>5 FRIEC BROWN</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/16.webp" alt="Twoday White premium rolling papers with natural Arabic gum and filter tips" />
+            <h4>TWODAY WHITE</h4>
+          </a>
+  
+
+          <a href="products.html" class="product-item">
+            <img src="images/10.webp" alt="Twoday Brown premium unbleached rolling papers with natural Arabic gum and filter tips" />
+            <h4>TWODAY BROWN</h4>
+          </a>
+  
+        </div>
+      </div>
+    </section>
+
+    <section class="why-us-section section reveal" style="background: var(--white);">
+      <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 40px;">
+          <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">🌿</div>
+            <h4>Natural Gum</h4>
+            <p>Sticks first time, every time.</p>
+          </div>
+          <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">⏳</div>
+            <h4>Slow Even Burn</h4>
+            <p>Engineered consistency for perfect moments.</p>
+          </div>
+          <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
+            <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">✨</div>
+            <h4>Ultra-Thin Paper</h4>
+            <p>No taste interference, purely tobacco.</p>
+          </div>
         </div>
       </div>
     </section>

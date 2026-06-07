@@ -3,7 +3,7 @@ const fs = require('fs');
 const products = [
   {
     id: 1,
-    name: "Perfect Roll White",
+    name: "PERFECT ROLL WHITE",
     tagline: "Experience the ultimate smooth, even burn.",
     imageAlt: "Perfect Roll White premium rolling papers with natural Arabic gum",
     images: [
@@ -25,7 +25,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Perfect Roll Brown",
+    name: "PERFECT ROLL BROWN",
     tagline: "Experience the organic, raw taste of unbleached paper.",
     imageAlt: "Perfect Roll Brown organic unbleached rolling papers with natural Arabic gum",
     images: [
@@ -175,6 +175,11 @@ const head = `
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Prince Perfect Roll</title>
+  <script>
+    if (localStorage.getItem('age_verified') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -186,10 +191,10 @@ const head = `
 const header = `
   <header id="site-header">
     <div class="header-container">
-      <a href="index.html" class="logo">Prince Perfect</a>
+      <a href="home.html" class="logo">Prince Perfect</a>
       <nav id="main-nav">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="home.html">Home</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="about.html">Our Story</a></li>
           <li><a href="distributors.html">Distributors</a></li>
@@ -207,7 +212,7 @@ const header = `
     </div>
     <div id="mobile-nav-overlay">
         <ul>
-          <li><a href="index.html" class="mobile-link">Home</a></li>
+          <li><a href="home.html" class="mobile-link">Home</a></li>
           <li><a href="products.html" class="mobile-link">Products</a></li>
           <li><a href="about.html" class="mobile-link">Our Story</a></li>
           <li><a href="distributors.html" class="mobile-link">Distributors</a></li>
@@ -222,21 +227,30 @@ const footer = `
     <div class="container">
       <div class="footer-grid" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
         <div class="footer-brand">
-          <a href="index.html" class="logo" style="font-size: 1.5rem; margin-bottom: 8px; display: block;">Prince Perfect</a>
-          <p style="color: #999; font-size: 0.9rem;">Premium rolling papers by Twoday.</p>
+          <a href="home.html" class="logo" style="font-size: 1.5rem; margin-bottom: 8px; display: block;">Prince Perfect</a>
+          <p style="color: #999; font-size: 0.9rem; max-width: 450px; line-height: 1.5;">Prince Perfect Roll manufactures premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted with natural Arabic gum for a smooth, slow, and consistent burn experience across India.</p>
         </div>
         <div class="footer-links" style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <a href="home.html" style="color: var(--white); font-size: 0.9rem; text-transform: uppercase;">Home</a>
           <a href="products.html" style="color: var(--white); font-size: 0.9rem; text-transform: uppercase;">Products</a>
           <a href="about.html" style="color: var(--white); font-size: 0.9rem; text-transform: uppercase;">Our Story</a>
           <a href="distributors.html" style="color: var(--white); font-size: 0.9rem; text-transform: uppercase;">Distributors</a>
+          <a href="contact.html" style="color: var(--white); font-size: 0.9rem; text-transform: uppercase;">Contact</a>
         </div>
-        <div class="footer-social" style="display: flex; gap: 16px;">
-          <a href="#" style="color: var(--gold); font-weight: bold; font-size: 1.2rem;">IG</a>
-          <a href="#" style="color: var(--gold); font-weight: bold; font-size: 1.2rem;">FB</a>
+        <div class="footer-social" style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+          <span style="color: var(--white); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; font-family: var(--font-body);">Follow Us</span>
+          <div style="display: flex; gap: 16px; align-items: center;">
+            <a href="#" aria-label="Instagram" style="color: var(--gold); transition: color 0.3s, transform 0.3s; display: inline-flex;" onmouseover="this.style.color='var(--white)'; this.style.transform='scale(1.15)'" onmouseout="this.style.color='var(--gold)'; this.style.transform='scale(1)'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="#" aria-label="Facebook" style="color: var(--gold); transition: color 0.3s, transform 0.3s; display: inline-flex;" onmouseover="this.style.color='var(--white)'; this.style.transform='scale(1.15)'" onmouseout="this.style.color='var(--gold)'; this.style.transform='scale(1)'">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom" style="margin-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; display: flex; flex-wrap: wrap; justify-content: space-between; color: #666; font-size: 0.8rem; gap: 16px;">
-        <p>&copy; 2026 Prince Perfect Roll. All rights reserved.</p>
+        <p>&copy; 2025-2026 Prince Perfect Roll. All Rights Reserved.</p>
         <p>18+ | Tobacco consumption is injurious to health.</p>
       </div>
     </div>
@@ -273,14 +287,20 @@ const featuredHtmlList = products.length === 0
   : products
       .filter(p => p.featured)
       .map(p => `
-          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color};">
-            <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-radius: var(--radius-lg); margin-bottom: 24px;">
-              ${makeSliderHtml(p)}
-              ${p.badge ? `<div class="badge" style="position: absolute; top: 16px; right: 16px; ${p.badge === 'Best Seller' ? 'background: var(--white); color: var(--gold); border: 1px solid var(--gold);' : 'background: var(--red); color: var(--white);'}">${p.badge}</div>` : ''}
+          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color}; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; flex-grow: 1;">
+              <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
+                ${makeSliderHtml(p)}
+                ${p.badge ? `<div class="badge" style="position: absolute; top: 16px; right: 16px; ${p.badge === 'Best Seller' ? 'background: var(--white); color: var(--gold); border: 1px solid var(--gold);' : 'background: var(--red); color: var(--white);'}">${p.badge}</div>` : ''}
+              </div>
+              <div style="padding: 0 24px; flex-grow: 1;">
+                <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 8px; color: var(--black);">${p.name}</h3>
+                <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem; line-height: 1.5;">${p.tagline}</p>
+              </div>
             </div>
-            <h3 class="product-title" style="font-size: 1.5rem; margin-bottom: 12px; color: var(--black);">${p.name}</h3>
-            <p style="color: #666; margin-bottom: 24px;">${p.tagline}</p>
-            <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+            <div style="padding: 0 24px; margin-top: auto;">
+              <a href="products.html" class="btn btn-gold-outline" style="width: 100%; display: block; text-align: center;">Explore Product</a>
+            </div>
           </div>
       `).join('\n');
 
@@ -316,10 +336,63 @@ const marqueeProductsHtml = [...products, ...products]
   .map(p => `
           <a href="products.html" class="product-item">
             <img src="${p.images[0]}" alt="${p.imageAlt}" />
+            <h4>${p.name}</h4>
           </a>
   `).join('\n');
 
 const indexHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Age Verification | Prince Perfect Roll</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="age-gate-body">
+  <div class="age-gate-wrapper">
+    <div class="age-gate-content">
+      <div class="age-gate-logo">Prince Perfect</div>
+      <div class="age-gate-divider"></div>
+      <h2>Age Verification</h2>
+      <p id="age-gate-message">You must be 18 years of age or older to enter this website. Please verify your age to continue.</p>
+      
+      <div class="age-gate-actions" id="age-gate-buttons">
+        <button class="btn btn-red btn-large" id="btn-verify-yes">Yes, I am 18+</button>
+        <button class="btn btn-outline-light btn-large" id="btn-verify-no">No, I am under 18</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (localStorage.getItem('age_verified') === 'true') {
+      window.location.href = 'home.html';
+    }
+
+    const btnYes = document.getElementById('btn-verify-yes');
+    const btnNo = document.getElementById('btn-verify-no');
+    const message = document.getElementById('age-gate-message');
+    const buttonsContainer = document.getElementById('age-gate-buttons');
+
+    btnYes.addEventListener('click', () => {
+      localStorage.setItem('age_verified', 'true');
+      window.location.href = 'home.html';
+    });
+
+    btnNo.addEventListener('click', () => {
+      buttonsContainer.style.display = 'none';
+      message.innerHTML = '<span class="denied-text">You are not old enough to view this website. Access Denied.</span>';
+      message.style.color = '#B51F2E';
+      message.style.fontSize = '1.3rem';
+      message.style.fontWeight = '600';
+    });
+  </script>
+</body>
+</html>`;
+
+const homeHtml = `<!DOCTYPE html>
 <html lang="en">
 ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfect Roll</title>')}
 <body>
@@ -390,6 +463,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Home | Prince Perfe
     <section class="product-marquee section reveal">
       <div class="container" style="text-align: center; margin-bottom: 40px;">
         <h2 class="section-title">Our Signature Range</h2>
+        <p style="color: #666; font-size: 1.1rem; line-height: 1.6; max-width: 700px; margin: 20px auto 0;">Explore our premium rolling papers, king-size cones, ultra-thin rolling papers, and natural Arabic gum products designed for a smooth and consistent smoking experience.</p>
       </div>
       <div class="marquee-track-container" style="overflow: hidden; width: 100%; display: flex; position: relative; mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, white 20%, white 80%, transparent);">
         <div class="marquee-track">
@@ -530,6 +604,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Distributors | Prin
     <section id="distributors" class="distributor-section section reveal">
       <div class="container">
         <h2 class="section-title gold-text">Partner With Us</h2>
+        <p style="color: #ccc; font-size: 1.15rem; max-width: 700px; margin: -10px auto 36px; line-height: 1.6;">Join the Prince Perfect Roll distribution network and bring premium rolling papers, king-size cones, and smoking accessories to customers across India.</p>
         <div class="distributor-perks">
           <div class="perk"><span class="icon gold">★</span> High Margins</div>
           <div class="perk"><span class="icon gold">★</span> Premium Brand Value</div>
@@ -608,6 +683,7 @@ ${head.replace('<title>Prince Perfect Roll</title>', '<title>Contact | Prince Pe
 </html>`;
 
 fs.writeFileSync('index.html', indexHtml);
+fs.writeFileSync('home.html', homeHtml);
 fs.writeFileSync('products.html', productsHtml);
 fs.writeFileSync('about.html', aboutHtml);
 fs.writeFileSync('distributors.html', distributorsHtml);
