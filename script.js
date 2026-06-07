@@ -484,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
         modalFeatures.innerHTML = featuresHtml;
         modalPrice.innerText = priceText;
         
-        const waBaseUrl = 'https://wa.me/91XXXXXXXXXX'; 
+        const waBaseUrl = 'https://wa.me/+919717990597'; 
         const messageText = encodeURIComponent(`Hi Prince Perfect! I am interested in ordering the "${titleText}" rolling paper (${priceText}). Please provide details on how to proceed.`);
         modalWaBtn.href = `${waBaseUrl}?text=${messageText}`;
         
