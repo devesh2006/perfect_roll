@@ -64,6 +64,17 @@ a {
   justify-content: center;
 }
 
+/* Override inline links in paragraphs and list items to display and size naturally */
+p a,
+li a,
+.faq-answer a,
+.contact-seo-text a {
+  min-height: auto;
+  min-width: auto;
+  display: inline;
+  text-decoration: underline;
+}
+
 ul {
   list-style: none;
 }
@@ -84,6 +95,17 @@ img {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+/* Keyboard navigation accessibility focus visible outlines */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+details summary:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 2px !important;
 }
 
 /* Typography */
@@ -414,8 +436,9 @@ h1, h2, h3, h4, h5, h6 {
   display: none;
   flex-direction: column;
   justify-content: space-around;
-  width: 30px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
+  padding: 10px 7px;
   z-index: 1002;
   position: relative;
 }
@@ -1599,6 +1622,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 60px;
   }
 
+  .hero-title {
+    font-size: clamp(2rem, 6.5vw, 3.5rem);
+  }
+
   .hero-content > div:first-child {
     max-width: 100%;
     margin-top: 16px;
@@ -1711,6 +1738,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-lg);
   max-width: 900px;
   width: 100%;
+  min-height: 660px;
   max-height: 90vh;
   display: flex;
   flex-direction: row;
@@ -1754,14 +1782,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-modal-img-side {
-  flex: 1.1;
+  flex: 1.4;
   background: transparent; /* Remove unnecessary black padding background */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   position: relative;
-  min-height: 400px;
+  min-height: 500px;
 }
 
 .product-modal-img-side .product-gallery {
@@ -1776,7 +1804,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-modal-img-side .image-container {
   height: auto !important;
-  max-height: 400px !important;
+  max-height: 500px !important;
   width: 100% !important;
   aspect-ratio: auto !important; /* override default aspect-ratio */
   display: flex !important;
@@ -1790,7 +1818,7 @@ h1, h2, h3, h4, h5, h6 {
   width: auto !important;
   height: auto !important;
   max-width: 100% !important;
-  max-height: 360px !important;
+  max-height: 440px !important;
   object-fit: contain !important;
   display: block !important;
   border-radius: var(--radius-md);
@@ -1798,18 +1826,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-modal-info-side {
   flex: 1;
-  padding: 48px;
+  padding: 20px 24px 16px 24px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: auto;
   border-left: 1px solid rgba(200, 168, 107, 0.2);
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera for modals */
+.product-modal-card::-webkit-scrollbar,
+.product-modal-info-side::-webkit-scrollbar,
+.modal-card::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .product-modal-info-side h2 {
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
   color: var(--white);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-family: var(--font-heading);
 }
 
@@ -1820,12 +1859,12 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 24px;
 }
 
-.product-modal-info-side .modal-features {
-  margin-bottom: 32px;
+.product-modal-info-side .modal-benefits {
+  margin-bottom: 16px;
 }
 
-.product-modal-info-side .modal-features li {
-  margin-bottom: 12px;
+.product-modal-info-side .modal-benefits li {
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -1833,9 +1872,54 @@ h1, h2, h3, h4, h5, h6 {
   color: #ccc;
 }
 
-.product-modal-info-side .modal-features li::before {
-  content: "✦";
+.product-modal-info-side .modal-benefits li::before {
+  content: "✓";
   color: var(--gold);
+  font-weight: bold;
+}
+
+.modal-section-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.modal-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+.product-modal-specs-wrapper {
+  margin-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 12px;
+}
+
+.modal-specs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.modal-specs li {
+  margin-bottom: 4px;
+  font-size: 0.95rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-specs li::before {
+  content: "•";
+  color: var(--gold);
+  font-weight: bold;
 }
 
 .product-modal-footer {
@@ -1844,8 +1928,8 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   gap: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 24px;
-  margin-top: 12px;
+  padding-top: 12px;
+  margin-top: 6px;
 }
 
 .product-modal-price {
@@ -1861,7 +1945,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-modal-price .price-val {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--gold);
   font-family: var(--font-heading);
@@ -1870,12 +1954,12 @@ h1, h2, h3, h4, h5, h6 {
 .product-modal-cta {
   background: var(--red);
   color: var(--white);
-  padding: 14px 28px;
+  padding: 10px 20px;
   border-radius: 4px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 14px;
+  font-size: 13px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1891,6 +1975,7 @@ h1, h2, h3, h4, h5, h6 {
   .product-modal-card {
     flex-direction: column;
     max-height: 95vh;
+    min-height: auto;
   }
   .product-modal-img-side {
     min-height: 250px;

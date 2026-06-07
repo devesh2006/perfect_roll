@@ -23,10 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (mobileBtn && mobileNav) {
+    mobileBtn.setAttribute('aria-expanded', 'false');
+    mobileBtn.setAttribute('aria-controls', 'mobile-nav-overlay');
+    
     function toggleMenu() {
-      mobileBtn.classList.toggle('open');
+      const isOpen = mobileBtn.classList.toggle('open');
       mobileNav.classList.toggle('open');
-      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+      mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
     }
     mobileBtn.addEventListener('click', toggleMenu);
     
@@ -102,6 +106,74 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { waBtn.classList.add('visible'); }, 800);
   }
 
+  // Helper for keyboard focus trapping
+  function getFocusableElements(container) {
+    return Array.from(container.querySelectorAll(
+      'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]'
+    ));
+  }
+
+  function setupFocusTrap(modal, closeBtn, onOpenCallback, onCloseCallback) {
+    let previouslyFocused = null;
+
+    function open() {
+      previouslyFocused = document.activeElement;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      if (onOpenCallback) onOpenCallback();
+      setTimeout(() => {
+        if (closeBtn) closeBtn.focus();
+      }, 100);
+    }
+
+    function close() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      if (onCloseCallback) onCloseCallback();
+      if (previouslyFocused) {
+        previouslyFocused.focus();
+      }
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        close();
+      });
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        close();
+      }
+    });
+
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        close();
+      } else if (e.key === 'Tab') {
+        const focusables = getFocusableElements(modal);
+        if (focusables.length === 0) return;
+        const firstFocusable = focusables[0];
+        const lastFocusable = focusables[focusables.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstFocusable) {
+            lastFocusable.focus();
+            e.preventDefault();
+          }
+        } else {
+          if (document.activeElement === lastFocusable) {
+            firstFocusable.focus();
+            e.preventDefault();
+          }
+        }
+      }
+    });
+
+    return { open, close };
+  }
+
   // Distributor Modal
   const distBtn = document.getElementById('open-dist-modal');
   const distModal = document.getElementById('distributor-modal');
@@ -109,26 +181,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const distForm = document.getElementById('distributor-form');
 
   if (distBtn && distModal) {
+    const distTrap = setupFocusTrap(distModal, closeDistModal);
+
     distBtn.addEventListener('click', () => {
-      distModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      distTrap.open();
     });
-    closeDistModal.addEventListener('click', () => {
-      distModal.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-    distModal.addEventListener('click', (e) => {
-      if (e.target === distModal) {
-        distModal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    });
+
     if (distForm) {
       distForm.addEventListener('submit', (e) => {
         e.preventDefault();
         alert('Application submitted successfully! We will contact you soon.');
-        distModal.classList.remove('active');
-        document.body.style.overflow = '';
+        distTrap.close();
         distForm.reset();
       });
     }
@@ -248,6 +311,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     }, { passive: true });
+
+    // Keyboard navigation support for gallery
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        if (prevBtn) {
+          e.preventDefault();
+          prevBtn.click();
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (nextBtn) {
+          e.preventDefault();
+          nextBtn.click();
+        }
+      }
+    });
   });
 
   // Product Detail Modal Dynamic Creation & Event Handling
@@ -268,10 +346,22 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="product-modal-info-side">
             <h2 id="modal-product-title">Product Title</h2>
-            <p id="modal-product-tagline" class="tagline">Product Tagline</p>
-            <ul id="modal-product-features" class="modal-features">
-              <!-- Dynamic features -->
-            </ul>
+            
+            <p id="modal-product-description" class="modal-description" style="margin-top: 8px; margin-bottom: 8px; font-size: 1rem; line-height: 1.6; color: #ccc;"></p>
+            
+            <div class="product-modal-specs-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
+              <h4 class="modal-section-title">SPECIFICATIONS</h4>
+              <ul id="modal-product-specs" class="modal-specs">
+                <!-- Dynamic specifications -->
+              </ul>
+            </div>
+
+            <div class="product-modal-benefits-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
+              <h4 class="modal-section-title">WHY CHOOSE IT</h4>
+              <ul id="modal-product-benefits" class="modal-benefits">
+                <!-- Dynamic benefits -->
+              </ul>
+            </div>
             <div class="product-modal-footer">
               <div class="product-modal-price">
                 <span class="price-label">Estimated Price</span>
@@ -291,26 +381,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClose = modalOverlay.querySelector('.product-modal-close');
     const modalImgSide = modalOverlay.querySelector('.product-modal-img-side');
     const modalTitle = modalOverlay.querySelector('#modal-product-title');
-    const modalTagline = modalOverlay.querySelector('#modal-product-tagline');
-    const modalFeatures = modalOverlay.querySelector('#modal-product-features');
     const modalPrice = modalOverlay.querySelector('#modal-product-price');
     const modalWaBtn = modalOverlay.querySelector('#modal-product-wa-btn');
-    
-    function closeModal() {
-      modalOverlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-    
-    modalClose.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
-        closeModal();
-      }
-    });
+
+    const productDetailTrap = setupFocusTrap(modalOverlay, modalClose);
     
     productCards.forEach(card => {
       card.addEventListener('click', (e) => {
@@ -347,8 +421,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const altText = card.getAttribute('data-alt') || titleText;
         
-        const priceEl = card.querySelector('.price-range');
-        const priceText = priceEl ? priceEl.innerText : '₹20 - ₹100';
+        const priceText = card.getAttribute('data-price') || '₹20 - ₹100';
+        
+        const descriptionAttr = card.getAttribute('data-description');
+        const descriptionText = descriptionAttr ? decodeURIComponent(descriptionAttr) : '';
+        
+        const specsAttr = card.getAttribute('data-specs');
+        let specs = {};
+        if (specsAttr) {
+          try {
+            specs = JSON.parse(decodeURIComponent(specsAttr));
+          } catch(err) {
+            console.error("Failed to parse specs:", err);
+          }
+        }
+        
+        const benefitsAttr = card.getAttribute('data-benefits');
+        let benefits = [];
+        if (benefitsAttr && benefitsAttr !== 'undefined' && benefitsAttr !== '') {
+          try {
+            benefits = JSON.parse(decodeURIComponent(benefitsAttr));
+          } catch(err) {
+            console.error("Failed to parse benefits:", err);
+          }
+        }
         
         const imagesAttr = card.getAttribute('data-images') || (card.querySelector('.product-gallery') ? card.querySelector('.product-gallery').getAttribute('data-images') : null);
         let images = [];
@@ -479,17 +575,30 @@ document.addEventListener('DOMContentLoaded', () => {
           `;
         }
         
-        modalTitle.innerText = titleText;
-        modalTagline.innerText = taglineText;
-        modalFeatures.innerHTML = featuresHtml;
-        modalPrice.innerText = priceText;
+        if (modalTitle) modalTitle.innerText = titleText;
+        if (modalPrice) modalPrice.innerText = priceText;
+
+        const modalDescription = modalOverlay.querySelector('#modal-product-description');
+        const modalSpecsList = modalOverlay.querySelector('#modal-product-specs');
+        const modalBenefitsList = modalOverlay.querySelector('#modal-product-benefits');
+
+        if (modalDescription) {
+          modalDescription.innerHTML = descriptionText.replace(/\n\n/g, '<br><br>');
+        }
+        
+        if (modalSpecsList) {
+          modalSpecsList.innerHTML = Object.entries(specs).map(([key, val]) => `<li><strong>${key}:</strong> ${val}</li>`).join('');
+        }
+        
+        if (modalBenefitsList) {
+          modalBenefitsList.innerHTML = benefits.map(b => `<li>${b}</li>`).join('');
+        }
         
         const waBaseUrl = 'https://wa.me/+919717990597'; 
         const messageText = encodeURIComponent(`Hi Prince Perfect! I am interested in ordering the "${titleText}" rolling paper (${priceText}). Please provide details on how to proceed.`);
         modalWaBtn.href = `${waBaseUrl}?text=${messageText}`;
         
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        productDetailTrap.open();
       });
     });
   }
