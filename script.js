@@ -174,25 +174,168 @@ document.addEventListener('DOMContentLoaded', () => {
     return { open, close };
   }
 
-  // Distributor Modal
+  // Distributor Modal with Input Validation, XSS Sanitization, and Client-side Rate-limiting
   const distBtn = document.getElementById('open-dist-modal');
   const distModal = document.getElementById('distributor-modal');
   const closeDistModal = document.getElementById('close-dist-modal');
   const distForm = document.getElementById('distributor-form');
 
   if (distBtn && distModal) {
-    const distTrap = setupFocusTrap(distModal, closeDistModal);
+    const distTrap = setupFocusTrap(distModal, closeDistModal, () => {
+      // Clear status when opening
+      clearFormStatus();
+      checkLockoutStatus();
+    });
 
     distBtn.addEventListener('click', () => {
       distTrap.open();
     });
 
+    const statusBanner = document.getElementById('distributor-form-status');
+    const submitBtn = distForm ? distForm.querySelector('button[type="submit"]') : null;
+
+    function clearFormStatus() {
+      if (statusBanner) {
+        statusBanner.style.display = 'none';
+        statusBanner.textContent = '';
+        statusBanner.className = 'form-status-banner';
+      }
+    }
+
+    function showFormStatus(type, message) {
+      if (statusBanner) {
+        statusBanner.textContent = message;
+        statusBanner.className = `form-status-banner form-status-${type}`;
+        statusBanner.style.display = 'block';
+        statusBanner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // Client-side XSS Sanitization
+    function sanitizeInput(str) {
+      if (typeof str !== 'string') return '';
+      // Strip all HTML elements
+      const cleanHtml = str.replace(/<[^>]*>/g, '');
+      // Strip unsafe JavaScript patterns
+      const cleanScript = cleanHtml.replace(/(javascript:|onload=|onerror=|onclick=|onfocus=|onblur=)/gi, '');
+      return cleanScript.trim();
+    }
+
+    // LocalStorage Rate Limiter
+    function getRecentSubmissions() {
+      try {
+        const history = localStorage.getItem('dist_submissions');
+        return history ? JSON.parse(history) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function recordSubmission() {
+      try {
+        const submissions = getRecentSubmissions();
+        submissions.push(Date.now());
+        localStorage.setItem('dist_submissions', JSON.stringify(submissions));
+      } catch (e) {
+        console.warn("localStorage is disabled or full");
+      }
+    }
+
+    function checkLockoutStatus() {
+      const now = Date.now();
+      const timeframe = 15 * 60 * 1000; // 15 minutes
+      const submissions = getRecentSubmissions().filter(t => now - t < timeframe);
+      
+      // Update clean history
+      try {
+        localStorage.setItem('dist_submissions', JSON.stringify(submissions));
+      } catch (e) {}
+
+      if (submissions.length >= 5) {
+        // Exceeded 5 submissions in 15 minutes
+        const oldestActive = submissions[0];
+        const remainingMs = timeframe - (now - oldestActive);
+        const remainingMin = Math.ceil(remainingMs / (60 * 1000));
+        
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = `Locked Out (${remainingMin}m remaining)`;
+        }
+        showFormStatus('error', `429 Too Many Requests: submission rate limit exceeded. Please try again in ${remainingMin} minute(s).`);
+        return true;
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+      }
+      return false;
+    }
+
     if (distForm) {
       distForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        alert('Application submitted successfully! We will contact you soon.');
-        distTrap.close();
+        clearFormStatus();
+
+        if (checkLockoutStatus()) {
+          return;
+        }
+
+        // Fetch inputs
+        const nameVal = document.getElementById('d-name').value;
+        const businessVal = document.getElementById('d-business').value;
+        const cityVal = document.getElementById('d-city').value;
+        const phoneVal = document.getElementById('d-phone').value;
+        const emailVal = document.getElementById('d-email').value;
+
+        // Sanitize
+        const name = sanitizeInput(nameVal);
+        const business = sanitizeInput(businessVal);
+        const city = sanitizeInput(cityVal);
+        const phone = sanitizeInput(phoneVal);
+        const email = sanitizeInput(emailVal);
+
+        // Validation Rules
+        const nameRegex = /^[a-zA-Z\s.-]{2,100}$/;
+        const businessRegex = /^[a-zA-Z0-9\s.,&'()-]{2,100}$/;
+        const cityRegex = /^[a-zA-Z\s.-]{2,100}$/;
+        const phoneRegex = /^\+?[0-9\s-]{10,15}$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!nameRegex.test(name)) {
+          showFormStatus('error', 'Validation Error: Full Name must contain only letters and be between 2 and 100 characters.');
+          return;
+        }
+        if (!businessRegex.test(business)) {
+          showFormStatus('error', 'Validation Error: Business Name must be between 2 and 100 characters.');
+          return;
+        }
+        if (!cityRegex.test(city)) {
+          showFormStatus('error', 'Validation Error: City must contain only letters and be between 2 and 100 characters.');
+          return;
+        }
+        if (!phoneRegex.test(phone)) {
+          showFormStatus('error', 'Validation Error: Please enter a valid phone number (10 to 15 digits).');
+          return;
+        }
+        if (!emailRegex.test(email)) {
+          showFormStatus('error', 'Validation Error: Please enter a valid email address.');
+          return;
+        }
+
+        // Log and confirm submission
+        recordSubmission();
+        showFormStatus('success', 'Application submitted successfully! Our team will contact you soon.');
+        
+        // Reset inputs and block button
         distForm.reset();
+        checkLockoutStatus();
+
+        // Close modal after delay to let user read success message
+        setTimeout(() => {
+          distTrap.close();
+          clearFormStatus();
+        }, 3000);
       });
     }
   }

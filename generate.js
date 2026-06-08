@@ -342,6 +342,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.princeperfectroll.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none';">
   <title>${title}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="https://www.princeperfectroll.com/${pageUrl}">
@@ -788,7 +789,7 @@ ${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Per
           <div class="perk"><span class="icon gold">★</span> Premium Brand Value</div>
           <div class="perk"><span class="icon gold">★</span> Dedicated Support</div>
         </div>
-        <a href="https://wa.me/+919717990597" target="_blank" rel="noopener noreferrer" class="btn btn-red btn-large">Become a Distributor</a>
+        <button id="open-dist-modal" class="btn btn-red btn-large">Become a Distributor</button>
       </div>
     </section>
   </main>
@@ -801,6 +802,7 @@ ${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Per
       <h2>Become a Distributor</h2>
       <p>Join our growing network of premium partners.</p>
       <form id="distributor-form">
+        <div id="distributor-form-status" class="form-status-banner" style="display: none;"></div>
         <div class="form-group">
           <label for="d-name">Full Name</label>
           <input type="text" id="d-name" required>
