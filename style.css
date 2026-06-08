@@ -919,6 +919,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
+.card-content h2,
 .card-content h3 {
   font-size: 1.75rem;
   margin-bottom: 4px;
@@ -1068,6 +1069,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.product-item h3,
 .product-item h4 {
   margin-top: 12px;
   font-family: var(--font-heading);
@@ -1102,6 +1104,7 @@ h1, h2, h3, h4, h5, h6 {
   .marquee-track {
     gap: 24px;
   }
+  .product-item h3,
   .product-item h4 {
     font-size: 0.95rem;
   }
@@ -3328,4 +3331,28 @@ h1, h2, h3, h4, h5, h6 {
   .container {
     max-width: 1200px !important;
   }
+}
+
+/* Accessibility: Distinct keyboard focus outlines */
+button:focus-visible, 
+a:focus-visible, 
+input:focus-visible, 
+select:focus-visible, 
+textarea:focus-visible {
+  outline: 2px solid var(--gold) !important;
+  outline-offset: 4px !important;
+}
+
+/* Distributor benefits card layout hover effects */
+.distributor-benefit-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold) !important;
+  box-shadow: 0 10px 25px rgba(200, 168, 107, 0.12);
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Products SEO description cards hover effects */
+.products-seo-card:hover {
+  border-color: var(--gold) !important;
+  box-shadow: 0 8px 25px rgba(200, 168, 107, 0.08);
 }

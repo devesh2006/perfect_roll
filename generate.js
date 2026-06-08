@@ -226,6 +226,7 @@ const getProductSchemaJson = (productsList) => {
       "name": p.name,
       "image": p.images.map(img => `https://www.princeperfectroll.com/${img}`),
       "description": p.description,
+      "category": p.specs && p.specs["Paper Type"] ? p.specs["Paper Type"] : "Premium Rolling Papers",
       "brand": {
         "@type": "Brand",
         "name": "Prince Perfect"
@@ -510,7 +511,7 @@ const productsHtmlList = products.length === 0
               ${makeSliderHtml(p)}
             </div>
             <div class="card-content">
-              <h3>${p.name}</h3>
+              <h2>${p.name}</h2>
               <p class="tagline">"${p.tagline}"</p>
               <div class="card-footer" style="border-top: none; padding-top: 0;">
                 <button class="btn btn-gold btn-full">Get Price</button>
@@ -523,7 +524,7 @@ const marqueeProductsHtml = [...products, ...products]
   .map(p => `
           <a href="products.html" class="product-item">
             <img src="${p.images[0]}" alt="${p.imageAlt}" width="80" height="80" loading="lazy" />
-            <h4>${p.name}</h4>
+            <h3>${p.name}</h3>
           </a>
   `).join('\n');
 
@@ -535,7 +536,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
     <div class="age-gate-content">
       <div class="age-gate-logo">Prince Perfect</div>
       <div class="age-gate-divider"></div>
-      <h2>Age Verification</h2>
+      <h1>Age Verification</h1>
       <p id="age-gate-message">You must be 18 years of age or older to enter this website. Please verify your age to continue.</p>
       
       <div class="age-gate-actions" id="age-gate-buttons">
@@ -582,7 +583,7 @@ ${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', '
       <div class="hero-content">
         <div class="hero-text-wrapper">
           <div class="badge hero-badge gold-badge">Premium Collection</div>
-          <h1 class="hero-title">The Art of<br><span class="gold-text">The Perfect Roll</span></h1>
+          <h1 class="hero-title">Premium Rolling Papers &<br><span class="gold-text">Cones in India</span></h1>
           <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
           <div class="hero-ctas">
             <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
@@ -657,17 +658,17 @@ ${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', '
         <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-top: 40px;">
           <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
             <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">🌿</div>
-            <h4>Natural Gum</h4>
+            <h3>Natural Gum</h3>
             <p>Sticks first time, every time.</p>
           </div>
           <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
             <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">⏳</div>
-            <h4>Slow Even Burn</h4>
+            <h3>Slow Even Burn</h3>
             <p>Engineered consistency for perfect moments.</p>
           </div>
           <div class="feature-item" style="text-align: center; padding: 32px; background: var(--cream); border-radius: var(--radius-lg); transition: transform 0.3s; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
             <div class="feature-icon" style="font-size: 3rem; margin-bottom: 24px;">✨</div>
-            <h4>Ultra-Thin Paper</h4>
+            <h3>Ultra-Thin Paper</h3>
             <p>No taste interference, purely tobacco.</p>
           </div>
         </div>
@@ -686,9 +687,49 @@ ${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover 
   <main style="padding-top: var(--nav-height);">
     <section id="products" class="products-section section reveal">
       <div class="container">
-        <h2 class="section-title">Our Products</h2>
+        <h1 class="section-title">Premium Rolling Papers & Cones</h1>
         <div class="products-grid">
           ${productsHtmlList}
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Product Specifications & Highlights SEO Section -->
+    <section class="products-seo-section section reveal" style="background: var(--cream); border-top: 1px solid rgba(200, 168, 107, 0.15); padding-top: 64px; padding-bottom: 64px;">
+      <div class="container">
+        <h2 class="section-title" style="margin-bottom: 40px; text-align: center;">Detailed Product Highlights & Specifications</h2>
+        <div class="products-seo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
+          
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">PERFECT ROLL WHITE Cones</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Roll White Pre-Rolled Cones offer the ultimate rolling experience for quality-conscious consumers. Meticulously crafted using premium bleached white paper and 100% natural Arabic gum, these king-size cones ensure a smooth, slow, and consistent burn. Designed for convenience and superior performance, our pre-rolled cones save time while maintaining the highest quality standards. Ideal for retailers and distributors looking to supply premium smoking accessories, Prince Perfect Roll Cones stand out in the Indian market for their precision construction and organic composition, delivering satisfaction in every fill.</p>
+          </article>
+
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">PERFECT ROLL NATURAL Papers</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Roll Natural rolling papers are designed for smokers who prefer a raw, chemical-free experience. Made from organic unbleached brown paper and natural Arabic gum, these premium papers preserve the organic taste of your blend. Each pack includes pre-rolled filter tips for maximum convenience and structure. Our slow-burn technology guarantees an even, slow burn without any unwanted paper taste. As leading manufacturer of smoking accessories in India, Prince Perfect Roll offers a cleaner alternative, making this organic collection highly popular among distributors and quality-focused consumers.</p>
+          </article>
+
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">5 FRIEC WHITE Papers</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect 5 Friec White rolling papers are engineered for purists who value a clean, slow, and even burn. Utilizing ultra-thin bleached white paper of premium grade, they deliver minimal taste interference for an unadulterated smoking experience. The 100% natural Arabic gum line ensures a reliable, strong seal on the first try. Crafted under strict quality controls, these lightweight rolling papers represent a classic choice for everyday rolling. Their thin yet durable texture makes them easy to handle, ensuring they remain a staple product for wholesale supply and retail distribution networks across India.</p>
+          </article>
+
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">5 FRIEC NATURAL Papers</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect 5 Friec Natural rolling papers showcase the beauty of raw materials, made with organic unbleached brown paper fibers. Absolutely chemical-free and chlorine-free, these papers provide an organic, slow-burning roll. Combined with a natural Arabic gum adhesive line, they hold firmly throughout the session. Perfect for those seeking a sustainable, premium rolling paper, 5 Friec Natural delivers a pure burn and clean taste. This product is a top choice for smoke shops and distribution partners looking to capture the rapidly expanding organic smoking accessories market in India.</p>
+          </article>
+
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">TWODAY WHITE Papers</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Twoday White rolling papers offer a convenient, all-in-one rolling kit complete with premium pre-rolled filter tips. Crafted from ultra-thin bleached white paper, this product ensures a slow, smooth, and clean burn. The natural Arabic gum adhesive provides a reliable, secure stick, making rolling effortless even for beginners. Designed for premium portability and everyday convenience, the Twoday White line delivers consistent performance. It represents a highly marketable retail product, perfect for distributors expanding their catalog of premium rolling papers and tobacco accessories in major cities.</p>
+          </article>
+
+          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
+            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">TWODAY NATURAL Papers</h3>
+            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Twoday Natural rolling papers combine organic unbleached fibers with integrated filter tips for a premium, earthy rolling experience. Designed for enthusiasts who demand natural quality and convenience, these brown papers feature a slow burn profile and a 100% natural Arabic gum seal. Free from chemicals and chlorine, Twoday Natural preserves the natural profile of your smoking blends. This all-in-one packaging is highly favored by retail consumers, making it an excellent high-margin product for wholesale distribution networks and business partners throughout India.</p>
+          </article>
+
         </div>
       </div>
     </section>
@@ -705,7 +746,8 @@ ${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about
     <section id="story" class="story-section section">
       <div class="container">
         <div style="text-align: center; margin-bottom: 56px;">
-          <h2 class="section-title about-heading">Premium Rolling Papers Designed for a Superior Smoking Experience</h2>
+          <h1 class="section-title about-heading">About Prince Perfect Roll</h1>
+          <h2 class="about-hero-tagline" style="font-family: var(--font-heading); font-size: 1.5rem; color: var(--black); margin-top: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em;">Premium Rolling Papers Designed for a Superior Smoking Experience</h2>
           <p class="about-subtitle">Natural Arabic Gum • Slow Burn Technology • Premium Rolling Papers • King Size Cones</p>
         </div>
         <div class="story-split">
@@ -782,14 +824,38 @@ ${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Per
   <main style="padding-top: var(--nav-height);">
     <section id="distributors" class="distributor-section section reveal">
       <div class="container">
-        <h2 class="section-title gold-text">Partner With Us</h2>
-        <p style="color: #ccc; font-size: 1.15rem; max-width: 700px; margin: -10px auto 36px; line-height: 1.6;">Join the Prince Perfect Roll distribution network and bring premium rolling papers, king-size cones, and smoking accessories to customers across India.</p>
-        <div class="distributor-perks">
-          <div class="perk"><span class="icon gold">★</span> High Margins</div>
-          <div class="perk"><span class="icon gold">★</span> Premium Brand Value</div>
-          <div class="perk"><span class="icon gold">★</span> Dedicated Support</div>
+        <h1 class="section-title gold-text">Become a Prince Perfect Roll Distributor</h1>
+        <p style="color: #ccc; font-size: 1.15rem; max-width: 700px; margin: -10px auto 48px; line-height: 1.6;">Join the Prince Perfect Roll distribution network and bring premium rolling papers, king-size cones, and smoking accessories to customers across India.</p>
+        
+        <div class="distributor-benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-bottom: 48px; text-align: left;">
+          
+          <div class="distributor-benefit-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(200, 168, 107, 0.2); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.3s ease;">
+            <div class="benefit-icon" style="font-size: 2.2rem; margin-bottom: 16px; color: var(--gold);">👑</div>
+            <h2 style="font-family: var(--font-heading); color: var(--white); font-size: 1.25rem; margin-bottom: 12px; font-weight: 700;">Premium Brand</h2>
+            <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin: 0;">Represent a luxury rolling paper brand backed by fully verified legal credentials (GST, MSME, Trademark) and compliance registries.</p>
+          </div>
+
+          <div class="distributor-benefit-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(200, 168, 107, 0.2); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.3s ease;">
+            <div class="benefit-icon" style="font-size: 2.2rem; margin-bottom: 16px; color: var(--gold);">📈</div>
+            <h2 style="font-family: var(--font-heading); color: var(--white); font-size: 1.25rem; margin-bottom: 12px; font-weight: 700;">Growing Market</h2>
+            <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin: 0;">Tap into high-volume consumer demand and a rapidly expanding market for premium smoking cones and organic accessories in India.</p>
+          </div>
+
+          <div class="distributor-benefit-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(200, 168, 107, 0.2); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.3s ease;">
+            <div class="benefit-icon" style="font-size: 2.2rem; margin-bottom: 16px; color: var(--gold);">🤝</div>
+            <h2 style="font-family: var(--font-heading); color: var(--white); font-size: 1.25rem; margin-bottom: 12px; font-weight: 700;">Dedicated Support</h2>
+            <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin: 0;">Get complete logistical assistance, high-res marketing material, promotional assets, and direct sales coordination inside your region.</p>
+          </div>
+
+          <div class="distributor-benefit-card" style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(200, 168, 107, 0.2); border-radius: var(--radius-lg); padding: 28px 24px; transition: all 0.3s ease;">
+            <div class="benefit-icon" style="font-size: 2.2rem; margin-bottom: 16px; color: var(--gold);">💰</div>
+            <h2 style="font-family: var(--font-heading); color: var(--white); font-size: 1.25rem; margin-bottom: 12px; font-weight: 700;">Strong Margins</h2>
+            <p style="color: #bbb; font-size: 0.9rem; line-height: 1.5; margin: 0;">Accelerate your business growth with competitive wholesale price models, quick product turnaround, and high profit margins.</p>
+          </div>
+
         </div>
-        <button id="open-dist-modal" class="btn btn-red btn-large">Become a Distributor</button>
+
+        <button id="open-dist-modal" class="btn btn-red btn-large" style="margin: 0 auto; display: block;">Become a Distributor</button>
       </div>
     </section>
   </main>
@@ -887,7 +953,7 @@ ${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect R
       <div class="container contact-split">
         <div class="contact-left">
           <div class="contact-info">
-            <h1 class="section-title">Get in Touch</h1>
+            <h1 class="section-title">Contact Prince Perfect Roll</h1>
             <p>Have questions or need assistance? Our team is ready to help you.</p>
             <p class="contact-seo-text">Contact Prince Perfect Roll for premium rolling papers, king-size cones, flavored cones, <a href="distributors.html" style="color: var(--gold); text-decoration: underline;">distribution inquiries</a>, wholesale orders, and customer support across India.</p>
             <ul class="contact-details">
@@ -1107,7 +1173,7 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
           
           <!-- Trust Indicators Block -->
           <div class="doc-modal-trust-block" id="modal-trust-block" style="margin-bottom: 24px;">
-            <h4 class="modal-section-title">TRUST INDICATORS</h4>
+            <h3 class="modal-section-title">TRUST INDICATORS</h3>
             <div class="doc-modal-trust-list" id="modal-trust-list">
               <!-- Dynamic trust indicators -->
             </div>

@@ -193,8 +193,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const statusBanner = document.getElementById('distributor-form-status');
     const submitBtn = distForm ? distForm.querySelector('button[type="submit"]') : null;
+    let distTimeout = null;
 
     function clearFormStatus() {
+      if (distTimeout) {
+        clearTimeout(distTimeout);
+        distTimeout = null;
+      }
       if (statusBanner) {
         statusBanner.style.display = 'none';
         statusBanner.textContent = '';
@@ -332,7 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
         checkLockoutStatus();
 
         // Close modal after delay to let user read success message
-        setTimeout(() => {
+        if (distTimeout) clearTimeout(distTimeout);
+        distTimeout = setTimeout(() => {
           distTrap.close();
           clearFormStatus();
         }, 3000);
@@ -493,21 +499,21 @@ document.addEventListener('DOMContentLoaded', () => {
             <p id="modal-product-description" class="modal-description" style="margin-top: 8px; margin-bottom: 8px; font-size: 1rem; line-height: 1.6; color: #ccc;"></p>
             
             <div class="product-modal-features-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
-              <h4 class="modal-section-title">FEATURES</h4>
+              <h3 class="modal-section-title">FEATURES</h3>
               <ul id="modal-product-features" class="modal-features">
                 <!-- Dynamic features -->
               </ul>
             </div>
 
             <div class="product-modal-specs-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
-              <h4 class="modal-section-title">SPECIFICATIONS</h4>
+              <h3 class="modal-section-title">SPECIFICATIONS</h3>
               <ul id="modal-product-specs" class="modal-specs">
                 <!-- Dynamic specifications -->
               </ul>
             </div>
 
             <div class="product-modal-benefits-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
-              <h4 class="modal-section-title">WHY CHOOSE IT</h4>
+              <h3 class="modal-section-title">WHY CHOOSE IT</h3>
               <ul id="modal-product-benefits" class="modal-benefits">
                 <!-- Dynamic benefits -->
               </ul>
