@@ -736,14 +736,26 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (modalFeaturesList) {
           modalFeaturesList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
+          const wrapper = modalFeaturesList.closest('.product-modal-features-wrapper');
+          if (wrapper) {
+            wrapper.style.display = features.length > 0 ? 'block' : 'none';
+          }
         }
         
         if (modalSpecsList) {
           modalSpecsList.innerHTML = Object.entries(specs).map(([key, val]) => `<li><strong>${key}:</strong> ${val}</li>`).join('');
+          const wrapper = modalSpecsList.closest('.product-modal-specs-wrapper');
+          if (wrapper) {
+            wrapper.style.display = Object.keys(specs).length > 0 ? 'block' : 'none';
+          }
         }
         
         if (modalBenefitsList) {
           modalBenefitsList.innerHTML = benefits.map(b => `<li>${b}</li>`).join('');
+          const wrapper = modalBenefitsList.closest('.product-modal-benefits-wrapper');
+          if (wrapper) {
+            wrapper.style.display = benefits.length > 0 ? 'block' : 'none';
+          }
         }
         
         const waBaseUrl = 'https://wa.me/+919717990597'; 

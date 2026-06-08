@@ -11,30 +11,28 @@ const products = [
       "images/5.webp",
       "images/7.webp"
     ],
-    features: [
-      "50 + 5 pre-rolled cones per pack",
-      "Premium bleached white paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable and eco-friendly"
-    ],
+    features: [],
     priceRange: "₹825",
     color: "#e67e22",
     featured: true,
     badge: "Signature Collection",
-    description: "Premium king-size pre-rolled cones crafted from high-quality bleached paper and natural Arabic gum. Designed for a smooth, slow, and consistent burn, delivering convenience and reliable performance in every pack.",
+    description: "Prince Perfect Roll Bleached White King Size Cones are crafted using premium paper and natural Arabic gum for a smooth, slow, and consistent burn. Designed for convenience and quality, each cone comes pre-rolled with a filter tip for an effortless experience.Trusted Brand Since 2020.",
     specs: {
-      "Size": "King Size",
-      "Contents": "50+5 Cones",
-      "Paper Type": "Premium Bleached Paper",
-      "Gum Type": "Natural Arabic Gum",
-      "Burn Profile": "Slow & Even Burn"
+      "Brand": "Prince Perfect Roll (Trusted Since 2020)",
+      "Type": "Pre-Rolled Cones",
+      "Cone Length": "109 mm",
+      "Filter Length": "26 mm",
+      "Paper Type": "Premium Bleached White",
+      "Content": "50+5 pcs per pack",
+      "Burn Profile": "Slow & Consistent"
     },
     benefits: [
-      "Ready-to-Fill Design",
-      "Smooth Rolling Experience",
-      "Consistent Performance",
-      "Premium Paper Quality"
+      "King Size Cones (109 mm)",
+      "Natural Arabic Gum",
+      "Slow & Even Burn",
+      "Premium Paper Quality",
+      "Pre-Rolled Filter Tip",
+      "Made in India"
     ]
   },
   {
@@ -47,30 +45,28 @@ const products = [
       "images/12.webp",
       "images/21.webp"
     ],
-    features: [
-      "2 Rolling Papers + 1 Filter Tip per pack",
-      "Premium unbleached organic brown paper",
-      "100% natural Arabic gum",
-      "Ultra-thin slow burn technology",
-      "Fully biodegradable and eco-friendly"
-    ],
+    features: [],
     priceRange: "₹825",
     color: "#5c4033",
     featured: true,
     badge: "Organic Premium",
-    description: "Premium unbleached rolling papers crafted from natural fibers and organic Arabic gum. Designed for a smooth, slow, and clean burn, delivering a pure, chemical-free experience for rolling enthusiasts in every pack.",
+    description: "Prince Perfect Roll Unbleached Natural King Size Cones are crafted using premium paper and natural Arabic gum for a smooth, slow, and consistent burn. Designed for convenience and quality, each cone comes pre-rolled with a filter tip for an effortless experience.Trusted Brand Since 2020.",
     specs: {
-      "Size": "Standard Size",
-      "Contents": "2 Papers + 1 Filter Tip",
-      "Paper Type": "Unbleached Natural Paper",
-      "Gum Type": "Natural Arabic Gum",
-      "Burn Profile": "Slow & Even Burn"
+      "Brand": "Prince Perfect Roll (Trusted Since 2020)",
+      "Type": "Pre-Rolled Cones",
+      "Cone Length": "109 mm",
+      "Filter Length": "26 mm",
+      "Paper Type": "Premium Unbleached Natural",
+      "Content": "50+5 pcs per pack",
+      "Burn Profile": "Slow & Consistent"
     },
     benefits: [
-      "Raw & Unbleached",
-      "Natural Gum Line",
-      "Smooth Rolling Experience",
-      "Slow & Consistent Burn"
+      "King Size Cones (109 mm)",
+      "Natural Arabic Gum",
+      "Slow & Even Burn",
+      "Premium Paper Quality",
+      "Pre-Rolled Filter Tip",
+      "Made in India"
     ]
   },
   {
@@ -95,8 +91,8 @@ const products = [
     badge: "Premium Choice",
     description: "Premium bleached white rolling papers crafted for a clean, pure smoking experience. Engineered with ultra-thin lightweight paper and natural Arabic gum, these papers ensure a slow, even, and consistent burn every time.",
     specs: {
-      "Size": "Standard Size",
-      "Contents": "50 Pcs Per Pack",
+      "Size": "109 mm cone and 26mm tip",
+      "Contents": "30 Pcs Per Pack",
       "Paper Type": "Premium Bleached Paper",
       "Gum Type": "Natural Arabic Gum",
       "Burn Profile": "Slow & Even Burn"
@@ -111,7 +107,7 @@ const products = [
   {
     id: 4,
     name: "5 FRIEC NATURAL",
-    tagline: "Unbleached organic brown paper for a raw, natural experience.",
+    tagline: "Unbleached organic natural paper for a raw, natural experience.",
     imageAlt: "5 Friec Natural organic natural unbleached rolling papers with slow burn technology",
     images: [
       "images/18.webp",
@@ -119,7 +115,7 @@ const products = [
       "images/19.webp"
     ],
     features: [
-      "Unbleached organic natural brown paper",
+      "Unbleached organic natural paper",
       "100% organic natural Arabic gum",
       "Ultra-thin lightweight paper",
       "Slow, clean, even burn",
@@ -131,9 +127,9 @@ const products = [
     badge: "Organic Choice",
     description: "Premium unbleached organic rolling papers crafted for a raw, natural smoking experience. Made from chemical-free organic fibers and 100% natural Arabic gum to ensure a slow, clean, and consistent burn.",
     specs: {
-      "Size": "Standard Size",
-      "Contents": "50 Pcs Per Pack",
-      "Paper Type": "Unbleached Organic Paper",
+      "Size": "109 mm cone and 26mm tip",
+      "Contents": "30 Pcs Per Pack",
+      "Paper Type": "Unbleached Organic natural",
       "Gum Type": "Natural Arabic Gum",
       "Burn Profile": "Slow & Even Burn"
     },
@@ -167,7 +163,7 @@ const products = [
     badge: "Connoisseur's Choice",
     description: "Premium bleached rolling papers with pre-rolled filter tips, crafted with natural Arabic gum. Designed for convenience and a smooth rolling experience, delivering a clean, slow, and consistent burn in every pack.",
     specs: {
-      "Size": "Standard Size",
+      "Size": "109 mm cone and 26mm tip",
       "Contents": "50 Pcs Per Pack",
       "Paper Type": "Premium Bleached Paper",
       "Gum Type": "Natural Arabic Gum",
@@ -183,7 +179,7 @@ const products = [
   {
     id: 6,
     name: "TWODAY NATURAL",
-    tagline: "Premium unbleached brown paper, earthy and smooth.",
+    tagline: "Premium unbleached natural paper, earthy and smooth.",
     imageAlt: "Twoday Natural premium unbleached rolling papers with natural Arabic gum and filter tips",
     images: [
       "images/10.webp",
@@ -192,7 +188,7 @@ const products = [
     ],
     features: [
       "2 Rolling Papers + 2 Filter Tips per pack",
-      "Premium quality unbleached brown paper",
+      "Premium quality unbleached natural paper",
       "100% natural Arabic gum",
       "Ultra-thin slow burn technology",
       "Fully biodegradable packaging"
@@ -203,9 +199,9 @@ const products = [
     badge: "Earthy Choice",
     description: "Premium unbleached rolling papers with pre-rolled filter tips, crafted with natural Arabic gum. Designed for organic enthusiasts who value convenience, raw materials, and a smooth, slow, consistent burn.",
     specs: {
-      "Size": "Standard Size",
+      "Size": "109 mm cone and 26mm tip",
       "Contents": "50 Pcs Per Pack",
-      "Paper Type": "Unbleached Organic Paper",
+      "Paper Type": "Unbleached Organic natural",
       "Gum Type": "Natural Arabic Gum",
       "Burn Profile": "Slow & Even Burn"
     },

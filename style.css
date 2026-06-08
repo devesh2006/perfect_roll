@@ -1990,12 +1990,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .modal-specs li,
 .modal-features li {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   font-size: 0.95rem;
   color: #ccc;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  position: relative;
+  padding-left: 15px;
+  line-height: 1.5;
+  display: block;
 }
 
 .modal-specs li::before,
@@ -2003,6 +2004,9 @@ h1, h2, h3, h4, h5, h6 {
   content: "•";
   color: var(--gold);
   font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .product-modal-footer {
