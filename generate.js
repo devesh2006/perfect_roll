@@ -220,20 +220,6 @@ const products = [
 
 const getProductSchemaJson = (productsList) => {
   return productsList.map(p => {
-    let lowPrice = 0;
-    let highPrice = 0;
-    const rangeMatch = p.priceRange.match(/₹?(\d+)\s*-\s*₹?(\d+)/);
-    if (rangeMatch) {
-      lowPrice = parseInt(rangeMatch[1], 10);
-      highPrice = parseInt(rangeMatch[2], 10);
-    } else {
-      const singleMatch = p.priceRange.match(/₹?(\d+)/);
-      if (singleMatch) {
-        lowPrice = parseInt(singleMatch[1], 10);
-        highPrice = parseInt(singleMatch[1], 10);
-      }
-    }
-
     return {
       "@context": "https://schema.org",
       "@type": "Product",
@@ -245,11 +231,8 @@ const getProductSchemaJson = (productsList) => {
         "name": "Prince Perfect"
       },
       "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "INR",
-        "lowPrice": lowPrice,
-        "highPrice": highPrice,
-        "offerCount": p.images.length,
+        "@type": "Offer",
+        "url": `https://www.princeperfectroll.com/products.html`,
         "availability": "https://schema.org/InStock"
       }
     };
@@ -273,8 +256,8 @@ const orgSchema = {
     "availableLanguage": ["en", "hi"]
   },
   "sameAs": [
-    "https://www.instagram.com/princeperfectroll",
-    "https://www.facebook.com/princeperfectroll"
+    "https://www.instagram.com/princeperfectroll.india/",
+    "https://www.facebook.com/share/1JeTX5F4xd/"
   ]
 };
 
@@ -296,7 +279,7 @@ const localBusinessSchema = {
   "name": "Prince Perfect Roll",
   "image": "https://www.princeperfectroll.com/images/2.webp",
   "telephone": "+919717990597",
-  "email": "hello@princeperfectroll.com",
+  "email": "princeperfectroll@gmail.com",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Gurgaon",
@@ -361,6 +344,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${title}</title>
   <meta name="description" content="${description}">
+  <link rel="canonical" href="https://www.princeperfectroll.com/${pageUrl}">
   <meta name="keywords" content="premium rolling papers, king size rolling papers, rolling paper cones, natural Arabic gum, flavored cones, smoking accessories, premium paper products, rolling papers India">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
@@ -370,6 +354,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="https://www.princeperfectroll.com/images/2.webp">
   ${ageVerifyScript}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -392,6 +377,7 @@ const header = `
           <li><a href="products.html">Products</a></li>
           <li><a href="about.html">Our Story</a></li>
           <li><a href="distributors.html">Distributors</a></li>
+          <li><a href="documentation.html">Documentation</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
@@ -409,6 +395,7 @@ const header = `
           <li><a href="products.html" class="mobile-link">Products</a></li>
           <li><a href="about.html" class="mobile-link">Our Story</a></li>
           <li><a href="distributors.html" class="mobile-link">Distributors</a></li>
+          <li><a href="documentation.html" class="mobile-link">Documentation</a></li>
           <li><a href="contact.html" class="mobile-link">Contact</a></li>
         </ul>
     </div>
@@ -424,7 +411,7 @@ const footer = `
           <p class="brand-description">Prince Perfect Roll manufactures premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted with natural Arabic gum for a smooth, slow, and consistent burn experience across India.</p>
           <div class="footer-contact-info">
             <p><strong>WhatsApp:</strong> <a href="https://wa.me/+919717990597" target="_blank" rel="noopener noreferrer" aria-label="Chat with Prince Perfect Roll on WhatsApp" class="footer-contact-link">+91 9717990597</a></p>
-            <p><strong>Email:</strong> <a href="mailto:hello@princeperfectroll.com" aria-label="Email Prince Perfect Roll" class="footer-contact-link">hello@princeperfectroll.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="footer-contact-link">princeperfectroll@gmail.com</a></p>
           </div>
         </div>
         <div class="footer-column links-column">
@@ -434,16 +421,19 @@ const footer = `
             <li><a href="products.html">Products</a></li>
             <li><a href="about.html">Our Story</a></li>
             <li><a href="distributors.html">Distributors</a></li>
+            <li><a href="documentation.html">Documentation</a></li>
             <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
           </ul>
         </div>
         <div class="footer-column social-column">
           <h4>FOLLOW US</h4>
           <div class="social-icons-wrapper">
-            <a href="#" aria-label="Instagram" class="social-icon-link">
+            <a href="https://www.instagram.com/princeperfectroll.india/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
-            <a href="#" aria-label="Facebook" class="social-icon-link">
+            <a href="https://www.facebook.com/share/1JeTX5F4xd/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon-link">
               <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
           </div>
@@ -487,7 +477,7 @@ const featuredHtmlList = products.length === 0
   : products
       .filter(p => p.featured)
       .map(p => `
-          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-price="${p.priceRange}" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color}; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-features="${encodeURIComponent(JSON.stringify(p.features))}" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color}; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="display: flex; flex-direction: column; flex-grow: 1;">
               <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
                 ${makeSliderHtml(p)}
@@ -514,19 +504,15 @@ const productsHtmlList = products.length === 0
   `
   : products
       .map(p => `
-          <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-price="${p.priceRange}" style="border-top: 4px solid ${p.color};">
+          <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-features="${encodeURIComponent(JSON.stringify(p.features))}" style="border-top: 4px solid ${p.color};">
             <div class="card-img-container">
               ${makeSliderHtml(p)}
             </div>
             <div class="card-content">
               <h3>${p.name}</h3>
               <p class="tagline">"${p.tagline}"</p>
-              <ul class="features-list">
-                ${p.features.map(f => `<li>${f}</li>`).join('\n')}
-              </ul>
-              <div class="card-footer">
-                <span class="price-range">${p.priceRange}</span>
-                <button class="btn btn-red">Order Now</button>
+              <div class="card-footer" style="border-top: none; padding-top: 0;">
+                <button class="btn btn-gold btn-full">Get Price</button>
               </div>
             </div>
           </article>
@@ -586,7 +572,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
 
 const homeHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Home | Prince Perfect Roll', 'Prince Perfect Roll offers premium rolling papers, pre-rolled cones, and smoking accessories crafted with natural Arabic gum in India.', 'home.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
+${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', 'Explore Prince Perfect Roll premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted for a smooth and consistent experience.', 'home.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
 <body class="page-home">
   ${header}
   <main>
@@ -693,7 +679,7 @@ ${getHeadHtml('Home | Prince Perfect Roll', 'Prince Perfect Roll offers premium 
 
 const productsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Products | Prince Perfect Roll', 'Explore Prince Perfect Roll\'s premium collection of rolling papers, king-size cones, and organic unbleached papers with natural Arabic gum.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Products', url: 'products.html'}])])}
+${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover premium rolling papers, king-size cones, flavored cones, and smoking accessories designed for quality and consistency.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Products', url: 'products.html'}])])}
 <body class="page-products">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -711,7 +697,7 @@ ${getHeadHtml('Products | Prince Perfect Roll', 'Explore Prince Perfect Roll\'s 
 </html>`;
 const aboutHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Our Story | Prince Perfect Roll', 'Discover the craftsmanship behind Prince Perfect Roll. We make premium rolling papers and king-size pre-rolled cones for a clean, slow, and consistent burn.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Our Story', url: 'about.html'}])])}
+${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about Prince Perfect Roll, our manufacturing standards, quality commitment, and dedication to premium rolling products.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Our Story', url: 'about.html'}])])}
 <body class="page-about">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -789,7 +775,7 @@ ${getHeadHtml('Our Story | Prince Perfect Roll', 'Discover the craftsmanship beh
 
 const distributorsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Distributors | Prince Perfect Roll', 'Partner with Prince Perfect Roll\'s distribution network in India. Wholesale orders and premium partnership opportunities for rolling papers and smoking accessories.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Distributors', url: 'distributors.html'}])])}
+${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Perfect Roll distribution network and bring premium rolling products to customers across India.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Distributors', url: 'distributors.html'}])])}
 <body class="page-distributors">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -891,23 +877,25 @@ const faqSchemaObj = {
 
 const contactHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Contact | Prince Perfect Roll', 'Get in touch with Prince Perfect Roll for customer support, wholesale orders, and distributor inquiries across India. We reply within minutes on WhatsApp.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
+${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect Roll for distributor inquiries, wholesale orders, product support, and customer assistance.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
 <body class="page-contact">
   ${header}
   <main style="padding-top: var(--nav-height);">
     <section id="contact" class="contact-section section reveal">
       <div class="container contact-split">
-        <div class="contact-info">
-          <h2 class="section-title">Get in Touch</h2>
-          <p>Have questions or need assistance? Our team is ready to help you.</p>
-          <p class="contact-seo-text">Contact Prince Perfect Roll for premium rolling papers, king-size cones, flavored cones, <a href="distributors.html" style="color: var(--gold); text-decoration: underline;">distribution inquiries</a>, wholesale orders, and customer support across India.</p>
-          <ul class="contact-details">
-            <li><strong>Email:</strong> <a href="mailto:hello@princeperfectroll.com" aria-label="Email Prince Perfect Roll" class="contact-link">hello@princeperfectroll.com</a></li>
-            <li><strong>Phone:</strong> <a href="tel:+919717990597" aria-label="Call Prince Perfect Roll" class="contact-link">+91 9717990597</a></li>
-            <li><strong>Location:</strong> Gurgaon, Delhi NCR, India</li>
-          </ul>
+        <div class="contact-left">
+          <div class="contact-info">
+            <h1 class="section-title">Get in Touch</h1>
+            <p>Have questions or need assistance? Our team is ready to help you.</p>
+            <p class="contact-seo-text">Contact Prince Perfect Roll for premium rolling papers, king-size cones, flavored cones, <a href="distributors.html" style="color: var(--gold); text-decoration: underline;">distribution inquiries</a>, wholesale orders, and customer support across India.</p>
+            <ul class="contact-details">
+              <li><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="contact-link">princeperfectroll@gmail.com</a></li>
+              <li><strong>Phone:</strong> <a href="tel:+919717990597" aria-label="Call Prince Perfect Roll" class="contact-link">+91 9717990597</a></li>
+              <li><strong>Location:</strong> Gurgaon, Delhi NCR, India</li>
+            </ul>
+          </div>
           <div class="contact-help-container">
-            <h3>How We Can Help</h3>
+            <h2>How We Can Help</h2>
             <ul class="contact-help-list">
               <li><span class="checkmark">✓</span> Distributor Inquiries</li>
               <li><span class="checkmark">✓</span> Wholesale Orders</li>
@@ -979,4 +967,310 @@ fs.writeFileSync('products.html', productsHtml);
 fs.writeFileSync('about.html', aboutHtml);
 fs.writeFileSync('distributors.html', distributorsHtml);
 fs.writeFileSync('contact.html', contactHtml);
-console.log('Pages generated successfully!');
+
+const documentationHtml = `<!DOCTYPE html>
+<html lang="en">
+${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', 'View GST registration, MSME certification, trademark records, and official business documentation for Prince Perfect Roll.', 'documentation.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Documentation', url: 'documentation.html'}])])}
+<body class="page-documentation">
+  ${header}
+  <main style="padding-top: var(--nav-height);">
+    <!-- HERO/HEADER SECTION -->
+    <section class="doc-hero section reveal">
+      <div class="container">
+        <h1 class="section-title">Certifications & Registrations</h1>
+        <p class="doc-hero-subtitle">Official business registrations and certifications demonstrating Prince Perfect Roll's commitment to compliance, transparency, and quality.</p>
+      </div>
+    </section>
+
+    <!-- CERTIFICATES SECTION -->
+    <section class="doc-grid-section section">
+      <div class="container">
+        
+        <!-- SECTION TITLE & INTRO -->
+        <div class="doc-section-header reveal">
+          <h2 class="doc-section-title">Verified Business Credentials</h2>
+          <p class="doc-intro-text">
+            Prince Perfect Roll is a registered Indian manufacturing business committed to quality, compliance, and transparency. Our certifications and registrations demonstrate our commitment to operating under recognized government standards.
+          </p>
+        </div>
+
+        <!-- TRUST BADGES ROW (Above Cards) -->
+        <div class="doc-trust-badges-row reveal">
+          <div class="doc-trust-badge">
+            <span class="checkmark gold-text">✓</span> GST Registered
+          </div>
+          <div class="doc-trust-badge">
+            <span class="checkmark gold-text">✓</span> MSME Registered
+          </div>
+          <div class="doc-trust-badge">
+            <span class="checkmark gold-text">✓</span> Trademark Protected
+          </div>
+          <div class="doc-trust-badge">
+            <span class="checkmark gold-text">✓</span> Indian Manufacturer
+          </div>
+        </div>
+
+        <div class="doc-grid">
+          
+          <!-- GST CARD -->
+          <div class="doc-card reveal">
+            <div class="doc-card-header">
+              <div class="doc-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" class="gold-text"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </div>
+              <h3 class="doc-title">GST Registration</h3>
+              <span class="card-status-badge status-active">Active & Compliant</span>
+            </div>
+            <div class="doc-card-body">
+              <p class="doc-description">Government-recognized tax registration ensuring legal business operations in India.</p>
+            </div>
+            <div class="doc-card-footer">
+              <button class="btn btn-gold-outline btn-view-doc" data-doc="gst" aria-label="View GST Registration Certificate">View Certificate</button>
+            </div>
+          </div>
+
+          <!-- MSME CARD -->
+          <div class="doc-card reveal">
+            <div class="doc-card-header">
+              <div class="doc-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" class="gold-text"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 12 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              </div>
+              <h3 class="doc-title">MSME Registration</h3>
+              <span class="card-status-badge status-active">Registered</span>
+            </div>
+            <div class="doc-card-body">
+              <p class="doc-description">Recognized manufacturing enterprise registered under the Government of India's Udyam program.</p>
+            </div>
+            <div class="doc-card-footer">
+              <button class="btn btn-gold-outline btn-view-doc" data-doc="msme" aria-label="View MSME Registration Certificate">View Certificate</button>
+            </div>
+          </div>
+
+          <!-- TRADEMARK CARD -->
+          <div class="doc-card reveal">
+            <div class="doc-card-header">
+              <div class="doc-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" class="gold-text"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 12 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-5.5h4c.83 0 1.5-.67 1.5-1.5V11c0-.83-.67-1.5-1.5-1.5h-4v6h2v-2.5h2v-1h-2v1h-2v2z"/></svg>
+              </div>
+              <h3 class="doc-title">Trademark Documentation</h3>
+              <span class="card-status-badge status-protected">Active & Protected</span>
+            </div>
+            <div class="doc-card-body">
+              <p class="doc-description">Official trademark documentation protecting the Prince Perfect Roll brand identity.</p>
+            </div>
+            <div class="doc-card-footer">
+              <button class="btn btn-gold-outline btn-view-doc" data-doc="trademark" aria-label="View Trademark Documentation">View Certificate</button>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="doc-grid-footer-statement reveal">
+          <p>All certifications are verified and issued by the corresponding Government of India authorities.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  ${footer}
+
+  <!-- DOCUMENT VIEWER MODAL (Premium Split View) -->
+  <div id="doc-modal" class="doc-modal-overlay" role="dialog" aria-modal="true" style="display: none;">
+    <div class="doc-modal-card">
+      <button id="close-doc-modal" class="doc-modal-close-btn" aria-label="Close modal" title="Close Modal">&times;</button>
+      <div class="doc-modal-split">
+        <!-- Visual Document Side (60%) -->
+        <div class="doc-modal-viewer-side" id="modal-body-scroll">
+          <div class="doc-modal-img-container" id="modal-zoom-container">
+            <img id="modal-doc-img" src="" alt="High resolution preview of the document" />
+          </div>
+          <div class="doc-modal-viewer-controls">
+            <button id="doc-zoom-out" class="doc-modal-control-btn" aria-label="Zoom out" title="Zoom out">−</button>
+            <span id="doc-zoom-level">100%</span>
+            <button id="doc-zoom-in" class="doc-modal-control-btn" aria-label="Zoom in" title="Zoom in">+</button>
+          </div>
+        </div>
+        <!-- Information details side (40%) -->
+        <div class="doc-modal-info-side">
+          <div class="doc-modal-header-block">
+            <div class="doc-modal-badge" id="modal-info-badge">OFFICIAL VERIFICATION</div>
+            <h2 class="doc-modal-info-title" id="modal-info-title">Document Title</h2>
+            <div class="doc-modal-authority" id="modal-info-authority">Government Authority</div>
+            <div class="doc-modal-status-badge-container">
+              <span class="modal-status-badge" id="modal-info-status">✓ Active & Compliant</span>
+            </div>
+          </div>
+          <div class="doc-modal-divider"></div>
+          <p class="doc-modal-info-desc" id="modal-info-desc">Short description of the document.</p>
+          
+          <!-- Collapsible Accordion for Technical Metadata -->
+          <details class="doc-modal-accordion" id="doc-details-accordion">
+            <summary class="doc-modal-accordion-summary">View Additional Details</summary>
+            <div class="doc-modal-accordion-content">
+              <div class="doc-modal-meta-grid">
+                <div class="doc-modal-meta-item">
+                  <span class="meta-label">Registration No</span>
+                  <span class="meta-value" id="modal-meta-number">-</span>
+                </div>
+                <div class="doc-modal-meta-item">
+                  <span class="meta-label">Registration Date</span>
+                  <span class="meta-value" id="modal-meta-date">-</span>
+                </div>
+                <div class="doc-modal-meta-item">
+                  <span class="meta-label">Issuing Authority</span>
+                  <span class="meta-value" id="modal-meta-authority">-</span>
+                </div>
+                <div class="doc-modal-meta-item">
+                  <span class="meta-label">Verification Status</span>
+                  <span class="meta-value" id="modal-meta-status-full">-</span>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <div class="doc-modal-footer-seal">
+            <span class="verification-seal">✦ Official Brand Registry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>`;
+
+const privacyHtml = `<!DOCTYPE html>
+<html lang="en">
+${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince Perfect Roll. Understand how we handle and protect customer and visitor information.', 'privacy.html')}
+<body class="page-privacy">
+  ${header}
+  <main style="padding-top: var(--nav-height); min-height: 80vh;">
+    <section class="section">
+      <div class="container" style="max-width: 800px; padding: 40px 24px; background: var(--white); border-radius: var(--radius-lg); margin-top: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid var(--gold);">
+        <h1 class="section-title" style="margin-bottom: 30px; font-size: 2.2rem;">Privacy Policy</h1>
+        <p style="margin-bottom: 20px;">At Prince Perfect Roll, accessible from www.princeperfectroll.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Prince Perfect Roll and how we use it.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Information We Collect</h2>
+        <p style="margin-bottom: 20px;">The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">How We Use Your Information</h2>
+        <ul style="margin-bottom: 20px; padding-left: 20px; list-style-type: disc;">
+          <li style="margin-bottom: 8px;">Provide, operate, and maintain our website</li>
+          <li style="margin-bottom: 8px;">Improve, personalize, and expand our website</li>
+          <li style="margin-bottom: 8px;">Understand and analyze how you use our website</li>
+          <li style="margin-bottom: 8px;">Develop new products, services, features, and functionality</li>
+          <li style="margin-bottom: 8px;">Communicate with you, either directly or through one of our partners</li>
+        </ul>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Log Files</h2>
+        <p style="margin-bottom: 20px;">Prince Perfect Roll follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this as part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Consent</h2>
+        <p style="margin-bottom: 20px;">By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
+      </div>
+    </section>
+  </main>
+  ${footer}
+</body>
+</html>`;
+
+const termsHtml = `<!DOCTYPE html>
+<html lang="en">
+${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions for accessing and using the Prince Perfect Roll website and purchasing rolling paper products.', 'terms.html')}
+<body class="page-terms">
+  ${header}
+  <main style="padding-top: var(--nav-height); min-height: 80vh;">
+    <section class="section">
+      <div class="container" style="max-width: 800px; padding: 40px 24px; background: var(--white); border-radius: var(--radius-lg); margin-top: 40px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid var(--gold);">
+        <h1 class="section-title" style="margin-bottom: 30px; font-size: 2.2rem;">Terms & Conditions</h1>
+        <p style="margin-bottom: 20px;">Welcome to Prince Perfect Roll! These terms and conditions outline the rules and regulations for the use of Prince Perfect Roll's Website, located at www.princeperfectroll.com.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px; color: var(--red);">Age Restriction</h2>
+        <p style="margin-bottom: 20px; font-weight: bold; color: var(--red);">You must be 18 years of age or older to enter and use this website. By accessing our products and website, you warrant and represent that you are at least 18 years of age.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">License</h2>
+        <p style="margin-bottom: 20px;">Unless otherwise stated, Prince Perfect Roll and/or its licensors own the intellectual property rights for all material on Prince Perfect Roll. All intellectual property rights are reserved. You may access this from Prince Perfect Roll for your own personal use subjected to restrictions set in these terms and conditions.</p>
+        
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Restrictions</h2>
+        <p style="margin-bottom: 15px;">You are specifically restricted from all of the following:</p>
+        <ul style="margin-bottom: 20px; padding-left: 20px; list-style-type: disc;">
+          <li style="margin-bottom: 8px;">Republishing website material in any other media;</li>
+          <li style="margin-bottom: 8px;">Selling, sublicensing and/or otherwise commercializing website material;</li>
+          <li style="margin-bottom: 8px;">Publicly performing and/or showing any website material;</li>
+          <li style="margin-bottom: 8px;">Using this Website in any way that is or may be damaging to this Website;</li>
+          <li style="margin-bottom: 8px;">Using this Website contrary to applicable laws and regulations.</li>
+        </ul>
+
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Limitation of Liability</h2>
+        <p style="margin-bottom: 20px;">In no event shall Prince Perfect Roll, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.</p>
+      </div>
+    </section>
+  </main>
+  ${footer}
+</body>
+</html>`;
+
+fs.writeFileSync('index.html', indexHtml);
+fs.writeFileSync('home.html', homeHtml);
+fs.writeFileSync('products.html', productsHtml);
+fs.writeFileSync('about.html', aboutHtml);
+fs.writeFileSync('distributors.html', distributorsHtml);
+fs.writeFileSync('contact.html', contactHtml);
+fs.writeFileSync('documentation.html', documentationHtml);
+fs.writeFileSync('privacy.html', privacyHtml);
+fs.writeFileSync('terms.html', termsHtml);
+
+const currentDate = new Date().toISOString().split('T')[0];
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://www.princeperfectroll.com/index.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/home.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/products.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/about.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/distributors.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/documentation.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/contact.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>`;
+
+const robotsTxt = `User-agent: *
+Allow: /
+
+Sitemap: https://www.princeperfectroll.com/sitemap.xml`;
+
+fs.writeFileSync('sitemap.xml', sitemapXml);
+fs.writeFileSync('robots.txt', robotsTxt);
+console.log('Pages, sitemap, and robots.txt generated successfully!');

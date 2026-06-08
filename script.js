@@ -349,6 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
             
             <p id="modal-product-description" class="modal-description" style="margin-top: 8px; margin-bottom: 8px; font-size: 1rem; line-height: 1.6; color: #ccc;"></p>
             
+            <div class="product-modal-features-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
+              <h4 class="modal-section-title">FEATURES</h4>
+              <ul id="modal-product-features" class="modal-features">
+                <!-- Dynamic features -->
+              </ul>
+            </div>
+
             <div class="product-modal-specs-wrapper" style="margin-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px;">
               <h4 class="modal-section-title">SPECIFICATIONS</h4>
               <ul id="modal-product-specs" class="modal-specs">
@@ -363,14 +370,11 @@ document.addEventListener('DOMContentLoaded', () => {
               </ul>
             </div>
             <div class="product-modal-footer">
-              <div class="product-modal-price">
-                <span class="price-label">Estimated Price</span>
-                <span id="modal-product-price" class="price-val">₹20 - ₹50</span>
-              </div>
-              <a href="#" id="modal-product-wa-btn" target="_blank" rel="noopener noreferrer" class="product-modal-cta">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="margin-right: 4px; vertical-align: middle;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                Order via WhatsApp
+              <a href="#" id="modal-product-wa-btn" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-full" style="justify-content: center; align-items: center; gap: 8px;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align: middle;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Get Price on WhatsApp
               </a>
+              <a href="distributors.html" class="btn btn-outline-light btn-full" style="justify-content: center; align-items: center;">Become a Distributor</a>
             </div>
           </div>
         </div>
@@ -381,7 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalClose = modalOverlay.querySelector('.product-modal-close');
     const modalImgSide = modalOverlay.querySelector('.product-modal-img-side');
     const modalTitle = modalOverlay.querySelector('#modal-product-title');
-    const modalPrice = modalOverlay.querySelector('#modal-product-price');
     const modalWaBtn = modalOverlay.querySelector('#modal-product-wa-btn');
 
     const productDetailTrap = setupFocusTrap(modalOverlay, modalClose);
@@ -407,21 +410,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const taglineEl = card.querySelector('.tagline') || card.querySelector('p');
         const taglineText = taglineEl ? taglineEl.innerText : '"Premium rolling experience"';
         
-        const featuresEl = card.querySelector('.features-list');
-        let featuresHtml = '';
-        if (featuresEl) {
-          featuresHtml = featuresEl.innerHTML;
-        } else {
-          featuresHtml = `
-            <li>Natural Arabic Gum</li>
-            <li>Ultra-Thin slow burn paper</li>
-            <li>Premium quality materials</li>
-          `;
+        const featuresAttr = card.getAttribute('data-features');
+        let features = [];
+        if (featuresAttr) {
+          try {
+            features = JSON.parse(decodeURIComponent(featuresAttr));
+          } catch(err) {
+            console.error("Failed to parse features:", err);
+          }
         }
         
         const altText = card.getAttribute('data-alt') || titleText;
-        
-        const priceText = card.getAttribute('data-price') || '₹20 - ₹100';
         
         const descriptionAttr = card.getAttribute('data-description');
         const descriptionText = descriptionAttr ? decodeURIComponent(descriptionAttr) : '';
@@ -576,14 +575,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (modalTitle) modalTitle.innerText = titleText;
-        if (modalPrice) modalPrice.innerText = priceText;
 
         const modalDescription = modalOverlay.querySelector('#modal-product-description');
+        const modalFeaturesList = modalOverlay.querySelector('#modal-product-features');
         const modalSpecsList = modalOverlay.querySelector('#modal-product-specs');
         const modalBenefitsList = modalOverlay.querySelector('#modal-product-benefits');
 
         if (modalDescription) {
           modalDescription.innerHTML = descriptionText.replace(/\n\n/g, '<br><br>');
+        }
+        
+        if (modalFeaturesList) {
+          modalFeaturesList.innerHTML = features.map(f => `<li>${f}</li>`).join('');
         }
         
         if (modalSpecsList) {
@@ -595,11 +598,217 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         const waBaseUrl = 'https://wa.me/+919717990597'; 
-        const messageText = encodeURIComponent(`Hi Prince Perfect! I am interested in ordering the "${titleText}" rolling paper (${priceText}). Please provide details on how to proceed.`);
+        const messageText = encodeURIComponent(`Hello, I'm interested in the ${titleText}. Please share pricing and availability.`);
         modalWaBtn.href = `${waBaseUrl}?text=${messageText}`;
         
         productDetailTrap.open();
       });
     });
+  }
+
+  // Documentation & Certifications Page Interactive Modal
+  const docModal = document.getElementById('doc-modal');
+  if (docModal) {
+    const viewButtons = document.querySelectorAll('.btn-view-doc');
+    const closeBtn = document.getElementById('close-doc-modal');
+    const modalTitle = document.getElementById('modal-info-title');
+    const modalDesc = document.getElementById('modal-info-desc');
+    const modalGovAuthority = document.getElementById('modal-info-authority');
+    const modalInfoStatus = document.getElementById('modal-info-status');
+    const modalNumber = document.getElementById('modal-meta-number');
+    const modalDate = document.getElementById('modal-meta-date');
+    const modalAuthority = document.getElementById('modal-meta-authority');
+    const modalStatusFull = document.getElementById('modal-meta-status-full');
+    const modalImg = document.getElementById('modal-doc-img');
+    const zoomInBtn = document.getElementById('doc-zoom-in');
+    const zoomOutBtn = document.getElementById('doc-zoom-out');
+    const zoomLevelEl = document.getElementById('doc-zoom-level');
+    const zoomContainer = document.getElementById('modal-zoom-container');
+    const bodyScroll = document.getElementById('modal-body-scroll');
+    const accordion = document.getElementById('doc-details-accordion');
+
+    let zoomFactor = 1.0;
+    const minZoom = 1.0;
+    const maxZoom = 3.0;
+    const zoomStep = 0.25;
+
+    const docTrap = setupFocusTrap(docModal, closeBtn, () => {
+      docModal.style.display = 'flex';
+      zoomFactor = 1.0;
+      updateZoom();
+    }, () => {
+      docModal.style.display = 'none';
+      zoomFactor = 1.0;
+      updateZoom();
+      if (modalImg) modalImg.src = '';
+    });
+
+    if (bodyScroll) {
+      bodyScroll.addEventListener('click', (e) => {
+        if (e.target === bodyScroll || e.target === zoomContainer) {
+          docTrap.close();
+        }
+      });
+    }
+
+    const docDetails = {
+      gst: {
+        title: "GST Registration Certificate",
+        img: "images/gst_preview.webp",
+        desc: "Official Goods and Services Tax compliance registration verifying active taxation compliance under the Government of India.",
+        govAuthority: "Government of India",
+        statusBadge: "✓ Active & Compliant",
+        statusClass: "status-active",
+        number: "06FTMPS1974K1ZV",
+        date: "May 01, 2026",
+        authority: "GST Department, Government of India",
+        statusFull: "Active & Fully Compliant"
+      },
+      msme: {
+        title: "MSME Registration Certificate",
+        img: "images/msme_preview.webp",
+        desc: "Government recognized Micro, Small, and Medium Enterprises (MSME) registration certificate issued under the Udyam initiative.",
+        govAuthority: "Government of India",
+        statusBadge: "✓ Registered Manufacturing Enterprise",
+        statusClass: "status-active",
+        number: "UDYAM-HR-05-0164997",
+        date: "November 13, 2025",
+        authority: "Ministry of MSME, Government of India",
+        statusFull: "Active / Micro Enterprise"
+      },
+      trademark: {
+        title: "Trademark Documentation",
+        img: "images/trademark_preview.webp",
+        desc: "Brand protection records confirming registration and legal ownership of the trademark name 'Prince Perfect Roll'.",
+        govAuthority: "Trademark Registry, India",
+        statusBadge: "✓ Brand Protection Record",
+        statusClass: "status-protected",
+        number: "Application No: 7122851 (Class 34)",
+        date: "November 11, 2025",
+        authority: "Controller General of Patents, Designs and Trade Marks, India",
+        statusFull: "Registered / Active"
+      }
+    };
+
+    function updateZoom() {
+      if (zoomContainer) {
+        zoomContainer.style.transform = `scale(${zoomFactor})`;
+        if (zoomFactor > 1.0) {
+          zoomContainer.style.transformOrigin = 'top center';
+          bodyScroll.style.overflow = 'auto';
+        } else {
+          zoomContainer.style.transformOrigin = 'top center';
+          bodyScroll.style.overflow = 'hidden';
+          bodyScroll.scrollLeft = 0;
+          bodyScroll.scrollTop = 0;
+        }
+      }
+      if (zoomLevelEl) {
+        zoomLevelEl.innerText = `${Math.round(zoomFactor * 100)}%`;
+      }
+    }
+
+    viewButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const docKey = btn.getAttribute('data-doc');
+        const details = docDetails[docKey];
+        if (details) {
+          if (modalTitle) modalTitle.innerText = details.title;
+          if (modalImg) {
+            modalImg.src = details.img;
+            modalImg.alt = details.title + " preview";
+          }
+          if (modalDesc) modalDesc.innerText = details.desc;
+          if (modalGovAuthority) modalGovAuthority.innerText = details.govAuthority;
+          if (modalInfoStatus) {
+            modalInfoStatus.innerText = details.statusBadge;
+            modalInfoStatus.className = 'modal-status-badge ' + (details.statusClass || 'status-active');
+          }
+          if (modalNumber) modalNumber.innerText = details.number;
+          if (modalDate) modalDate.innerText = details.date;
+          if (modalAuthority) modalAuthority.innerText = details.authority;
+          if (modalStatusFull) modalStatusFull.innerText = details.statusFull;
+          
+          if (accordion) accordion.removeAttribute('open');
+          
+          docTrap.open();
+        }
+      });
+    });
+
+    if (zoomInBtn) {
+      zoomInBtn.addEventListener('click', () => {
+        if (zoomFactor < maxZoom) {
+          zoomFactor += zoomStep;
+          updateZoom();
+        }
+      });
+    }
+
+    if (zoomOutBtn) {
+      zoomOutBtn.addEventListener('click', () => {
+        if (zoomFactor > minZoom) {
+          zoomFactor -= zoomStep;
+          updateZoom();
+        }
+      });
+    }
+
+    // Support pinch zoom / gesture zooming on mobile
+    let activeTouch = false;
+    let initialDist = 0;
+    let initialZoom = 1.0;
+
+    if (bodyScroll) {
+      bodyScroll.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+          activeTouch = true;
+          initialDist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          initialZoom = zoomFactor;
+        }
+      }, { passive: true });
+
+      bodyScroll.addEventListener('touchmove', (e) => {
+        if (activeTouch && e.touches.length === 2) {
+          const dist = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          const factor = dist / initialDist;
+          let nextZoom = initialZoom * factor;
+          nextZoom = Math.min(Math.max(nextZoom, minZoom), maxZoom);
+          zoomFactor = Math.round(nextZoom * 20) / 20;
+          updateZoom();
+        }
+      }, { passive: true });
+
+      bodyScroll.addEventListener('touchend', (e) => {
+        if (e.touches.length < 2) {
+          activeTouch = false;
+        }
+      }, { passive: true });
+    }
+
+    // Double tap to toggle zoom
+    let lastTap = 0;
+    if (modalImg) {
+      modalImg.addEventListener('touchend', (e) => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 300 && tapLength > 0) {
+          e.preventDefault();
+          if (zoomFactor > 1.0) {
+            zoomFactor = 1.0;
+          } else {
+            zoomFactor = 2.0;
+          }
+          updateZoom();
+        }
+        lastTap = currentTime;
+      });
+    }
   }
 });
