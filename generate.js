@@ -1103,6 +1103,14 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
           <div class="doc-modal-divider"></div>
           <p class="doc-modal-info-desc" id="modal-info-desc">Short description of the document.</p>
           
+          <!-- Trust Indicators Block -->
+          <div class="doc-modal-trust-block" id="modal-trust-block" style="margin-bottom: 24px;">
+            <h4 class="modal-section-title">TRUST INDICATORS</h4>
+            <div class="doc-modal-trust-list" id="modal-trust-list">
+              <!-- Dynamic trust indicators -->
+            </div>
+          </div>
+          
           <!-- Collapsible Accordion for Technical Metadata -->
           <details class="doc-modal-accordion" id="doc-details-accordion">
             <summary class="doc-modal-accordion-summary">View Additional Details</summary>
@@ -1127,10 +1135,6 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
               </div>
             </div>
           </details>
-
-          <div class="doc-modal-footer-seal">
-            <span class="verification-seal">✦ Official Brand Registry</span>
-          </div>
         </div>
       </div>
     </div>

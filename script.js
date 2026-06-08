@@ -626,6 +626,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const zoomContainer = document.getElementById('modal-zoom-container');
     const bodyScroll = document.getElementById('modal-body-scroll');
     const accordion = document.getElementById('doc-details-accordion');
+    const modalTrustList = document.getElementById('modal-trust-list');
 
     let zoomFactor = 1.0;
     const minZoom = 1.0;
@@ -662,7 +663,12 @@ document.addEventListener('DOMContentLoaded', () => {
         number: "06FTMPS1974K1ZV",
         date: "May 01, 2026",
         authority: "GST Department, Government of India",
-        statusFull: "Active & Fully Compliant"
+        statusFull: "Active & Fully Compliant",
+        trustIndicators: [
+          "Government Verified",
+          "Active Registration",
+          "Business Compliance Confirmed"
+        ]
       },
       msme: {
         title: "MSME Registration Certificate",
@@ -674,7 +680,12 @@ document.addEventListener('DOMContentLoaded', () => {
         number: "UDYAM-HR-05-0164997",
         date: "November 13, 2025",
         authority: "Ministry of MSME, Government of India",
-        statusFull: "Active / Micro Enterprise"
+        statusFull: "Active / Micro Enterprise",
+        trustIndicators: [
+          "Government Verified",
+          "Udyam Registered",
+          "Manufacturing Enterprise"
+        ]
       },
       trademark: {
         title: "Trademark Documentation",
@@ -686,7 +697,12 @@ document.addEventListener('DOMContentLoaded', () => {
         number: "Application No: 7122851 (Class 34)",
         date: "November 11, 2025",
         authority: "Controller General of Patents, Designs and Trade Marks, India",
-        statusFull: "Registered / Active"
+        statusFull: "Registered / Active",
+        trustIndicators: [
+          "Brand Protection Active",
+          "Trademark Registered",
+          "Legal Registry Confirmed"
+        ]
       }
     };
 
@@ -728,6 +744,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (modalDate) modalDate.innerText = details.date;
           if (modalAuthority) modalAuthority.innerText = details.authority;
           if (modalStatusFull) modalStatusFull.innerText = details.statusFull;
+          
+          if (modalTrustList && details.trustIndicators) {
+            modalTrustList.innerHTML = details.trustIndicators.map(t => `
+              <div class="doc-modal-trust-badge">
+                <span class="check">✓</span> ${t}
+              </div>
+            `).join('');
+          }
           
           if (accordion) accordion.removeAttribute('open');
           
