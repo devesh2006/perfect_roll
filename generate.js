@@ -693,46 +693,6 @@ ${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover 
         </div>
       </div>
     </section>
-
-    <!-- Detailed Product Specifications & Highlights SEO Section -->
-    <section class="products-seo-section section reveal" style="background: var(--cream); border-top: 1px solid rgba(200, 168, 107, 0.15); padding-top: 64px; padding-bottom: 64px;">
-      <div class="container">
-        <h2 class="section-title" style="margin-bottom: 40px; text-align: center;">Detailed Product Highlights & Specifications</h2>
-        <div class="products-seo-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px;">
-          
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">PERFECT ROLL WHITE Cones</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Roll White Pre-Rolled Cones offer the ultimate rolling experience for quality-conscious consumers. Meticulously crafted using premium bleached white paper and 100% natural Arabic gum, these king-size cones ensure a smooth, slow, and consistent burn. Designed for convenience and superior performance, our pre-rolled cones save time while maintaining the highest quality standards. Ideal for retailers and distributors looking to supply premium smoking accessories, Prince Perfect Roll Cones stand out in the Indian market for their precision construction and organic composition, delivering satisfaction in every fill.</p>
-          </article>
-
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">PERFECT ROLL NATURAL Papers</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Roll Natural rolling papers are designed for smokers who prefer a raw, chemical-free experience. Made from organic unbleached brown paper and natural Arabic gum, these premium papers preserve the organic taste of your blend. Each pack includes pre-rolled filter tips for maximum convenience and structure. Our slow-burn technology guarantees an even, slow burn without any unwanted paper taste. As leading manufacturer of smoking accessories in India, Prince Perfect Roll offers a cleaner alternative, making this organic collection highly popular among distributors and quality-focused consumers.</p>
-          </article>
-
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">5 FRIEC WHITE Papers</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect 5 Friec White rolling papers are engineered for purists who value a clean, slow, and even burn. Utilizing ultra-thin bleached white paper of premium grade, they deliver minimal taste interference for an unadulterated smoking experience. The 100% natural Arabic gum line ensures a reliable, strong seal on the first try. Crafted under strict quality controls, these lightweight rolling papers represent a classic choice for everyday rolling. Their thin yet durable texture makes them easy to handle, ensuring they remain a staple product for wholesale supply and retail distribution networks across India.</p>
-          </article>
-
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">5 FRIEC NATURAL Papers</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect 5 Friec Natural rolling papers showcase the beauty of raw materials, made with organic unbleached brown paper fibers. Absolutely chemical-free and chlorine-free, these papers provide an organic, slow-burning roll. Combined with a natural Arabic gum adhesive line, they hold firmly throughout the session. Perfect for those seeking a sustainable, premium rolling paper, 5 Friec Natural delivers a pure burn and clean taste. This product is a top choice for smoke shops and distribution partners looking to capture the rapidly expanding organic smoking accessories market in India.</p>
-          </article>
-
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">TWODAY WHITE Papers</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Twoday White rolling papers offer a convenient, all-in-one rolling kit complete with premium pre-rolled filter tips. Crafted from ultra-thin bleached white paper, this product ensures a slow, smooth, and clean burn. The natural Arabic gum adhesive provides a reliable, secure stick, making rolling effortless even for beginners. Designed for premium portability and everyday convenience, the Twoday White line delivers consistent performance. It represents a highly marketable retail product, perfect for distributors expanding their catalog of premium rolling papers and tobacco accessories in major cities.</p>
-          </article>
-
-          <article class="products-seo-card" style="background: var(--white); border: 1.5px solid rgba(200, 168, 107, 0.15); border-radius: var(--radius-lg); padding: 32px 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); transition: all 0.3s ease;">
-            <h3 style="font-family: var(--font-heading); color: var(--black); font-size: 1.25rem; margin-bottom: 16px; border-bottom: 2px solid var(--gold); padding-bottom: 8px;">TWODAY NATURAL Papers</h3>
-            <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin: 0;">Prince Perfect Twoday Natural rolling papers combine organic unbleached fibers with integrated filter tips for a premium, earthy rolling experience. Designed for enthusiasts who demand natural quality and convenience, these brown papers feature a slow burn profile and a 100% natural Arabic gum seal. Free from chemicals and chlorine, Twoday Natural preserves the natural profile of your smoking blends. This all-in-one packaging is highly favored by retail consumers, making it an excellent high-margin product for wholesale distribution networks and business partners throughout India.</p>
-          </article>
-
-        </div>
-      </div>
-    </section>
   </main>
   ${footer}
 </body>
@@ -950,36 +910,55 @@ ${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect R
   ${header}
   <main style="padding-top: var(--nav-height);">
     <section id="contact" class="contact-section section reveal">
-      <div class="container contact-split">
-        <div class="contact-left">
-          <div class="contact-info">
-            <h1 class="section-title">Contact Prince Perfect Roll</h1>
-            <p>Have questions or need assistance? Our team is ready to help you.</p>
-            <p class="contact-seo-text">Contact Prince Perfect Roll for premium rolling papers, king-size cones, flavored cones, <a href="distributors.html" style="color: var(--gold); text-decoration: underline;">distribution inquiries</a>, wholesale orders, and customer support across India.</p>
-            <ul class="contact-details">
-              <li><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="contact-link">princeperfectroll@gmail.com</a></li>
-              <li><strong>Phone:</strong> <a href="tel:+919717990597" aria-label="Call Prince Perfect Roll" class="contact-link">+91 9717990597</a></li>
-              <li><strong>Location:</strong> Gurgaon, Delhi NCR, India</li>
-            </ul>
+      <div class="container">
+        <div class="contact-split">
+          <div class="contact-left">
+            <div class="contact-info">
+              <h1 class="section-title">Contact Prince Perfect Roll</h1>
+              <p>Have questions or need assistance? Our team is ready to help you.</p>
+              <p class="contact-seo-text">Contact Prince Perfect Roll for premium rolling papers, king-size cones, flavored cones, <a href="distributors.html" style="color: var(--gold); text-decoration: underline;">distribution inquiries</a>, wholesale orders, and customer support across India.</p>
+              <ul class="contact-details">
+                <li><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="contact-link">princeperfectroll@gmail.com</a></li>
+                <li><strong>Phone:</strong> <a href="tel:+919717990597" aria-label="Call Prince Perfect Roll" class="contact-link">+91 9717990597</a></li>
+                <li><strong>Location:</strong> Gurgaon, Delhi NCR, India</li>
+              </ul>
+            </div>
           </div>
-          <div class="contact-help-container">
-            <h2>How We Can Help</h2>
-            <ul class="contact-help-list">
-              <li><span class="checkmark">✓</span> Distributor Inquiries</li>
-              <li><span class="checkmark">✓</span> Wholesale Orders</li>
-              <li><span class="checkmark">✓</span> Product Support</li>
-              <li><span class="checkmark">✓</span> Customer Assistance</li>
-            </ul>
-            <p class="contact-trust-line">Supporting customers, retailers, and distributors across India.</p>
+          <div class="contact-card">
+            <div class="whatsapp-card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#25D366" style="margin: 0 auto 24px; display: block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              <h3>Need quick answers?</h3>
+              <p>We reply within minutes.</p>
+              <a href="https://wa.me/+919717990597" class="btn btn-green" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+            </div>
           </div>
         </div>
-        <div class="contact-card">
-          <div class="whatsapp-card">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" fill="#25D366" style="margin: 0 auto 24px; display: block;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <h3>Need quick answers?</h3>
-            <p>We reply within minutes.</p>
-            <a href="https://wa.me/+919717990597" class="btn btn-green" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+
+        <div class="contact-help-container">
+          <h2>How We Can Help</h2>
+          <div class="contact-help-grid">
+            <div class="contact-help-card">
+              <span class="help-card-icon">🤝</span>
+              <h3>Distributor Inquiries</h3>
+              <p>Apply to become an official retail or wholesale partner in your state.</p>
+            </div>
+            <div class="contact-help-card">
+              <span class="help-card-icon">📦</span>
+              <h3>Wholesale Orders</h3>
+              <p>High-volume pricing and bulk orders for registered merchants and shops.</p>
+            </div>
+            <div class="contact-help-card">
+              <span class="help-card-icon">🌿</span>
+              <h3>Product Support</h3>
+              <p>Questions about our natural Arabic gum, paper types, or burning consistency.</p>
+            </div>
+            <div class="contact-help-card">
+              <span class="help-card-icon">💬</span>
+              <h3>Customer Assistance</h3>
+              <p>General inquiries, order status support, and feedback on our products.</p>
+            </div>
           </div>
+          <p class="contact-trust-line" style="margin-top: 32px;">Supporting customers, retailers, and distributors across India.</p>
         </div>
       </div>
     </section>
