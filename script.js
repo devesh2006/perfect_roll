@@ -330,6 +330,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Log and confirm submission
         recordSubmission();
+        if (typeof gtag === 'function') {
+          gtag('event', 'form_submission', {
+            event_category: 'Form',
+            event_label: 'Distributor Application',
+            form_id: 'distributor-form'
+          });
+        }
         showFormStatus('success', 'Application submitted successfully! Our team will contact you soon.');
         
         // Reset inputs and block button
@@ -996,4 +1003,60 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   }
+
+  // Google Analytics Event Tracking Helper
+  function trackEvent(name, params) {
+    if (typeof gtag === 'function') {
+      gtag('event', name, params);
+    }
+  }
+
+  // Track WhatsApp button clicks
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a');
+    if (anchor && anchor.href && anchor.href.includes('wa.me')) {
+      trackEvent('whatsapp_click', {
+        event_category: 'Engagement',
+        event_label: anchor.href,
+        link_url: anchor.href
+      });
+    }
+  });
+
+  // Track outbound link clicks (excluding WhatsApp)
+  document.addEventListener('click', (e) => {
+    const anchor = e.target.closest('a');
+    if (anchor && anchor.href && anchor.href.startsWith('http')) {
+      try {
+        const url = new URL(anchor.href);
+        if (url.hostname !== window.location.hostname && !url.hostname.includes('wa.me')) {
+          trackEvent('outbound_click', {
+            event_category: 'Outbound',
+            event_label: anchor.href,
+            link_url: anchor.href
+          });
+        }
+      } catch (err) {}
+    }
+  });
+
+  // Track scroll depth (25%, 50%, 75%, 90%)
+  let scrollThresholds = { 25: false, 50: false, 75: false, 90: false };
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (docHeight <= 0) return;
+    const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+
+    [25, 50, 75, 90].forEach(threshold => {
+      if (scrollPercent >= threshold && !scrollThresholds[threshold]) {
+        scrollThresholds[threshold] = true;
+        trackEvent('scroll_depth', {
+          event_category: 'Engagement',
+          event_label: `${threshold}%`,
+          value: threshold
+        });
+      }
+    });
+  }, { passive: true });
 });
