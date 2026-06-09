@@ -893,7 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
           if (modalTitle) modalTitle.innerText = details.title;
           if (modalImg) {
             modalImg.src = details.img;
-            modalImg.alt = details.title + " preview";
+            modalImg.alt = details.title + " - Prince Perfect Roll Documentation Certificate";
           }
           if (modalDesc) modalDesc.innerText = details.desc;
           if (modalGovAuthority) modalGovAuthority.innerText = details.govAuthority;

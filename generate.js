@@ -5,7 +5,7 @@ const products = [
     id: 1,
     name: "PERFECT ROLL WHITE",
     tagline: "Experience the ultimate smooth, even burn.",
-    imageAlt: "Perfect Roll White premium rolling papers with natural Arabic gum",
+    imageAlt: "Prince Perfect Roll King Size Pre Rolled Cones",
     images: [
       "images/2.webp",
       "images/5.webp",
@@ -39,7 +39,7 @@ const products = [
     id: 2,
     name: "PERFECT ROLL NATURAL",
     tagline: "Experience the organic, raw taste of unbleached paper.",
-    imageAlt: "Perfect Roll Natural organic unbleached rolling papers with natural Arabic gum",
+    imageAlt: "Prince Perfect Roll King Size Pre Rolled Cones",
     images: [
       "images/13.webp",
       "images/12.webp",
@@ -73,7 +73,7 @@ const products = [
     id: 3,
     name: "5 FRIEC WHITE",
     tagline: "Premium bleached white paper for a clean, pure experience.",
-    imageAlt: "5 Friec White premium rolling papers with slow burn technology",
+    imageAlt: "Prince Perfect Roll White Rolling Papers",
     images: [
       "images/22.webp",
       "images/24.webp"
@@ -108,7 +108,7 @@ const products = [
     id: 4,
     name: "5 FRIEC NATURAL",
     tagline: "Unbleached organic natural paper for a raw, natural experience.",
-    imageAlt: "5 Friec Natural organic natural unbleached rolling papers with slow burn technology",
+    imageAlt: "Prince Perfect Roll Natural Rolling Papers",
     images: [
       "images/18.webp",
       "images/15.webp",
@@ -144,7 +144,7 @@ const products = [
     id: 5,
     name: "TWODAY WHITE",
     tagline: "Standard bleached white paper, clean and pure.",
-    imageAlt: "Twoday White premium rolling papers with natural Arabic gum and filter tips",
+    imageAlt: "Prince Perfect Roll White Rolling Papers with Filter Tips",
     images: [
       "images/16.webp",
       "images/1.webp",
@@ -180,7 +180,7 @@ const products = [
     id: 6,
     name: "TWODAY NATURAL",
     tagline: "Premium unbleached natural paper, earthy and smooth.",
-    imageAlt: "Twoday Natural premium unbleached rolling papers with natural Arabic gum and filter tips",
+    imageAlt: "Prince Perfect Roll Natural Rolling Papers with Filter Tips",
     images: [
       "images/10.webp",
       "images/9.webp",
@@ -577,7 +577,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
 
 const homeHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', 'Explore Prince Perfect Roll premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted for a smooth and consistent experience.', 'index.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
+${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones India', 'Prince Perfect Roll manufactures premium rolling papers, king size cones, flavored cones, and smoking accessories crafted for quality and consistency.', 'index.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
 <body class="page-home">
   ${header}
   <main>
@@ -684,7 +684,7 @@ ${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', '
 
 const productsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover premium rolling papers, king-size cones, flavored cones, and smoking accessories designed for quality and consistency.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Products', url: 'products.html'}])])}
+${getHeadHtml('Premium Rolling Papers, Cones & Smoking Accessories | Prince Perfect Roll', 'Explore Prince Perfect Roll\'s collection of premium rolling papers, king size cones, flavored cones, and smoking accessories.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Products', url: 'products.html'}])])}
 <body class="page-products">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -702,7 +702,7 @@ ${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover 
 </html>`;
 const aboutHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about Prince Perfect Roll, our manufacturing standards, quality commitment, and dedication to premium rolling products.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Our Story', url: 'about.html'}])])}
+${getHeadHtml('About Prince Perfect Roll | Premium Rolling Paper Brand', 'Learn about Prince Perfect Roll\'s journey, commitment to quality, innovation, and premium smoking accessories in India.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Our Story', url: 'about.html'}])])}
 <body class="page-about">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -725,7 +725,7 @@ ${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about
             </div>
           </div>
           <div class="story-image">
-            <img src="26.webp" alt="Prince Perfect Crafting" width="600" height="500" loading="lazy" style="width: 100%; height: auto; max-height: 500px; object-fit: contain; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+            <img src="26.webp" alt="Prince Perfect Roll Product Packaging" width="600" height="500" loading="lazy" style="width: 100%; height: auto; max-height: 500px; object-fit: contain; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
           </div>
         </div>
       </div>
@@ -781,7 +781,7 @@ ${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about
 
 const distributorsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Perfect Roll distribution network and bring premium rolling products to customers across India.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Distributors', url: 'distributors.html'}])])}
+${getHeadHtml('Become a Distributor | Prince Perfect Roll India', 'Partner with Prince Perfect Roll and join our growing distributor network across India for premium rolling paper products.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Distributors', url: 'distributors.html'}])])}
 <body class="page-distributors">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -908,7 +908,7 @@ const faqSchemaObj = {
 
 const contactHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect Roll for distributor inquiries, wholesale orders, product support, and customer assistance.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
+${getHeadHtml('Contact Prince Perfect Roll | Wholesale & Distributor Inquiries', 'Get in touch with Prince Perfect Roll for distributor inquiries, wholesale orders, customer support, and business partnerships.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
 <body class="page-contact">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -1015,7 +1015,7 @@ ${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect R
 
 const documentationHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', 'View GST registration, MSME certification, trademark records, and official business documentation for Prince Perfect Roll.', 'documentation.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Documentation', url: 'documentation.html'}])])}
+${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', 'View GST registration, MSME registration, trademark records, and official business certifications of Prince Perfect Roll.', 'documentation.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Documentation', url: 'documentation.html'}])])}
 <body class="page-documentation">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -1127,7 +1127,7 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
         <!-- Visual Document Side (60%) -->
         <div class="doc-modal-viewer-side" id="modal-body-scroll">
           <div class="doc-modal-img-container" id="modal-zoom-container">
-            <img id="modal-doc-img" src="" alt="High resolution preview of the document" />
+            <img id="modal-doc-img" src="" alt="Prince Perfect Roll Documentation Certificate" />
           </div>
           <div class="doc-modal-viewer-controls">
             <button id="doc-zoom-out" class="doc-modal-control-btn" aria-label="Zoom out" title="Zoom out">−</button>
