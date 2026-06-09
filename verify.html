@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.princeperfectroll.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none';">
+  <title>Age Verification | Prince Perfect Roll</title>
+  <meta name="description" content="Please verify that you are 18 years of age or older to access Prince Perfect Roll's premium rolling papers, pre-rolled cones, and smoking accessories.">
+  <link rel="canonical" href="https://www.princeperfectroll.com/verify.html">
+  <meta name="keywords" content="premium rolling papers, king size rolling papers, rolling paper cones, natural Arabic gum, flavored cones, smoking accessories, premium paper products, rolling papers India">
+  <meta property="og:title" content="Age Verification | Prince Perfect Roll">
+  <meta property="og:description" content="Please verify that you are 18 years of age or older to access Prince Perfect Roll's premium rolling papers, pre-rolled cones, and smoking accessories.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.princeperfectroll.com/verify.html">
+  <meta property="og:image" content="https://www.princeperfectroll.com/images/2.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Age Verification | Prince Perfect Roll">
+  <meta name="twitter:description" content="Please verify that you are 18 years of age or older to access Prince Perfect Roll's premium rolling papers, pre-rolled cones, and smoking accessories.">
+  <meta name="twitter:image" content="https://www.princeperfectroll.com/images/2.webp">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=1.0.3">
+  <script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Age Verification | Prince Perfect Roll",
+    "description": "Please verify that you are 18 years of age or older to access Prince Perfect Roll's premium rolling papers, pre-rolled cones, and smoking accessories.",
+    "url": "https://www.princeperfectroll.com/verify.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Prince Perfect Roll",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.princeperfectroll.com/images/2.webp"
+      }
+    }
+  }
+]
+  </script>
+</head>
+
+<body class="age-gate-body">
+  <div class="age-gate-wrapper">
+    <div class="age-gate-content">
+      <div class="age-gate-logo">Prince Perfect</div>
+      <div class="age-gate-divider"></div>
+      <h1>Age Verification</h1>
+      <p id="age-gate-message">You must be 18 years of age or older to enter this website. Please verify your age to continue.</p>
+      
+      <div class="age-gate-actions" id="age-gate-buttons">
+        <button class="btn btn-red btn-large" id="btn-verify-yes">Yes, I am 18+</button>
+        <button class="btn btn-outline-light btn-large" id="btn-verify-no">No, I am under 18</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    if (localStorage.getItem('age_verified') === 'true') {
+      window.location.href = '/';
+    }
+
+    const btnYes = document.getElementById('btn-verify-yes');
+    const btnNo = document.getElementById('btn-verify-no');
+    const message = document.getElementById('age-gate-message');
+    const buttonsContainer = document.getElementById('age-gate-buttons');
+
+    btnYes.addEventListener('click', () => {
+      localStorage.setItem('age_verified', 'true');
+      window.location.href = '/';
+    });
+
+    btnNo.addEventListener('click', () => {
+      buttonsContainer.style.display = 'none';
+      message.innerHTML = '<span class="denied-text">You are not old enough to view this website. Access Denied.</span>';
+      message.style.color = '#B51F2E';
+      message.style.fontSize = '1.3rem';
+      message.style.fontWeight = '600';
+    });
+  </script>
+</body>
+</html>

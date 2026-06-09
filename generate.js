@@ -288,12 +288,18 @@ const localBusinessSchema = {
 };
 
 const getBreadcrumbSchema = (crumbs) => {
-  const itemListElement = crumbs.map((crumb, index) => ({
-    "@type": "ListItem",
-    "position": index + 1,
-    "name": crumb.name,
-    "item": crumb.url ? `https://www.princeperfectroll.com/${crumb.url}` : undefined
-  }));
+  const itemListElement = crumbs.map((crumb, index) => {
+    let url = crumb.url;
+    if (url === 'home.html' || url === 'index.html') {
+      url = '';
+    }
+    return {
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.name,
+      "item": crumb.url !== undefined ? `https://www.princeperfectroll.com/${url}` : undefined
+    };
+  });
 
   return {
     "@context": "https://schema.org",
@@ -303,12 +309,13 @@ const getBreadcrumbSchema = (crumbs) => {
 };
 
 const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', extraSchemas = []) => {
+  const canonicalUrl = pageUrl === 'index.html' ? '' : pageUrl;
   const baseSchema = {
     "@context": "https://schema.org",
     "@type": pageSchemaType,
     "name": title,
     "description": description,
-    "url": `https://www.princeperfectroll.com/${pageUrl}`,
+    "url": `https://www.princeperfectroll.com/${canonicalUrl}`,
     "publisher": {
       "@type": "Organization",
       "name": "Prince Perfect Roll",
@@ -328,10 +335,10 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
     });
   }
 
-  const ageVerifyScript = pageUrl === 'index.html' ? '' : `
+  const ageVerifyScript = pageUrl === 'verify.html' ? '' : `
   <script>
     if (localStorage.getItem('age_verified') !== 'true') {
-      window.location.href = 'index.html';
+      window.location.href = 'verify.html';
     }
   </script>`;
 
@@ -342,12 +349,12 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.princeperfectroll.com; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none';">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <link rel="canonical" href="https://www.princeperfectroll.com/${pageUrl}">
+  <link rel="canonical" href="https://www.princeperfectroll.com/${canonicalUrl}">
   <meta name="keywords" content="premium rolling papers, king size rolling papers, rolling paper cones, natural Arabic gum, flavored cones, smoking accessories, premium paper products, rolling papers India">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.princeperfectroll.com/${pageUrl}">
+  <meta property="og:url" content="https://www.princeperfectroll.com/${canonicalUrl}">
   <meta property="og:image" content="https://www.princeperfectroll.com/images/2.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
@@ -368,10 +375,10 @@ ${JSON.stringify(combinedSchemas, null, 2)}
 const header = `
   <header id="site-header">
     <div class="header-container">
-      <a href="home.html" class="logo">Prince Perfect</a>
+      <a href="/" class="logo">Prince Perfect</a>
       <nav id="main-nav">
         <ul>
-          <li><a href="home.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="products.html">Products</a></li>
           <li><a href="about.html">Our Story</a></li>
           <li><a href="distributors.html">Distributors</a></li>
@@ -389,7 +396,7 @@ const header = `
     </div>
     <div id="mobile-nav-overlay">
         <ul>
-          <li><a href="home.html" class="mobile-link">Home</a></li>
+          <li><a href="/" class="mobile-link">Home</a></li>
           <li><a href="products.html" class="mobile-link">Products</a></li>
           <li><a href="about.html" class="mobile-link">Our Story</a></li>
           <li><a href="distributors.html" class="mobile-link">Distributors</a></li>
@@ -405,7 +412,7 @@ const footer = `
     <div class="container">
       <div class="footer-grid">
         <div class="footer-column brand-column">
-          <h4 class="brand-title"><a href="home.html" class="logo">PRINCE PERFECT</a></h4>
+          <h4 class="brand-title"><a href="/" class="logo">PRINCE PERFECT</a></h4>
           <p class="brand-description">Prince Perfect Roll manufactures premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted with natural Arabic gum for a smooth, slow, and consistent burn experience across India.</p>
           <div class="footer-contact-info">
             <p><strong>WhatsApp:</strong> <a href="https://wa.me/+919717990597" target="_blank" rel="noopener noreferrer" aria-label="Chat with Prince Perfect Roll on WhatsApp" class="footer-contact-link">+91 9717990597</a></p>
@@ -415,7 +422,7 @@ const footer = `
         <div class="footer-column links-column">
           <h4>QUICK LINKS</h4>
           <ul class="footer-links-list">
-            <li><a href="home.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="products.html">Products</a></li>
             <li><a href="about.html">Our Story</a></li>
             <li><a href="distributors.html">Distributors</a></li>
@@ -526,7 +533,7 @@ const marqueeProductsHtml = [...products, ...products]
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you are 18 years of age or older to access Prince Perfect Roll\'s premium rolling papers, pre-rolled cones, and smoking accessories.', 'index.html')}
+${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you are 18 years of age or older to access Prince Perfect Roll\'s premium rolling papers, pre-rolled cones, and smoking accessories.', 'verify.html')}
 <body class="age-gate-body">
   <div class="age-gate-wrapper">
     <div class="age-gate-content">
@@ -544,7 +551,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
 
   <script>
     if (localStorage.getItem('age_verified') === 'true') {
-      window.location.href = 'home.html';
+      window.location.href = '/';
     }
 
     const btnYes = document.getElementById('btn-verify-yes');
@@ -554,7 +561,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
 
     btnYes.addEventListener('click', () => {
       localStorage.setItem('age_verified', 'true');
-      window.location.href = 'home.html';
+      window.location.href = '/';
     });
 
     btnNo.addEventListener('click', () => {
@@ -570,7 +577,7 @@ ${getHeadHtml('Age Verification | Prince Perfect Roll', 'Please verify that you 
 
 const homeHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', 'Explore Prince Perfect Roll premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted for a smooth and consistent experience.', 'home.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
+${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', 'Explore Prince Perfect Roll premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted for a smooth and consistent experience.', 'index.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema])}
 <body class="page-home">
   ${header}
   <main>
@@ -677,7 +684,7 @@ ${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones in India', '
 
 const productsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover premium rolling papers, king-size cones, flavored cones, and smoking accessories designed for quality and consistency.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Products', url: 'products.html'}])])}
+${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover premium rolling papers, king-size cones, flavored cones, and smoking accessories designed for quality and consistency.', 'products.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, ...productSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Products', url: 'products.html'}])])}
 <body class="page-products">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -695,7 +702,7 @@ ${getHeadHtml('Premium Rolling Papers & Cones | Prince Perfect Roll', 'Discover 
 </html>`;
 const aboutHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about Prince Perfect Roll, our manufacturing standards, quality commitment, and dedication to premium rolling products.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Our Story', url: 'about.html'}])])}
+${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about Prince Perfect Roll, our manufacturing standards, quality commitment, and dedication to premium rolling products.', 'about.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Our Story', url: 'about.html'}])])}
 <body class="page-about">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -774,7 +781,7 @@ ${getHeadHtml('About Prince Perfect Roll | Our Story & Commitment', 'Learn about
 
 const distributorsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Perfect Roll distribution network and bring premium rolling products to customers across India.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Distributors', url: 'distributors.html'}])])}
+${getHeadHtml('Become a Distributor | Prince Perfect Roll', 'Join the Prince Perfect Roll distribution network and bring premium rolling products to customers across India.', 'distributors.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Distributors', url: 'distributors.html'}])])}
 <body class="page-distributors">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -901,7 +908,7 @@ const faqSchemaObj = {
 
 const contactHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect Roll for distributor inquiries, wholesale orders, product support, and customer assistance.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
+${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect Roll for distributor inquiries, wholesale orders, product support, and customer assistance.', 'contact.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Contact', url: 'contact.html'}]), faqSchemaObj])}
 <body class="page-contact">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -1004,16 +1011,11 @@ ${getHeadHtml('Contact Prince Perfect Roll', 'Get in touch with Prince Perfect R
 </body>
 </html>`;
 
-fs.writeFileSync('index.html', indexHtml);
-fs.writeFileSync('home.html', homeHtml);
-fs.writeFileSync('products.html', productsHtml);
-fs.writeFileSync('about.html', aboutHtml);
-fs.writeFileSync('distributors.html', distributorsHtml);
-fs.writeFileSync('contact.html', contactHtml);
+
 
 const documentationHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', 'View GST registration, MSME certification, trademark records, and official business documentation for Prince Perfect Roll.', 'documentation.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: 'home.html'}, {name: 'Documentation', url: 'documentation.html'}])])}
+${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', 'View GST registration, MSME certification, trademark records, and official business documentation for Prince Perfect Roll.', 'documentation.html', 'WebPage', [orgSchema, websiteSchema, localBusinessSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Documentation', url: 'documentation.html'}])])}
 <body class="page-documentation">
   ${header}
   <main style="padding-top: var(--nav-height);">
@@ -1256,8 +1258,8 @@ ${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions 
 </body>
 </html>`;
 
-fs.writeFileSync('index.html', indexHtml);
-fs.writeFileSync('home.html', homeHtml);
+fs.writeFileSync('verify.html', indexHtml);
+fs.writeFileSync('index.html', homeHtml);
 fs.writeFileSync('products.html', productsHtml);
 fs.writeFileSync('about.html', aboutHtml);
 fs.writeFileSync('distributors.html', distributorsHtml);
@@ -1270,13 +1272,7 @@ const currentDate = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.princeperfectroll.com/index.html</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://www.princeperfectroll.com/home.html</loc>
+    <loc>https://www.princeperfectroll.com/</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
