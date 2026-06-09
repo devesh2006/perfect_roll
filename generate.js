@@ -22,7 +22,7 @@ const products = [
       "Type": "Pre-Rolled Cones",
       "Cone Length": "109 mm",
       "Filter Length": "26 mm",
-      "Paper Type": "Premium Bleached White",
+      "Paper Type": "Premium Bleached White (13.8 gsm)",
       "Content": "50+5 pcs per pack",
       "Burn Profile": "Slow & Consistent"
     },
@@ -56,7 +56,7 @@ const products = [
       "Type": "Pre-Rolled Cones",
       "Cone Length": "109 mm",
       "Filter Length": "26 mm",
-      "Paper Type": "Premium Unbleached Natural",
+      "Paper Type": "Premium Unbleached Natural (13.8 gsm)",
       "Content": "50+5 pcs per pack",
       "Burn Profile": "Slow & Consistent"
     },
@@ -92,7 +92,7 @@ const products = [
     description: "Premium bleached white rolling papers crafted for a clean, pure smoking experience. Engineered with ultra-thin lightweight paper and natural Arabic gum, these papers ensure a slow, even, and consistent burn every time.",
     specs: {
       "Size": "109 mm cone and 26mm tip",
-      "Contents": "30 Pcs Per Pack",
+      "Contents": "30 Pcs (5 Paper + 5 Filter tips)",
       "Paper Type": "Premium Bleached Paper",
       "Gum Type": "Natural Arabic Gum",
       "Burn Profile": "Slow & Even Burn"
@@ -128,7 +128,7 @@ const products = [
     description: "Premium unbleached organic rolling papers crafted for a raw, natural smoking experience. Made from chemical-free organic fibers and 100% natural Arabic gum to ensure a slow, clean, and consistent burn.",
     specs: {
       "Size": "109 mm cone and 26mm tip",
-      "Contents": "30 Pcs Per Pack",
+      "Contents": "30 Pcs (5 Paper + 5 Filter tips)",
       "Paper Type": "Unbleached Organic natural",
       "Gum Type": "Natural Arabic Gum",
       "Burn Profile": "Slow & Even Burn"

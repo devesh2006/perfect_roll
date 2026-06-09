@@ -856,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statusBadge: "✓ Brand Protection Record",
         statusClass: "status-protected",
         number: "Application No: 7122851 (Class 34)",
-        date: "November 11, 2025",
+        date: "November 8, 2023",
         authority: "Controller General of Patents, Designs and Trade Marks, India",
         statusFull: "Registered / Active",
         trustIndicators: [
