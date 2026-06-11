@@ -1112,4 +1112,16 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }, { passive: true });
+
+  // Mobile Our Story "Read More" button expander
+  const btnReadMore = document.getElementById('btn-read-more');
+  if (btnReadMore) {
+    btnReadMore.addEventListener('click', () => {
+      const readMoreContent = document.querySelector('.story-read-more-content');
+      if (readMoreContent) {
+        readMoreContent.classList.add('expanded');
+      }
+      btnReadMore.style.display = 'none';
+    });
+  }
 });

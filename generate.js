@@ -774,9 +774,12 @@ ${getHeadHtml('About Prince Perfect Roll | Premium Rolling Paper Brand', 'Learn 
         </div>
         <div class="story-split">
           <div class="story-text">
-            <p>Prince Perfect Roll is dedicated to creating premium rolling papers that deliver consistency, smoothness, and reliability with every roll. Crafted using carefully selected materials and natural Arabic gum, our papers are designed for smokers who appreciate quality, precision, and an even burn.</p>
-            <p>Whether you're looking for classic white rolling papers, natural brown papers, king-size cones, or innovative flavored options, every Prince Perfect Roll product is engineered to provide a cleaner, smoother, and slower-burning experience.</p>
-            <p>Our commitment goes beyond manufacturing. We focus on delivering premium rolling accessories that combine quality craftsmanship, modern design, and dependable performance for rolling enthusiasts across India.</p>
+            <p>Prince Perfect Roll is committed to delivering premium rolling papers crafted for smokers who value quality, consistency, and performance. Designed using carefully selected materials and natural Arabic gum, our products ensure a smooth rolling experience, an even burn, and dependable results every time. We believe that every roll should reflect precision, comfort, and superior craftsmanship.</p>
+            <button id="btn-read-more" class="btn btn-gold-outline">Read More</button>
+            <div class="story-read-more-content">
+              <p>Our product range includes classic white rolling papers, natural brown rolling papers, king-size papers, pre-rolled cones, and innovative flavored options. Each product is manufactured with attention to detail to provide a cleaner, slower-burning, and more enjoyable smoking experience. By combining traditional quality standards with modern manufacturing techniques, we create products that meet the expectations of both casual and experienced rolling enthusiasts.</p>
+              <p>At Prince Perfect Roll, our focus extends beyond rolling papers. We strive to build a trusted brand known for reliability, innovation, and customer satisfaction. As one of India's growing names in premium rolling accessories, we are dedicated to offering products that deliver exceptional performance while maintaining the highest standards of quality and consistency.</p>
+            </div>
             <div style="margin-top: 28px;">
               <a href="products.html" style="color: var(--gold); font-weight: 600; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 8px; transition: color 0.3s; text-decoration: none;" onmouseover="this.style.color='var(--red)'" onmouseout="this.style.color='var(--gold)'">
                 Explore Our Full Product Collection &rarr;
@@ -1265,10 +1268,10 @@ ${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince
         <h1 class="section-title" style="margin-bottom: 30px; font-size: 2.2rem;">Privacy Policy</h1>
         <p style="margin-bottom: 20px;">At Prince Perfect Roll, accessible from www.princeperfectroll.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Prince Perfect Roll and how we use it.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Information We Collect</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">Information We Collect</h2>
         <p style="margin-bottom: 20px;">The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">How We Use Your Information</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">How We Use Your Information</h2>
         <ul style="margin-bottom: 20px; padding-left: 20px; list-style-type: disc;">
           <li style="margin-bottom: 8px;">Provide, operate, and maintain our website</li>
           <li style="margin-bottom: 8px;">Improve, personalize, and expand our website</li>
@@ -1277,10 +1280,10 @@ ${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince
           <li style="margin-bottom: 8px;">Communicate with you, either directly or through one of our partners</li>
         </ul>
 
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Log Files</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">Log Files</h2>
         <p style="margin-bottom: 20px;">Prince Perfect Roll follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this as part of hosting services' analytics. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Consent</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">Consent</h2>
         <p style="margin-bottom: 20px;">By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
       </div>
     </section>
@@ -1300,13 +1303,13 @@ ${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions 
         <h1 class="section-title" style="margin-bottom: 30px; font-size: 2.2rem;">Terms & Conditions</h1>
         <p style="margin-bottom: 20px;">Welcome to Prince Perfect Roll! These terms and conditions outline the rules and regulations for the use of Prince Perfect Roll's Website, located at www.princeperfectroll.com.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px; color: var(--red);">Age Restriction</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); color: var(--red);">Age Restriction</h2>
         <p style="margin-bottom: 20px; font-weight: bold; color: var(--red);">You must be 18 years of age or older to enter and use this website. By accessing our products and website, you warrant and represent that you are at least 18 years of age.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">License</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">License</h2>
         <p style="margin-bottom: 20px;">Unless otherwise stated, Prince Perfect Roll and/or its licensors own the intellectual property rights for all material on Prince Perfect Roll. All intellectual property rights are reserved. You may access this from Prince Perfect Roll for your own personal use subjected to restrictions set in these terms and conditions.</p>
         
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Restrictions</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">Restrictions</h2>
         <p style="margin-bottom: 15px;">You are specifically restricted from all of the following:</p>
         <ul style="margin-bottom: 20px; padding-left: 20px; list-style-type: disc;">
           <li style="margin-bottom: 8px;">Republishing website material in any other media;</li>
@@ -1316,7 +1319,7 @@ ${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions 
           <li style="margin-bottom: 8px;">Using this Website contrary to applicable laws and regulations.</li>
         </ul>
 
-        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black); border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px;">Limitation of Liability</h2>
+        <h2 style="font-family: var(--font-heading); font-size: 1.5rem; margin: 30px 0 15px; color: var(--black);">Limitation of Liability</h2>
         <p style="margin-bottom: 20px;">In no event shall Prince Perfect Roll, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract.</p>
       </div>
     </section>
