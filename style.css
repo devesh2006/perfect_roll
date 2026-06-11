@@ -394,15 +394,25 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: color 0.4s ease;
+  white-space: nowrap;
 }
 
 #site-header.scrolled .logo {
   color: var(--black);
 }
 
+#main-nav {
+  display: flex;
+  align-items: center;
+}
+
 #main-nav ul {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: clamp(16px, 2vw, 32px);
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
 }
 
 #main-nav a {
@@ -412,6 +422,7 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   transition: color 0.3s;
+  white-space: nowrap;
 }
 
 #site-header.scrolled #main-nav a {
@@ -1689,6 +1700,16 @@ h1, h2, h3, h4, h5, h6 {
 /* ==========================================================================
    Responsive Queries
    ========================================================================== */
+@media (max-width: 1199.98px) {
+  #main-nav, .wa-cta {
+    display: none;
+  }
+  
+  #mobile-menu-btn {
+    display: flex;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-title {
     font-size: clamp(2rem, 5vw, 3.5rem);
@@ -1727,14 +1748,6 @@ h1, h2, h3, h4, h5, h6 {
 
   .hero-images .img-placeholder {
     min-height: 250px !important;
-  }
-  
-  #main-nav, .wa-cta {
-    display: none;
-  }
-  
-  #mobile-menu-btn {
-    display: flex;
   }
   
   .products-grid,
