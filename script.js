@@ -62,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     mobileBtn.addEventListener('click', toggleMenu);
     
+    mobileNav.addEventListener('click', (e) => {
+      if (e.target === mobileNav) {
+        toggleMenu();
+      }
+    });
+    
     const mobileLinks = document.querySelectorAll('.mobile-link');
     mobileLinks.forEach(link => {
       link.addEventListener('click', toggleMenu);

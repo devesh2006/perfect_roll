@@ -3,7 +3,7 @@
     "puppeteer": "^25.1.0"
   },
   "scripts": {
-    "dev": "npx -y http-server ."
+    "dev": "npx -y http-server . -c-1"
   },
   "devDependencies": {
     "clean-css": "^5.3.3",

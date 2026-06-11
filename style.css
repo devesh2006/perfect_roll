@@ -388,7 +388,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .logo {
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: clamp(18px, 1.8vw, 24px);
   font-weight: 700;
   color: var(--gold);
   text-transform: uppercase;
@@ -404,13 +404,14 @@ h1, h2, h3, h4, h5, h6 {
 #main-nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 #main-nav ul {
   display: flex;
   align-items: center;
-  gap: clamp(16px, 2vw, 32px);
-  flex-wrap: wrap;
+  gap: clamp(12px, 1.5vw, 28px);
+  flex-wrap: nowrap;
   padding: 0;
   margin: 0;
 }
@@ -418,9 +419,9 @@ h1, h2, h3, h4, h5, h6 {
 #main-nav a {
   color: var(--white);
   font-weight: 600;
-  font-size: 13px;
+  font-size: clamp(11px, 0.9vw, 13px);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   transition: color 0.3s;
   white-space: nowrap;
 }
@@ -491,35 +492,56 @@ h1, h2, h3, h4, h5, h6 {
   top: 0; left: 0; width: 100%; 
   height: 100vh;
   height: 100dvh;
-  background: rgba(17, 17, 17, 0.98);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(11, 11, 11, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   opacity: 0;
   visibility: hidden;
-  transform: scale(0.95);
-  transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.4s;
   z-index: 1001;
 }
 
 #mobile-nav-overlay.open {
   opacity: 1;
   visibility: visible;
-  transform: scale(1);
 }
 
 #mobile-nav-overlay ul {
+  position: absolute;
+  top: 0; right: 0;
+  width: clamp(280px, 45vw, 400px);
+  height: 100%;
+  background: var(--black);
+  border-left: 1px solid rgba(200, 168, 107, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  justify-content: center;
+  gap: clamp(24px, 4vh, 40px);
+  padding: 80px 40px 40px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#mobile-nav-overlay.open ul {
+  transform: translateX(0);
 }
 
 #mobile-nav-overlay a {
-  font-size: 24px;
+  font-size: clamp(20px, 3vh, 26px);
   font-family: var(--font-heading);
   color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  transition: color 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+#mobile-nav-overlay a:hover {
+  color: var(--gold);
+  transform: scale(1.05);
 }
 
 /* Mobile Nav Toggle states */
@@ -1700,7 +1722,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ==========================================================================
    Responsive Queries
    ========================================================================== */
-@media (max-width: 1199.98px) {
+@media (max-width: 1023.98px) {
   #main-nav, .wa-cta {
     display: none;
   }
