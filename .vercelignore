@@ -1,0 +1,11 @@
+node_modules/
+.git/
+.env
+.env.example
+generate.js
+update_generate.js
+package-lock.json
+package.json
+gst certificate.pdf
+msme_Redacted.pdf
+trademark.pdf

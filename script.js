@@ -1,5 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Lazy-load Google Tag Manager / Google Analytics on first interaction or idle timeout
+  let gtmLoaded = false;
+  function lazyLoadGTM() {
+    if (gtmLoaded) return;
+    gtmLoaded = true;
+    
+    // Inject the external GTM script
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-4HZE75QVSZ';
+    document.head.appendChild(script);
+    
+    // Initialize configuration
+    if (typeof gtag === 'function') {
+      gtag('config', 'G-4HZE75QVSZ');
+    }
+  }
+  
+  // Schedule a 3.5-second idle timeout, or listen for user interaction events
+  const idleTimeout = setTimeout(lazyLoadGTM, 3500);
+  const interactionEvents = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
+  interactionEvents.forEach(evt => {
+    window.addEventListener(evt, () => {
+      clearTimeout(idleTimeout);
+      lazyLoadGTM();
+    }, { once: true, passive: true });
+  });
+
   // Sticky Header & Mobile Nav
   const header = document.getElementById('site-header');
   const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -40,16 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Interactive Hero mouse-tracking glow
+  // Interactive Hero mouse-tracking glow (only on desktop/non-touch devices)
   const heroSection = document.getElementById('hero');
-  if (heroSection) {
+  if (heroSection && !window.matchMedia('(pointer: coarse)').matches) {
     heroSection.addEventListener('mousemove', (e) => {
       const rect = heroSection.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       heroSection.style.setProperty('--mouse-x', `${(x / rect.width) * 100}%`);
       heroSection.style.setProperty('--mouse-y', `${(y / rect.height) * 100}%`);
-    });
+    }, { passive: true });
   }
 
   // Scroll-Triggered Fade-In
@@ -369,47 +397,64 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (images.length === 0) return;
     
-    const activeImg = gallery.querySelector('#mainProductImage');
+    const galleryImages = gallery.querySelectorAll('.gallery-image');
     const prevBtn = gallery.querySelector('.prev-btn');
     const nextBtn = gallery.querySelector('.next-btn');
     const dots = gallery.querySelectorAll('.gallery-dot');
     
     let currentIndex = 0;
-    let isTransitioning = false;
+    
+    // Helper to preload adjacent images (Current, Next, Previous)
+    function preloadAdjacent() {
+      const adjacentIndices = [
+        currentIndex,
+        (currentIndex + 1) % images.length,
+        (currentIndex - 1 + images.length) % images.length
+      ];
+      
+      const uniqueIndices = [...new Set(adjacentIndices)];
+      uniqueIndices.forEach(idx => {
+        const img = galleryImages[idx];
+        if (img && img.getAttribute('src') === '') {
+          const src = img.getAttribute('data-src');
+          const srcset = img.getAttribute('data-srcset');
+          if (src) {
+            img.decoding = "async";
+            img.src = src;
+          }
+          if (srcset) {
+            img.srcset = srcset;
+          }
+        }
+      });
+    }
     
     function updateImage() {
-      if (!activeImg || isTransitioning) return;
-      isTransitioning = true;
-      
-      // Add fade-out transition class
-      activeImg.classList.add('fade-out');
+      // Toggle active classes on all images
+      galleryImages.forEach((img, idx) => {
+        img.classList.toggle('active', idx === currentIndex);
+        if (idx === currentIndex) {
+          img.setAttribute('fetchpriority', 'high');
+        } else {
+          img.removeAttribute('fetchpriority');
+        }
+      });
       
       // Update dots immediately
       dots.forEach((dot, idx) => {
         dot.classList.toggle('active', idx === currentIndex);
       });
-      
-      // Wait 150ms to swap src, then fade back in
-      setTimeout(() => {
-        activeImg.src = images[currentIndex];
-        activeImg.onload = () => {
-          activeImg.classList.remove('fade-out');
-          isTransitioning = false;
-        };
-        // Fallback in case loading takes too long or fails
-        setTimeout(() => {
-          if (isTransitioning) {
-            activeImg.classList.remove('fade-out');
-            isTransitioning = false;
-          }
-        }, 150);
-      }, 150);
+
+      // Preload new adjacent images
+      preloadAdjacent();
     }
+    
+    // Initial preload of adjacent images on page load
+    preloadAdjacent();
     
     if (nextBtn) {
       nextBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (isTransitioning) return;
         currentIndex = (currentIndex + 1) % images.length;
         updateImage();
       });
@@ -418,7 +463,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prevBtn) {
       prevBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (isTransitioning) return;
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateImage();
       });
@@ -428,7 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dots.forEach(dot => {
       dot.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (isTransitioning) return;
         const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
         if (targetIdx === currentIndex) return;
         currentIndex = targetIdx;
@@ -457,7 +500,6 @@ document.addEventListener('DOMContentLoaded', () => {
       
       // Prevent scrolling interference by checking X vs Y displacement
       if (Math.abs(swipeDistanceX) > threshold && Math.abs(swipeDistanceX) > Math.abs(swipeDistanceY)) {
-        if (isTransitioning) return;
         if (swipeDistanceX > 0) {
           currentIndex = (currentIndex - 1 + images.length) % images.length;
           updateImage();
@@ -619,33 +661,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let activeIndex = 0;
-        let modalTransitioning = false;
 
         function updateModalImage() {
-          const activeImg = modalImgSide.querySelector('#mainProductImage');
+          const modalImages = modalImgSide.querySelectorAll('.gallery-image');
           const modalDots = modalImgSide.querySelectorAll('.gallery-dot');
-          if (!activeImg || modalTransitioning) return;
-          modalTransitioning = true;
-
-          activeImg.classList.add('fade-out');
+          
+          modalImages.forEach((img, idx) => {
+            img.classList.toggle('active', idx === activeIndex);
+            if (idx === activeIndex) {
+              img.setAttribute('fetchpriority', 'high');
+            } else {
+              img.removeAttribute('fetchpriority');
+            }
+          });
 
           modalDots.forEach((dot, idx) => {
             dot.classList.toggle('active', idx === activeIndex);
           });
-
-          setTimeout(() => {
-            activeImg.src = images[activeIndex];
-            activeImg.onload = () => {
-              activeImg.classList.remove('fade-out');
-              modalTransitioning = false;
-            };
-            setTimeout(() => {
-              if (modalTransitioning) {
-                activeImg.classList.remove('fade-out');
-                modalTransitioning = false;
-              }
-            }, 150);
-          }, 150);
         }
 
         if (images.length > 1) {
@@ -653,7 +685,13 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="product-gallery">
                 <div class="image-container">
                     <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-                    <img id="mainProductImage" src="${images[0]}" alt="${altText}" />
+                    ${images.map((src, i) => `
+                      <img class="gallery-image ${i === 0 ? 'active' : ''}" 
+                           src="${src}" 
+                           alt="${altText}" 
+                           decoding="async" 
+                           ${i === 0 ? 'fetchpriority="high"' : ''} />
+                    `).join('')}
                     <button class="next-btn" aria-label="Next image">&rsaquo;</button>
                 </div>
                 <div class="gallery-dots">
@@ -662,20 +700,25 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `;
 
+          // Proactively preload all images when the modal opens by creating Image objects
+          images.forEach(src => {
+            const img = new Image();
+            img.decoding = "async";
+            img.src = src;
+          });
+
           const prevBtn = modalImgSide.querySelector('.prev-btn');
           const nextBtn = modalImgSide.querySelector('.next-btn');
           const modalDots = modalImgSide.querySelectorAll('.gallery-dot');
 
           prevBtn.onclick = (e) => {
             e.stopPropagation();
-            if (modalTransitioning) return;
             activeIndex = (activeIndex - 1 + images.length) % images.length;
             updateModalImage();
           };
 
           nextBtn.onclick = (e) => {
             e.stopPropagation();
-            if (modalTransitioning) return;
             activeIndex = (activeIndex + 1) % images.length;
             updateModalImage();
           };
@@ -683,7 +726,6 @@ document.addEventListener('DOMContentLoaded', () => {
           modalDots.forEach(dot => {
             dot.onclick = (e) => {
               e.stopPropagation();
-              if (modalTransitioning) return;
               const targetIdx = parseInt(dot.getAttribute('data-index'), 10);
               if (targetIdx === activeIndex) return;
               activeIndex = targetIdx;
@@ -711,7 +753,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const threshold = 50;
 
             if (Math.abs(distanceX) > threshold && Math.abs(distanceX) > Math.abs(distanceY)) {
-              if (modalTransitioning) return;
               if (distanceX > 0) {
                 activeIndex = (activeIndex - 1 + images.length) % images.length;
                 updateModalImage();
@@ -725,7 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           modalImgSide.innerHTML = `
             <div class="image-container">
-              <img id="mainProductImage" src="${images[0] || ''}" alt="${altText}">
+              <img id="mainProductImage" src="${images[0] || ''}" alt="${altText}" decoding="async" fetchpriority="high" class="active">
             </div>
           `;
         }
@@ -901,6 +942,18 @@ document.addEventListener('DOMContentLoaded', () => {
           if (modalImg) {
             modalImg.src = details.img;
             modalImg.alt = details.title + " - Prince Perfect Roll Documentation Certificate";
+            // Dynamically set dimensions to prevent layout shifts
+            if (docKey === 'trademark') {
+              modalImg.width = 800;
+              modalImg.height = 1078;
+            } else if (docKey === 'msme') {
+              modalImg.width = 800;
+              modalImg.height = 1131;
+            } else { // gst
+              modalImg.width = 800;
+              modalImg.height = 1132;
+            }
+            modalImg.decoding = "async";
           }
           if (modalDesc) modalDesc.innerText = details.desc;
           if (modalGovAuthority) modalGovAuthority.innerText = details.govAuthority;

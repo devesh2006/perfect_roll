@@ -1,4 +1,8 @@
 const fs = require('fs');
+const CleanCSS = require('clean-css');
+const Terser = require('terser');
+
+let inlinedCriticalCss = '';
 
 const products = [
   {
@@ -346,15 +350,22 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://www.princeperfectroll.com https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-ancestors 'none';">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-4HZE75QVSZ"></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://www.princeperfectroll.com https://*.google-analytics.com https://*.googletagmanager.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com;">
+  
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-4HZE75QVSZ');
   </script>
+  
   <title>${title}</title>
   <meta name="description" content="${description}">
   <link rel="canonical" href="https://www.princeperfectroll.com/${canonicalUrl}">
@@ -369,10 +380,12 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <meta name="twitter:description" content="${description}">
   <meta name="twitter:image" content="https://www.princeperfectroll.com/images/2.webp">
   ${ageVerifyScript}
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=1.0.3">
+  
+  <link rel="preload" href="fonts/inter-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/playfairdisplay-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <style>${inlinedCriticalCss}</style>
+  
   <script type="application/ld+json">
 ${JSON.stringify(combinedSchemas, null, 2)}
   </script>
@@ -461,15 +474,30 @@ const footer = `
   <a href="https://wa.me/+919717990597" class="floating-wa" aria-label="Chat with us on WhatsApp" target="_blank" rel="noopener noreferrer">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.885-9.885 9.885m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
-  <script src="script.js" defer></script>
+  <script src="script.min.js?v=1.0.4" defer></script>
 `;
 
-const makeSliderHtml = (p) => {
+const makeSliderHtml = (p, isLcp = false) => {
   return `
     <div class="product-gallery" data-images='${JSON.stringify(p.images)}'>
         <div class="image-container">
             <button class="prev-btn" aria-label="Previous image">&lsaquo;</button>
-            <img id="mainProductImage" src="${p.images[0]}" alt="${p.imageAlt}" width="360" height="240" loading="lazy" />
+            ${p.images.map((src, i) => {
+              const src800 = src.replace('.webp', '-800.webp');
+              return `
+              <img class="gallery-image ${i === 0 ? 'active' : ''}" 
+                   src="${i === 0 ? src : ''}" 
+                   data-src="${src}" 
+                   srcset="${i === 0 ? `${src800} 800w, ${src} 1600w` : ''}"
+                   data-srcset="${src800} 800w, ${src} 1600w"
+                   sizes="(max-width: 768px) 100vw, 360px"
+                   alt="${p.imageAlt}" 
+                   width="360" 
+                   height="240" 
+                   decoding="async" 
+                   ${i === 0 ? (isLcp ? 'fetchpriority="high" loading="eager"' : 'fetchpriority="low" loading="lazy"') : 'loading="lazy"'} />
+              `;
+            }).join('')}
             <button class="next-btn" aria-label="Next image">&rsaquo;</button>
         </div>
         <div class="gallery-dots">
@@ -489,11 +517,11 @@ const featuredHtmlList = products.length === 0
   `
   : products
       .filter(p => p.featured)
-      .map(p => `
+      .map((p, idx) => `
           <div class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-features="${encodeURIComponent(JSON.stringify(p.features))}" style="background: var(--white); border-radius: var(--radius-lg); padding: 0 0 24px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.3s ease; border-top: 4px solid ${p.color}; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="display: flex; flex-direction: column; flex-grow: 1;">
               <div class="product-img-wrapper" style="position: relative; overflow: hidden; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 20px;">
-                ${makeSliderHtml(p)}
+                ${makeSliderHtml(p, idx < 2)}
                 ${p.badge ? `<div class="badge" style="position: absolute; top: 16px; right: 16px; ${p.badge === 'Best Seller' ? 'background: var(--white); color: var(--gold); border: 1px solid var(--gold);' : 'background: var(--red); color: var(--white);'}">${p.badge}</div>` : ''}
               </div>
               <div style="padding: 0 24px; flex-grow: 1;">
@@ -516,10 +544,10 @@ const productsHtmlList = products.length === 0
           </div>
   `
   : products
-      .map(p => `
+      .map((p, idx) => `
           <article class="product-card" data-id="${p.id}" data-images='${JSON.stringify(p.images)}' data-alt="${p.imageAlt}" data-description="${encodeURIComponent(p.description)}" data-specs="${encodeURIComponent(JSON.stringify(p.specs))}" data-benefits="${encodeURIComponent(JSON.stringify(p.benefits))}" data-features="${encodeURIComponent(JSON.stringify(p.features))}" style="border-top: 4px solid ${p.color};">
             <div class="card-img-container">
-              ${makeSliderHtml(p)}
+              ${makeSliderHtml(p, idx < 2)}
             </div>
             <div class="card-content">
               <h2>${p.name}</h2>
@@ -534,10 +562,33 @@ const productsHtmlList = products.length === 0
 const marqueeProductsHtml = [...products, ...products]
   .map(p => `
           <a href="products.html" class="product-item">
-            <img src="${p.images[0]}" alt="${p.imageAlt}" width="80" height="80" loading="lazy" />
+            <img src="${p.images[0].replace('.webp', '-160.webp')}" alt="${p.imageAlt}" width="80" height="80" loading="lazy" decoding="async" />
             <h3>${p.name}</h3>
           </a>
   `).join('\n');
+
+(async () => {
+  // Read assets, minify, and write
+  console.log('Compiling and minifying styles/scripts...');
+  const styleCss = fs.readFileSync('style.css', 'utf8');
+  const fontsCss = fs.readFileSync('fonts.css', 'utf8');
+  const scriptJs = fs.readFileSync('script.js', 'utf8');
+
+  // Minify CSS
+  const cleanCss = new CleanCSS();
+  const minifiedStyleCss = cleanCss.minify(styleCss).styles;
+  const minifiedFontsCss = cleanCss.minify(fontsCss).styles;
+  fs.writeFileSync('style.min.css', minifiedStyleCss);
+
+  // Inline the ENTIRE minified stylesheet (CSS Variables, Reset, Modals, Gallery, Pages, etc.)
+  // This completely eliminates render-blocking network requests and layout shifts (CLS = 0)
+  inlinedCriticalCss = minifiedFontsCss + '\n' + minifiedStyleCss;
+
+  // Minify JS
+  const minifiedScriptJs = (await Terser.minify(scriptJs)).code;
+  fs.writeFileSync('script.min.js', minifiedScriptJs);
+
+  console.log('Generating page templates...');
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -733,7 +784,15 @@ ${getHeadHtml('About Prince Perfect Roll | Premium Rolling Paper Brand', 'Learn 
             </div>
           </div>
           <div class="story-image">
-            <img src="26.webp" alt="Prince Perfect Roll Product Packaging" width="600" height="500" loading="lazy" style="width: 100%; height: auto; max-height: 500px; object-fit: contain; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
+            <img src="26.webp" 
+                 srcset="26-800.webp 800w, 26.webp 1600w" 
+                 sizes="(max-width: 768px) 100vw, 600px" 
+                 alt="Prince Perfect Roll Product Packaging" 
+                 width="600" 
+                 height="500" 
+                 loading="lazy" 
+                 decoding="async" 
+                 style="width: 100%; height: auto; max-height: 500px; object-fit: contain; display: block; border-radius: var(--radius-lg); box-shadow: 0 20px 40px rgba(0,0,0,0.15);">
           </div>
         </div>
       </div>
@@ -1135,7 +1194,7 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
         <!-- Visual Document Side (60%) -->
         <div class="doc-modal-viewer-side" id="modal-body-scroll">
           <div class="doc-modal-img-container" id="modal-zoom-container">
-            <img id="modal-doc-img" src="" alt="Prince Perfect Roll Documentation Certificate" />
+            <img id="modal-doc-img" src="" alt="Prince Perfect Roll Documentation Certificate" width="800" height="1132" decoding="async" />
           </div>
           <div class="doc-modal-viewer-controls">
             <button id="doc-zoom-out" class="doc-modal-control-btn" aria-label="Zoom out" title="Zoom out">−</button>
@@ -1325,3 +1384,4 @@ Sitemap: https://www.princeperfectroll.com/sitemap.xml`;
 fs.writeFileSync('sitemap.xml', sitemapXml);
 fs.writeFileSync('robots.txt', robotsTxt);
 console.log('Pages, sitemap, and robots.txt generated successfully!');
+})();

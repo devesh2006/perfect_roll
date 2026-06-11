@@ -1,3 +1,5 @@
+@import url('fonts.css');
+
 /* ==========================================================================
    CSS Variables & Reset
    ========================================================================== */
@@ -64,15 +66,21 @@ a {
   justify-content: center;
 }
 
-/* Override inline links in paragraphs and list items to display and size naturally */
+/* Override inline links in paragraphs to display and size naturally */
 p a,
-li a,
 .faq-answer a,
 .contact-seo-text a {
   min-height: auto;
   min-width: auto;
   display: inline;
   text-decoration: underline;
+}
+
+li a {
+  min-height: auto;
+  min-width: auto;
+  display: inline;
+  text-decoration: none;
 }
 
 ul {
@@ -214,8 +222,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-gold:hover {
   background-color: transparent;
-  color: var(--gold);
+  color: #7A5E2B !important; /* dark gold for contrast compliance on light backgrounds */
+  border-color: #7A5E2B !important;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(122, 94, 43, 0.3);
+}
+
+.hero-section .btn-gold:hover,
+.distributor-section .btn-gold:hover {
+  color: var(--gold) !important;
+  border-color: var(--gold) !important;
   box-shadow: 0 4px 15px rgba(200, 168, 107, 0.3);
 }
 
@@ -1039,6 +1055,8 @@ h1, h2, h3, h4, h5, h6 {
   gap: 40px;
   width: max-content;
   animation: marquee 25s linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 .marquee-track:hover {
@@ -1090,10 +1108,10 @@ h1, h2, h3, h4, h5, h6 {
 
 @keyframes marquee {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -1886,7 +1904,7 @@ h1, h2, h3, h4, h5, h6 {
   height: auto !important;
   max-height: 500px !important;
   width: 100% !important;
-  aspect-ratio: auto !important; /* override default aspect-ratio */
+  aspect-ratio: 3 / 2 !important; /* reserve space to prevent layout shifts */
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -2111,21 +2129,40 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-card .image-container {
-  height: auto !important;
+  aspect-ratio: 3 / 2 !important;
 }
 
 .image-container img,
 .gallery-image,
 .product-image {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
   width: 100% !important;
   height: 100% !important;
   object-fit: contain !important;
   margin: 0 !important;
   padding: 0 !important;
   display: block !important;
-  transition: opacity 0.35s ease, transform 0.5s ease !important;
+  transition: opacity 0.25s ease-in-out, transform 0.5s ease !important;
   transform: scale(1.06) !important;
-  opacity: 1;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.image-container img.active,
+.gallery-image.active,
+.product-image.active {
+  position: relative !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.image-container img:only-of-type,
+.image-container img:not(.gallery-image) {
+  position: relative !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .image-container img.fade-out {
@@ -2208,18 +2245,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .product-modal-img-side .product-gallery {
   background: transparent;
-  padding: 0;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .product-card .image-container {
-    height: auto !important;
-  }
-  .prev-btn, .next-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
     opacity: 1 !important;
     pointer-events: auto !important;
   }
@@ -2408,7 +2433,7 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 768px) {
   .product-card .image-container {
-    height: auto !important;
+    aspect-ratio: 3 / 2 !important;
   }
   .prev-btn, .next-btn {
     width: 40px;
