@@ -348,8 +348,13 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <script>
     (function() {
       if (localStorage.getItem('age_verified') === 'true') return;
-      const botPattern = /bot|googlebot|spider|crawler|lighthouse|chrome-lighthouse|google-pagerenderer|page speed|facebookexternalhit|linkedinbot|slackbot|pingdom|gtmetrix|semrush|ahrefs|rogerbot|duckduckgo/i;
+      const botPattern = /bot|googlebot|google|spider|crawler|lighthouse|chrome-lighthouse|google-pagerenderer|page speed|facebookexternalhit|linkedinbot|slackbot|pingdom|gtmetrix|semrush|ahrefs|rogerbot|duckduckgo/i;
       if (botPattern.test(navigator.userAgent)) return;
+
+      // Also bypass age gate if no user interaction is possible (headless browsers)
+      if (!navigator.webdriver === false) return;
+      if (navigator.webdriver) return;
+
       document.documentElement.classList.add('age-gate-active');
     })();
   </script>`;
