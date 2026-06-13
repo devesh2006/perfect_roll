@@ -347,7 +347,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <script>
     (function() {
       if (localStorage.getItem('age_verified') === 'true') return;
-      const botPattern = /bot|googlebot|bingbot|yandex|baidu|duckduck|slurp|lighthouse|chrome-lighthouse|google-pagerenderer|page speed/i;
+      const botPattern = /bot|spider|crawler|lighthouse|chrome-lighthouse|google-pagerenderer|page speed|facebookexternalhit|linkedinbot|slackbot|pingdom|gtmetrix|semrush|ahrefs|rogerbot|duckduckgo/i;
       if (botPattern.test(navigator.userAgent)) return;
       document.documentElement.classList.add('age-gate-active');
     })();
