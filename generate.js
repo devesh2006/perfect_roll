@@ -234,6 +234,8 @@ const getProductSchemaJson = (productsList) => {
       "offers": {
         "@type": "Offer",
         "url": `https://www.princeperfectroll.com/products.html`,
+        "price": p.priceRange ? p.priceRange.replace('₹', '') : "450",
+        "priceCurrency": "INR",
         "availability": "https://schema.org/InStock"
       }
     };
@@ -339,11 +341,16 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
     });
   }
 
+  const robotsMeta = pageUrl === 'verify.html' ? '\n  <meta name="robots" content="noindex, nofollow">' : '';
+
   const ageVerifyScript = pageUrl === 'verify.html' ? '' : `
   <script>
-    if (localStorage.getItem('age_verified') !== 'true') {
-      window.location.href = 'verify.html';
-    }
+    (function() {
+      if (localStorage.getItem('age_verified') === 'true') return;
+      const botPattern = /bot|googlebot|bingbot|yandex|baidu|duckduck|slurp|lighthouse|chrome-lighthouse|google-pagerenderer|page speed/i;
+      if (botPattern.test(navigator.userAgent)) return;
+      document.documentElement.classList.add('age-gate-active');
+    })();
   </script>`;
 
   return `
@@ -366,7 +373,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
     gtag('js', new Date());
   </script>
   
-  <title>${title}</title>
+  <title>${title}</title>${robotsMeta}
   <meta name="description" content="${description}">
   <link rel="canonical" href="https://www.princeperfectroll.com/${canonicalUrl}">
   <meta name="keywords" content="premium rolling papers, king size rolling papers, rolling paper cones, natural Arabic gum, flavored cones, smoking accessories, premium paper products, rolling papers India">
@@ -1259,7 +1266,7 @@ ${getHeadHtml('Business Certifications & Registrations | Prince Perfect Roll', '
 
 const privacyHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince Perfect Roll. Understand how we handle and protect customer and visitor information.', 'privacy.html')}
+${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince Perfect Roll. Understand how we handle and protect customer and visitor information.', 'privacy.html', 'WebPage', [orgSchema, websiteSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Privacy Policy', url: 'privacy.html'}])])}
 <body class="page-privacy">
   ${header}
   <main style="padding-top: var(--nav-height); min-height: 80vh;">
@@ -1294,7 +1301,7 @@ ${getHeadHtml('Privacy Policy | Prince Perfect Roll', 'Privacy Policy for Prince
 
 const termsHtml = `<!DOCTYPE html>
 <html lang="en">
-${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions for accessing and using the Prince Perfect Roll website and purchasing rolling paper products.', 'terms.html')}
+${getHeadHtml('Terms & Conditions | Prince Perfect Roll', 'Terms and Conditions for accessing and using the Prince Perfect Roll website and purchasing rolling paper products.', 'terms.html', 'WebPage', [orgSchema, websiteSchema, getBreadcrumbSchema([{name: 'Home', url: ''}, {name: 'Terms & Conditions', url: 'terms.html'}])])}
 <body class="page-terms">
   ${header}
   <main style="padding-top: var(--nav-height); min-height: 80vh;">
@@ -1338,6 +1345,65 @@ fs.writeFileSync('documentation.html', documentationHtml);
 fs.writeFileSync('privacy.html', privacyHtml);
 fs.writeFileSync('terms.html', termsHtml);
 
+const ageGateModalHtml = `
+  <!-- Age Verification Modal -->
+  <div id="age-gate-modal" class="modal-overlay">
+    <div class="age-gate-card">
+      <div class="age-gate-logo">Prince Perfect</div>
+      <div class="age-gate-divider"></div>
+      <h2>Age Verification</h2>
+      <p id="age-gate-message">You must be 18 years of age or older to enter this website. Please verify your age to continue.</p>
+      <div class="age-gate-buttons" id="age-gate-buttons">
+        <button class="btn btn-red btn-large" id="btn-verify-yes" aria-label="Yes, I am 18 years or older">Yes, I am 18+</button>
+        <button class="btn btn-outline-light btn-large" id="btn-verify-no" aria-label="No, I am under 18 years old">No, I am under 18</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      const btnYes = document.getElementById('btn-verify-yes');
+      const btnNo = document.getElementById('btn-verify-no');
+      const message = document.getElementById('age-gate-message');
+      const buttonsContainer = document.getElementById('age-gate-buttons');
+
+      if (btnYes && btnNo) {
+        btnYes.addEventListener('click', function() {
+          localStorage.setItem('age_verified', 'true');
+          document.documentElement.classList.remove('age-gate-active');
+        });
+
+        btnNo.addEventListener('click', function() {
+          if (buttonsContainer) buttonsContainer.style.display = 'none';
+          if (message) {
+            message.innerHTML = '<span class="denied-text">You are not old enough to view this website. Access Denied.</span>';
+            message.style.color = '#B51F2E';
+            message.style.fontSize = '1.3rem';
+            message.style.fontWeight = '600';
+          }
+        });
+      }
+    })();
+  </script>
+`;
+
+const writeHtmlPage = (filename, htmlContent) => {
+  let content = htmlContent;
+  if (filename !== 'verify.html') {
+    content = content.replace('</body>', `${ageGateModalHtml}\n</body>`);
+  }
+  fs.writeFileSync(filename, content);
+};
+
+writeHtmlPage('verify.html', indexHtml);
+writeHtmlPage('index.html', homeHtml);
+writeHtmlPage('products.html', productsHtml);
+writeHtmlPage('about.html', aboutHtml);
+writeHtmlPage('distributors.html', distributorsHtml);
+writeHtmlPage('contact.html', contactHtml);
+writeHtmlPage('documentation.html', documentationHtml);
+writeHtmlPage('privacy.html', privacyHtml);
+writeHtmlPage('terms.html', termsHtml);
+
 const currentDate = new Date().toISOString().split('T')[0];
 const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -1376,6 +1442,18 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/privacy.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.princeperfectroll.com/terms.html</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>`;
 
