@@ -260,7 +260,8 @@ const orgSchema = {
   },
   "sameAs": [
     "https://www.instagram.com/princeperfectroll.india/",
-    "https://www.facebook.com/share/1JeTX5F4xd/"
+    "https://www.facebook.com/share/1JeTX5F4xd/",
+    "https://www.indiamart.com/prince-perfect-roll-stores/"
   ]
 };
 
@@ -280,17 +281,17 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Prince Perfect Roll",
-  "image": "https://www.princeperfectroll.com/images/2.webp",
-  "telephone": "+919717990597",
-  "email": "princeperfectroll@gmail.com",
+  "description": "Manufacturer of premium rolling papers, king size cones, and flavored cones in India",
+  "url": "https://www.princeperfectroll.com",
+  "telephone": "+91-9717990597",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Gurgaon",
-    "addressLocality": "Gurgaon",
-    "addressRegion": "Delhi NCR",
     "addressCountry": "IN"
   },
-  "priceRange": "₹"
+  "sameAs": [
+    "https://www.instagram.com/princeperfectroll.india/",
+    "https://www.facebook.com/share/1JeTX5F4xd/"
+  ]
 };
 
 const getBreadcrumbSchema = (crumbs) => {
@@ -347,7 +348,7 @@ const getHeadHtml = (title, description, pageUrl, pageSchemaType = 'WebPage', ex
   <script>
     (function() {
       if (localStorage.getItem('age_verified') === 'true') return;
-      const botPattern = /bot|spider|crawler|lighthouse|chrome-lighthouse|google-pagerenderer|page speed|facebookexternalhit|linkedinbot|slackbot|pingdom|gtmetrix|semrush|ahrefs|rogerbot|duckduckgo/i;
+      const botPattern = /bot|googlebot|spider|crawler|lighthouse|chrome-lighthouse|google-pagerenderer|page speed|facebookexternalhit|linkedinbot|slackbot|pingdom|gtmetrix|semrush|ahrefs|rogerbot|duckduckgo/i;
       if (botPattern.test(navigator.userAgent)) return;
       document.documentElement.classList.add('age-gate-active');
     })();
@@ -442,6 +443,10 @@ const footer = `
         <div class="footer-column brand-column">
           <h4 class="brand-title"><a href="/" class="logo">PRINCE PERFECT</a></h4>
           <p class="brand-description">Prince Perfect Roll manufactures premium rolling papers, king-size cones, flavored cones, and smoking accessories crafted with natural Arabic gum for a smooth, slow, and consistent burn experience across India.</p>
+          <p class="brand-description" style="margin-top:8px;">
+            Also available on 
+            <a href="https://www.indiamart.com/prince-perfect-roll-stores/" target="_blank" rel="noopener" style="color:var(--gold);">IndiaMart</a>.
+          </p>
           <div class="footer-contact-info">
             <p><strong>WhatsApp:</strong> <a href="https://wa.me/+919717990597" target="_blank" rel="noopener noreferrer" aria-label="Chat with Prince Perfect Roll on WhatsApp" class="footer-contact-link">+91 9717990597</a></p>
             <p><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="footer-contact-link">princeperfectroll@gmail.com</a></p>
@@ -652,8 +657,9 @@ ${getHeadHtml('Prince Perfect Roll | Premium Rolling Papers & Cones India', 'Pri
       <div class="hero-content">
         <div class="hero-text-wrapper">
           <div class="badge hero-badge gold-badge">Premium Collection</div>
-          <h1 class="hero-title">Premium Rolling Papers &<br><span class="gold-text">Cones in India</span></h1>
+          <h1 class="hero-title">Prince Perfect Roll —<br>Premium Rolling Papers &<br><span class="gold-text">Cones in India</span></h1>
           <p class="hero-sub">India's finest rolling papers, crafted for the true connoisseur. Experience a slow, even burn with 100% natural Arabic gum.</p>
+          <p class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;">Prince Perfect Roll is an Indian manufacturer of premium rolling papers, king size cones, and flavored cones. Based in India, Prince Perfect Roll supplies smoking accessories to distributors and retailers across the country.</p>
           <div class="hero-ctas">
             <a href="products.html" class="btn btn-red btn-large">Shop Collection</a>
             <a href="#showcase" class="btn btn-outline-light">Discover Range</a>
@@ -1000,6 +1006,7 @@ ${getHeadHtml('Contact Prince Perfect Roll | Wholesale & Distributor Inquiries',
               <ul class="contact-details">
                 <li><strong>Email:</strong> <a href="mailto:princeperfectroll@gmail.com" aria-label="Email Prince Perfect Roll" class="contact-link">princeperfectroll@gmail.com</a></li>
                 <li><strong>Phone:</strong> <a href="tel:+919717990597" aria-label="Call Prince Perfect Roll" class="contact-link">+91 9717990597</a></li>
+                <li>🏭 <strong>IndiaMart:</strong> <a href="https://www.indiamart.com/prince-perfect-roll-stores/" target="_blank" rel="noopener" class="contact-link">View our IndiaMart profile</a></li>
                 <li><strong>Location:</strong> Gurgaon, Delhi NCR, India</li>
               </ul>
             </div>
@@ -1412,12 +1419,6 @@ const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://www.princeperfectroll.com/products.html</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.princeperfectroll.com/about.html</loc>
